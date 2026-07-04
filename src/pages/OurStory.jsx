@@ -92,19 +92,22 @@ const OurStory = ({ onNavigate }) => {
     <div className="page-enter">
 
       {/* ── Hero ── */}
-      <section className="page-hero">
+      <section className="page-hero" style={{ minHeight: '640px' }}>
         <div className="page-hero-accent" />
         <div className="page-hero-bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/about/our_bg.png'})` }}></div>
-        <div className="cxl">
-          <div className="pg-badge">Our Story</div>
-          <div className="ph-title">15 Years of Winning Bids.<br />Now in Your Hands.</div>
-          <p className="sec-sub" style={{ maxWidth: '540px', margin: '0 auto 40px' }}>
-            Real Cost Estimating Inc. started as a team of estimators helping contractors win work.
-            Today, that expertise is built into a platform trusted by 500+ contractors across Canada.
-          </p>
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Try Free for 14 Days</a>
-            <button className="btn-ghost" onClick={() => onNavigate('demo')}>📅 Request Demo</button>
+        <div style={{ position:'absolute', inset:0, zIndex:0, pointerEvents:'none', background:'linear-gradient(105deg,rgba(10,20,40,.88) 0%,rgba(15,37,87,.72) 42%,rgba(15,37,87,.28) 75%,transparent 100%)' }} />
+        <div className="cxl" style={{ textAlign:'left' }}>
+          <div style={{ maxWidth:'580px' }}>
+            <div className="pg-badge">Our Story</div>
+            <div className="ph-title">15 Years of Winning Bids.<br />Now in Your Hands.</div>
+            <p className="sec-sub" style={{ margin:'0 0 40px' }}>
+              Real Cost Estimating Inc. started as a team of estimators helping contractors win work.
+              Today, that expertise is built into a platform trusted by 500+ contractors across Canada.
+            </p>
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Try Free for 14 Days</a>
+              <button className="btn-ghost" onClick={() => onNavigate('demo')}>📅 Request Demo</button>
+            </div>
           </div>
         </div>
       </section>

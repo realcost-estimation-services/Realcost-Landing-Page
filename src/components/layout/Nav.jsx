@@ -48,7 +48,7 @@ const Nav = ({ currentPage, onNavigate, lightHero }) => {
             width="36"
             height="36"
             alt="Real Cost"
-            style={{ borderRadius: '8px', objectFit: 'cover', flexShrink: '0', boxShadow: '0 2px 8px rgba(15,37,87,.18)' }}
+            style={{ borderRadius: '8px', objectFit: 'contain', flexShrink: '0', background: '#fff', padding: '5px', boxShadow: '0 2px 10px rgba(0,0,0,.22)' }}
           />
           <div className="nav-brand-wordmark">
             <span>Real Cost</span>
@@ -93,7 +93,7 @@ const Nav = ({ currentPage, onNavigate, lightHero }) => {
           <div className="nav-drawer-inner" onClick={e => e.stopPropagation()}>
             <div className="nav-drawer-brand">
               <img src={process.env.PUBLIC_URL + '/images/brand/logo.png'} width="28" height="28" alt="Real Cost"
-                style={{ borderRadius: '6px', objectFit: 'cover', flexShrink: 0 }} />
+                style={{ borderRadius: '6px', objectFit: 'contain', flexShrink: 0, background: '#fff', padding: '4px', boxShadow: '0 2px 8px rgba(0,0,0,.18)' }} />
               <span>Real Cost</span>
             </div>
             <nav className="nav-drawer-links">

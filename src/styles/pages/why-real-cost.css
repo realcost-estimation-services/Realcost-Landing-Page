@@ -1,5 +1,5 @@
 /* ===== WhyRealCost layout classes ===== */
-.wrc-hero-section   { padding: 140px 0 120px; }
+.wrc-hero-section   { padding: 100px 0; min-height: 640px; display: flex; align-items: center; }
 .wrc-hero-h1        { font-size: 44px; letter-spacing: -2px; }
 .wrc-hero-ctas      { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 44px; }
 .wrc-ticker-wrap    { overflow: hidden; position: relative; margin: 0 -80px; }
@@ -15,7 +15,7 @@
 .wrc-cta-pad        { position: relative; z-index: 1; padding: 0 80px; }
 
 @media (max-width:1024px) {
-  .wrc-hero-section    { padding: 120px 0 80px; }
+  .wrc-hero-section    { padding: 80px 0; min-height: 580px; }
   .wrc-hero-h1         { font-size: 36px; letter-spacing: -1.5px; }
   .wrc-2col            { gap: 40px; }
   .wrc-2col-wide       { gap: 40px; }
@@ -27,7 +27,7 @@
   .wrc-ticker-fade-l,.wrc-ticker-fade-r { width: 60px; }
 }
 @media (max-width:768px) {
-  .wrc-hero-section    { padding: 100px 0 56px; }
+  .wrc-hero-section    { padding: 70px 0; min-height: 520px; }
   .wrc-hero-h1         { font-size: 28px; letter-spacing: -1px; }
   .wrc-stats-grid      { grid-template-columns: repeat(3,1fr); }
   .wrc-2col            { grid-template-columns: 1fr; gap: 32px; }
@@ -41,7 +41,7 @@
   .wrc-ticker-fade-l,.wrc-ticker-fade-r { width: 48px; }
 }
 @media (max-width:600px) {
-  .wrc-hero-section    { padding: 88px 0 48px; }
+  .wrc-hero-section    { padding: 60px 0; min-height: 460px; }
   .wrc-hero-h1         { font-size: 24px; letter-spacing: -0.6px; }
   .wrc-hero-ctas .btn-prim,
   .wrc-hero-ctas .btn-ghost { width: 100%; justify-content: center; }
@@ -50,7 +50,7 @@
   .wrc-ticker-fade-l,.wrc-ticker-fade-r { width: 32px; }
 }
 @media (max-width:480px) {
-  .wrc-hero-section    { padding: 80px 0 40px; }
+  .wrc-hero-section    { padding: 56px 0; min-height: 420px; }
   .wrc-hero-h1         { font-size: 22px; letter-spacing: -0.4px; }
   .wrc-stats-grid      { grid-template-columns: repeat(2,1fr); }
   .wrc-stats-grid > div{ border-right: none !important; border-bottom: 1px solid rgba(220,226,240,.7); }

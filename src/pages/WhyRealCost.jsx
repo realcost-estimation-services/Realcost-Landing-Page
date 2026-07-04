@@ -30,22 +30,18 @@ const WhyRealCost = ({ onNavigate }) => {
         background: 'linear-gradient(145deg,#0E1E3A 0%,#142E56 30%,#1A3A72 62%,#1E4480 100%)',
         position: 'relative',
         overflow: 'hidden',
-        textAlign: 'center',
       }}>
         {/* hero bg image */}
         <div className="page-hero-bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/about/hero_whyrealcost.png'})` }}></div>
+        {/* directional overlay */}
+        <div style={{ position:'absolute', inset:0, zIndex:0, pointerEvents:'none', background:'linear-gradient(105deg,rgba(10,20,40,.88) 0%,rgba(15,37,87,.72) 42%,rgba(15,37,87,.28) 75%,transparent 100%)' }} />
         {/* dot grid */}
         <div style={{ position:'absolute', inset:0, zIndex:0, pointerEvents:'none', backgroundImage:'radial-gradient(rgba(255,255,255,.026) 1px,transparent 1px)', backgroundSize:'32px 32px' }} />
-        {/* gold blob top-left */}
-        <div style={{ position:'absolute', top:'-120px', left:'-140px', width:'560px', height:'560px', borderRadius:'50%', background:'radial-gradient(circle,rgba(201,168,76,.13) 0%,transparent 65%)', pointerEvents:'none', zIndex:0 }} />
-        {/* indigo blob bottom-right */}
-        <div style={{ position:'absolute', bottom:'-100px', right:'-120px', width:'500px', height:'500px', borderRadius:'50%', background:'radial-gradient(circle,rgba(79,70,229,.16) 0%,transparent 65%)', pointerEvents:'none', zIndex:0 }} />
-        {/* blue haze center-right */}
-        <div style={{ position:'absolute', top:'25%', right:'8%', width:'360px', height:'360px', borderRadius:'50%', background:'radial-gradient(circle,rgba(45,107,228,.09) 0%,transparent 60%)', pointerEvents:'none', zIndex:0 }} />
         {/* gold top accent line */}
         <div style={{ position:'absolute', top:0, left:0, right:0, height:'2.5px', background:'linear-gradient(90deg,transparent 0%,rgba(201,168,76,.5) 25%,rgba(228,199,120,.92) 50%,rgba(201,168,76,.5) 75%,transparent 100%)', zIndex:2, pointerEvents:'none' }} />
 
         <div className="cxl" style={{ position:'relative', zIndex:1 }}>
+          <div style={{ maxWidth:'620px' }}>
           {/* badge */}
           <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(201,168,76,.13)', border:'1px solid rgba(201,168,76,.30)', color:'#E4C778', fontSize:'10px', fontWeight:'700', padding:'5px 15px', borderRadius:'24px', letterSpacing:'.10em', textTransform:'uppercase', marginBottom:'16px' }}>
             <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#E4C778', boxShadow:'0 0 8px rgba(228,199,120,.7)', display:'inline-block', animation:'blink 2.4s ease-in-out infinite' }} />
@@ -53,22 +49,23 @@ const WhyRealCost = ({ onNavigate }) => {
           </div>
 
           {/* heading */}
-          <h1 className="wrc-hero-h1" style={{ fontWeight:'800', color:'#fff', lineHeight:'1.08', maxWidth:'720px', margin:'0 auto 16px' }}>
+          <h1 className="wrc-hero-h1" style={{ fontWeight:'800', color:'#fff', lineHeight:'1.08', margin:'0 0 16px' }}>
             Take Your Electrical Contracting<br />Business to the{' '}
             <em style={{ fontStyle:'normal', background:'linear-gradient(125deg,#C9A84C 0%,#F0D98A 55%,#DFC06A 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>Next Level</em>
           </h1>
 
           {/* subtitle */}
-          <p style={{ fontSize:'15px', color:'rgba(210,220,248,.62)', lineHeight:'1.80', maxWidth:'540px', margin:'0 auto 26px', fontWeight:'300' }}>
+          <p style={{ fontSize:'15px', color:'rgba(210,220,248,.72)', lineHeight:'1.80', margin:'0 0 26px', fontWeight:'300' }}>
             Canada's{' '}
             <strong style={{ color:'rgba(240,217,138,.85)', fontWeight:'500' }}>leading electrical estimation company</strong>
             {' '}— trusted by 500+ contractors, built on 15+ years of job-winning formulas.
           </p>
 
           {/* CTAs */}
-          <div className="wrc-hero-ctas" style={{ display:'flex', gap:'12px', justifyContent:'center', flexWrap:'wrap', marginBottom:'44px' }}>
+          <div className="wrc-hero-ctas" style={{ display:'flex', gap:'12px', flexWrap:'wrap', marginBottom:'44px' }}>
             <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial</a>
             <button className="btn-ghost" onClick={() => onNavigate('demo')}>📅 Request Demo</button>
+          </div>
           </div>
 
           {/* scrolling feature ticker */}

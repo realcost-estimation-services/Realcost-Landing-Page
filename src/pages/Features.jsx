@@ -17,21 +17,24 @@ const chips = ['🗺 Digital Takeoff Canvas', '🔍 Auto-Count', '💰 Bid Page'
 const Features = ({ onNavigate }) => {
   return (
     <div className="page-enter">
-      <section className="page-hero">
+      <section className="page-hero" style={{ minHeight: '640px' }}>
         <div className="page-hero-accent"></div>
-        <div className="page-hero-bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL + ''})` }}></div>
-        <div className="cxl">
-          <div className="pg-badge">Platform Features</div>
-          <div className="ph-title">Every tool your estimating<br />team needs.</div>
-          <p className="sec-sub" style={{ maxWidth: '560px', margin: '0 auto 44px' }}>From PDF upload to branded quote letter — Real Cost handles your full estimation workflow in one digital platform.</p>
-          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '36px' }}>
-            {chips.map((c, i) => (
-              <span key={i} className={`ph-chip ${c.includes('Quote Letter Generator') ? 'ph-chip-gold' : ''}`}>{c}</span>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Open the App →</a>
-            <button className="btn-ghost" onClick={() => onNavigate('pricing')}>See pricing</button>
+        <div className="page-hero-bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/features/our_features.png'})`, backgroundSize: 'contain', backgroundPosition: 'right center', backgroundRepeat: 'no-repeat' }}></div>
+        <div style={{ position:'absolute', inset:0, zIndex:0, pointerEvents:'none', background:'linear-gradient(105deg,rgba(10,20,40,.95) 0%,rgba(15,37,87,.90) 38%,rgba(15,37,87,.40) 60%,transparent 75%)' }} />
+        <div className="cxl" style={{ textAlign:'left' }}>
+          <div style={{ maxWidth:'520px' }}>
+            <div className="pg-badge">Platform Features</div>
+            <div className="ph-title">Every tool your estimating<br />team needs.</div>
+            <p className="sec-sub" style={{ margin:'0 0 36px' }}>From PDF upload to branded quote letter — Real Cost handles your full estimation workflow in one digital platform.</p>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '32px' }}>
+              {chips.map((c, i) => (
+                <span key={i} className={`ph-chip ${c.includes('Quote Letter Generator') ? 'ph-chip-gold' : ''}`}>{c}</span>
+              ))}
+            </div>
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Open the App →</a>
+              <button className="btn-ghost" onClick={() => onNavigate('pricing')}>See pricing</button>
+            </div>
           </div>
         </div>
       </section>

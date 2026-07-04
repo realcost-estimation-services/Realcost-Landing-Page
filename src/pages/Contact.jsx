@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 
 const partners = [
   {
-    name: 'FAJR Industries',
-    tagline: 'Global Quality Without Any Compromise',
-    desc: 'Scale your business with world-class polymer manufacturing and export expertise.',
+    name: 'FAJR',
+    sub: 'Industries Pvt Ltd',
+    icon: '🔵',
+    tagline: 'Global Quality\nWithout Any Compromise',
     href: 'https://fajrindustries.com/contactus.php',
     cta: 'Get Quote',
   },
   {
     name: 'LBH SFG',
-    tagline: 'Better Floors. Better Results.',
-    desc: 'Trusted flooring solutions partner — connect with their team directly.',
+    sub: 'Flooring Solutions',
+    icon: '🟤',
+    tagline: 'Better Floors\nBetter Results',
     href: 'https://lbhsfg.com/contact-us.php',
     cta: 'Contact Us',
   },
@@ -42,16 +44,69 @@ const Contact = () => {
 
   return (
     <div className="page-enter">
-      <section className="page-hero">
-        <div className="page-hero-accent"></div>
-        <div className="page-hero-bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/about/why_realcost.png'})` }}></div>
-        <div className="cxl">
-          <div className="pg-badge">🤝 Contact Us</div>
-          <div className="ph-title">Connect with us!</div>
-          <p className="sec-sub" style={{ maxWidth: '500px', margin: '0 auto' }}>Reach out anytime. Our team in Toronto, Ontario is happy to walk you through the platform, answer questions, or help you get started.</p>
+      <section className="contact-hero">
+        <div
+          className="contact-hero-bg"
+          style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/contact/contact_hero.png'})` }}
+        />
+        <div className="contact-hero-overlay" />
+        <div className="cxl contact-hero-inner">
+          {/* Left — copy */}
+          <div className="contact-hero-left">
+            <div className="contact-hero-eyebrow">Toronto, Canada · Mon–Fri 9AM–6PM ET</div>
+            <h1 className="contact-hero-title">Let's Build Something<br />Great Together</h1>
+            <p className="contact-hero-desc">
+              Whether you have questions, need a demo, or want to start your
+              free trial — our team is here for you. Reach out anytime.
+            </p>
+            <div className="contact-hero-actions">
+              <a className="contact-hero-btn-prim" href="#contact-form">
+                Send us a message
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+              <a className="contact-hero-btn-ghost" href="tel:6476778399">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 11a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 .18h3a2 2 0 0 1 2 1.72c.13 1 .37 1.98.72 2.91a2 2 0 0 1-.45 2.11L7.09 8a16 16 0 0 0 9 9l1.08-1.18a2 2 0 0 1 2.11-.45c.93.35 1.91.59 2.91.72A2 2 0 0 1 22 18v-1.08z"/>
+                </svg>
+                (647) 677-8399
+              </a>
+            </div>
+            <div className="contact-hero-trust">
+              <span>✓ Free 14-day trial</span>
+              <span>✓ No credit card</span>
+              <span>✓ Same-day response</span>
+            </div>
+          </div>
+
+          {/* Right — floating info cards */}
+          <div className="contact-hero-right">
+            <div className="contact-float-card">
+              <div className="contact-float-icon">📞</div>
+              <div>
+                <div className="contact-float-label">Call us</div>
+                <div className="contact-float-val">(647) 677-8399</div>
+              </div>
+            </div>
+            <div className="contact-float-card">
+              <div className="contact-float-icon">✉️</div>
+              <div>
+                <div className="contact-float-label">Email us</div>
+                <div className="contact-float-val">care@realcost.ca</div>
+              </div>
+            </div>
+            <div className="contact-float-card">
+              <div className="contact-float-icon">📍</div>
+              <div>
+                <div className="contact-float-label">Based in</div>
+                <div className="contact-float-val">Toronto, Ontario 🇨🇦</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-      <section className="sec-grey">
+      <section id="contact-form" className="sec-grey">
         <div className="cxl">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '56px' }}>
             <div>
@@ -114,30 +169,36 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Partner contacts */}
-      <section className="sec-white" style={{ padding: '72px 0' }}>
+      {/* ── Bottom hero ── */}
+      <section className="contact-hero">
+        <div
+          className="contact-hero-bg"
+          style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/contact/contact_hero.png'})` }}
+        />
+        <div className="contact-hero-overlay" />
         <div className="cxl">
-          <div className="sec-eyebrow">Reach out anytime</div>
-          <div style={{ fontSize: '26px', fontWeight: '700', color: 'var(--txt)', letterSpacing: '-.5px', marginBottom: '36px' }}>Our partners</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-            {partners.map((p) => (
-              <div key={p.name} style={{ background: 'var(--sap)', borderRadius: '16px', padding: '32px', color: '#fff', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ fontSize: '11px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '.12em', color: 'rgba(255,255,255,.55)' }}>{p.tagline}</div>
-                <div style={{ fontSize: '22px', fontWeight: '700' }}>{p.name}</div>
-                <div style={{ fontSize: '14px', color: 'rgba(255,255,255,.7)', lineHeight: '1.7', flex: 1 }}>{p.desc}</div>
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,.15)', border: '1px solid rgba(255,255,255,.25)', borderRadius: '10px', padding: '10px 20px', textDecoration: 'none', color: '#fff', fontSize: '13px', fontWeight: '600', width: 'fit-content', transition: 'all .2s' }}
-                >
-                  {p.cta} →
-                </a>
-              </div>
-            ))}
+          <div className="contact-hero-eyebrow">Global Quality Without Any Compromise</div>
+          <h2 className="contact-hero-title">Ready to get started?</h2>
+          <p className="contact-hero-desc">
+            Join estimators across Canada using RealCost to win more bids.
+            Start your free trial today — no credit card, no commitment.
+          </p>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <a
+              className="contact-hero-btn"
+              href="https://d3jt1vpskh0hbe.cloudfront.net/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Start Free Trial
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
           </div>
         </div>
       </section>
+
     </div>
   );
 };

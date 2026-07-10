@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Reveal, RevealGroup } from '../components/ui/Reveal';
 import '../styles/pages/pricing.css';
 
 const APP_URL = 'https://d3jt1vpskh0hbe.cloudfront.net/';
@@ -8,6 +10,51 @@ const FEATURE_CARDS = [
   { icon: '🎓', title: 'Free Training', desc: 'One-on-one demo with a qualified Trade Expert at any time.' },
   { icon: '🔄', title: 'No Lock-in', desc: 'Pay-as-you-go with no contracts. Cancel anytime, no questions.' },
   { icon: '👥', title: 'Concurrent Licensing', desc: 'Your whole team works from a single shared licence.' },
+];
+
+const ClockIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
+    <path d="M12 7v5l3.5 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const MoneyIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+    <path d="M8 3h8l-2 4H10L8 3z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    <path d="M6 7h12l1.5 12a2 2 0 01-2 2.2H6.5A2 2 0 014.5 19L6 7z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    <circle cx="12" cy="14" r="2.6" stroke="currentColor" strokeWidth="1.4" />
+    <path d="M12 12.4v3.2M11 13.2h2M11 14.8h2" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+  </svg>
+);
+
+const CalendarIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+    <rect x="4" y="5" width="16" height="15" rx="2" stroke="currentColor" strokeWidth="1.6" />
+    <path d="M4 9h16" stroke="currentColor" strokeWidth="1.6" />
+    <path d="M8 3v4M16 3v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    {[13, 16.5].map((cy) =>
+      [8, 12, 16].map((cx) => <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="1" fill="currentColor" />)
+    )}
+  </svg>
+);
+
+const STREAMLINE_ITEMS = [
+  {
+    icon: <ClockIcon />,
+    title: 'Save Time',
+    desc: 'The database of hundreds of common templates reduces the time spent creating schedules and quotes from days to minutes.',
+  },
+  {
+    icon: <MoneyIcon />,
+    title: 'Save Money',
+    desc: 'Accurate, upfront information enables instant budgeting to make sure time and money are only spent on realistic projects and processes.',
+  },
+  {
+    icon: <CalendarIcon />,
+    title: 'Save Stress',
+    desc: 'Clear, transparent prices ensure that expectations are managed appropriately and disputes are a thing of the past.',
+  },
 ];
 
 const FAQ_ITEMS = [
@@ -122,13 +169,18 @@ const Pricing = ({ onNavigate }) => {
     <div className="page-enter">
 
       {/* ── Hero ── */}
-      <section className="page-hero" style={{ minHeight: '100vh' }}>
+      <section className="page-hero" style={{ minHeight: '640px' }}>
         <div className="page-hero-accent" />
         <div className="page-hero-bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/pricing/pricing.png'})` }} />
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', background: 'linear-gradient(105deg,rgba(10,20,40,.96) 0%,rgba(15,37,87,.92) 40%,rgba(15,37,87,.45) 65%,transparent 100%)' }} />
         <div className="cxl" style={{ textAlign: 'left' }}>
-          <div style={{ maxWidth: '560px' }}>
-            <div className="pg-badge">Simple Pricing</div>
+          <motion.div
+            style={{ maxWidth: '560px' }}
+            initial={{ opacity: 0, y: 34 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.div className="pg-badge" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }}>Simple Pricing</motion.div>
             <div className="ph-title">Start free for {trialDays} days.<br />Subscribe when ready.</div>
             <p className="sec-sub" style={{ margin: '0 0 32px' }}>
               Every feature unlocked from day one. No credit card, no commitment, no surprises.
@@ -138,11 +190,36 @@ const Pricing = ({ onNavigate }) => {
               <span className="ph-chip">✓ Cancel anytime</span>
               <span className="ph-chip">✓ Free trade expert demo</span>
             </div>
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial →</a>
-              <button className="btn-ghost" onClick={() => onNavigate('contact')}>Talk to sales</button>
-            </div>
-          </div>
+            <motion.div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }}>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial →</motion.a>
+              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('contact')}>Talk to sales</motion.button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Streamline ── */}
+      <section className="pr-streamline-section">
+        <div className="cxl">
+          <Reveal style={{ textAlign: 'center' }}>
+            <div className="sec-h2">Simple Software That Saves You Time, Money &amp; Stress</div>
+          </Reveal>
+          <RevealGroup className="pr-streamline-grid">
+            {STREAMLINE_ITEMS.map((item, i) => (
+              <div key={i} className="pr-streamline-item">
+                <div className="pr-streamline-icon">{item.icon}</div>
+                <div className="pr-streamline-title">{item.title}</div>
+                <div className="pr-streamline-desc">{item.desc}</div>
+              </div>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      <section style={{ padding: '34px 0 28px' }}>
+        <div className="cxl" style={{ textAlign: 'center' }}>
+          <div className="sec-h2" style={{ marginBottom: '10px' }}>Best Value for Price</div>
+          <p className="sec-sub" style={{ color: 'var(--sap)', fontWeight: '600' }}>REAL COST — a name you can rely on.</p>
         </div>
       </section>
 
@@ -152,15 +229,17 @@ const Pricing = ({ onNavigate }) => {
 
           {/* Toggle */}
           {hasYearly && hasMonthly && (
-            <div className="pr-toggle-wrap">
+            <Reveal className="pr-toggle-wrap">
               <div className="pr-toggle">
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
                   className={`pr-toggle-btn${cycle === 'monthly' ? ' active' : ''}`}
                   onClick={() => setCycle('monthly')}
                 >
                   Monthly
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
                   className={`pr-toggle-btn${cycle === 'yearly' ? ' active' : ''}`}
                   onClick={() => setCycle('yearly')}
                 >
@@ -168,16 +247,16 @@ const Pricing = ({ onNavigate }) => {
                   {savingPct > 0 && (
                     <span className="pr-toggle-save">Save {savingPct}%</span>
                   )}
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </Reveal>
           )}
 
           {loading && <div className="pr-loading">Loading plans…</div>}
           {error && <div className="pr-error">{error}</div>}
 
           {!loading && !error && (
-            <div className="pr-cards">
+            <RevealGroup className="pr-cards">
 
               {/* ── Free Trial card ── */}
               {trialPlan && (
@@ -198,9 +277,9 @@ const Pricing = ({ onNavigate }) => {
                         <li key={i} className="pr-feature-item"><Check />{f}</li>
                       ))}
                     </ul>
-                    <a className="pr-cta-outline" href={APP_URL} target="_blank" rel="noopener noreferrer">
+                    <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="pr-cta-outline" href={APP_URL} target="_blank" rel="noopener noreferrer">
                       {trialPlan.button_text}
-                    </a>
+                    </motion.a>
                   </div>
                 </div>
               )}
@@ -235,15 +314,15 @@ const Pricing = ({ onNavigate }) => {
                         <li key={i} className="pr-feature-item"><Check />{f}</li>
                       ))}
                     </ul>
-                    <a className="pr-cta-primary" href={APP_URL} target="_blank" rel="noopener noreferrer">
+                    <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="pr-cta-primary" href={APP_URL} target="_blank" rel="noopener noreferrer">
                       {activePlan.button_text}
-                    </a>
+                    </motion.a>
                     <p className="pr-cta-note">{trialDays}-day free trial included · no card needed</p>
                   </div>
                 </div>
               )}
 
-            </div>
+            </RevealGroup>
           )}
 
         </div>
@@ -252,14 +331,14 @@ const Pricing = ({ onNavigate }) => {
       {/* ── What's included ── */}
       <section className="pr-features-section">
         <div className="cxl">
-          <div style={{ textAlign: 'center' }}>
+          <Reveal style={{ textAlign: 'center' }}>
             <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>What's included</div>
             <div className="sec-h2">Everything you need to win more bids</div>
             <p className="sec-sub" style={{ maxWidth: '480px', margin: '0 auto' }}>
               Every plan — free or paid — gets the full feature set from day one.
             </p>
-          </div>
-          <div className="pr-features-grid">
+          </Reveal>
+          <RevealGroup className="pr-features-grid">
             {FEATURE_CARDS.map((fc, i) => (
               <div key={i} className="pr-feature-card">
                 <div className="pr-feature-icon">{fc.icon}</div>
@@ -267,43 +346,71 @@ const Pricing = ({ onNavigate }) => {
                 <div className="pr-feature-desc">{fc.desc}</div>
               </div>
             ))}
-          </div>
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* ── Trust signals ── */}
+      <section className="pr-trust-section">
+        <div className="cxl">
+          <Reveal style={{ textAlign: 'center' }}>
+            <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>Trusted by contractors</div>
+            <div className="sec-h2">Real Cost supports your team at every step</div>
+            <p className="sec-sub" style={{ maxWidth: '540px', margin: '0 auto' }}>
+              The platform is built around trade workflows with practical support, trusted delivery, and service that keeps your next bid on track.
+            </p>
+          </Reveal>
+          <RevealGroup className="pr-trust-grid">
+            {[
+              { icon: '👥', title: 'Professional Team', desc: 'Real Cost’s expert support team understands trade estimating and helps you stay accurate and on schedule.' },
+              { icon: '🤝', title: 'Trusted by Clients', desc: 'Contractors across Canada rely on Real Cost for consistent estimates and competitive bids.' },
+              { icon: '💬', title: 'Customer Support', desc: 'Get fast, practical help with implementation, training, and troubleshooting whenever your team needs it.' },
+            ].map((item, i) => (
+              <div key={i} className="pr-trust-card">
+                <div className="pr-trust-icon">{item.icon}</div>
+                <div className="pr-trust-title">{item.title}</div>
+                <div className="pr-trust-desc">{item.desc}</div>
+              </div>
+            ))}
+          </RevealGroup>
         </div>
       </section>
 
       {/* ── FAQ ── */}
       <section className="pr-faq-section">
         <div className="cxl">
-          <div style={{ textAlign: 'center' }}>
+          <Reveal style={{ textAlign: 'center' }}>
             <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>FAQ</div>
             <div className="sec-h2">Common questions</div>
-          </div>
-          <div className="pr-faq-grid">
+          </Reveal>
+          <RevealGroup className="pr-faq-grid">
             {FAQ_ITEMS.map((item, i) => (
               <div key={i} className="pr-faq-item">
                 <div className="pr-faq-q">{item.q}</div>
                 <div className="pr-faq-a">{item.a}</div>
               </div>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
       {/* ── Bottom CTA ── */}
       <section className="pr-bottom-cta">
         <div className="cxl">
-          <div className="pr-bottom-cta-title">Ready to estimate smarter?</div>
-          <p className="pr-bottom-cta-sub">
-            Join estimators across Canada already using RealCost to win more bids.
-          </p>
-          <div className="pr-bottom-cta-btns">
-            <a className="btn-prim" href={APP_URL} target="_blank" rel="noopener noreferrer">
-              🚀 Start your free trial
-            </a>
-            <button className="btn-ghost" style={{ color: 'rgba(255,255,255,.7)', borderColor: 'rgba(255,255,255,.2)' }} onClick={() => onNavigate('contact')}>
-              Talk to us first
-            </button>
-          </div>
+          <Reveal>
+            <div className="pr-bottom-cta-title">Ready to estimate smarter?</div>
+            <p className="pr-bottom-cta-sub">
+              Join estimators across Canada already using RealCost to win more bids.
+            </p>
+            <div className="pr-bottom-cta-btns">
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={APP_URL} target="_blank" rel="noopener noreferrer">
+                🚀 Start your free trial
+              </motion.a>
+              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" style={{ color: 'rgba(255,255,255,.7)', borderColor: 'rgba(255,255,255,.2)' }} onClick={() => onNavigate('contact')}>
+                Talk to us first
+              </motion.button>
+            </div>
+          </Reveal>
         </div>
       </section>
 

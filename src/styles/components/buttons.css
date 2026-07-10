@@ -1,4 +1,42 @@
 /* ===== Buttons ===== */
+.btn-prim,
+.btn-ghost,
+.btn-ol-blue,
+.btn-ol-inv,
+.btn-form {
+  position: relative;
+  overflow: hidden;
+}
+.btn-prim::before,
+.btn-ghost::before,
+.btn-ol-blue::before,
+.btn-ol-inv::before,
+.btn-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.38), transparent);
+  transform: skewX(-20deg);
+  transition: left .55s cubic-bezier(.22,1,.36,1);
+  pointer-events: none;
+}
+.btn-prim:hover::before,
+.btn-ghost:hover::before,
+.btn-ol-blue:hover::before,
+.btn-ol-inv:hover::before,
+.btn-form:hover::before {
+  left: 130%;
+}
+.btn-prim:active,
+.btn-ghost:active,
+.btn-ol-blue:active,
+.btn-ol-inv:active,
+.btn-form:active {
+  transform: translateY(0) scale(.97);
+}
 .btn-prim {
   background: var(--grd-prim);
   color: #fff;

@@ -1,3 +1,66 @@
+/* ===== Project coverage grid ===== */
+.hm-coverage-grid { grid-template-columns: 1.1fr 1fr; }
+.hm-coverage-list { grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(3,auto); }
+@media (max-width:900px) {
+  .hm-coverage-grid { grid-template-columns: 1fr; }
+}
+@media (max-width:480px) {
+  .hm-coverage-list { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: auto; }
+}
+
+/* ===== Brochure section ===== */
+.hb-image-col {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hb-accent {
+  position: absolute;
+  width: 78%;
+  height: 78%;
+  right: 0;
+  bottom: 0;
+  background: var(--grd-prim-soft);
+  border-radius: 42% 58% 56% 44% / 46% 42% 58% 54%;
+  opacity: .9;
+  z-index: 0;
+}
+.hb-image-card {
+  position: relative;
+  z-index: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(15,23,42,.18);
+  border: 1px solid rgba(15,37,87,.08);
+  background: #fff;
+  width: 100%;
+}
+.hb-image-card img {
+  width: 100%;
+  display: block;
+}
+.hb-stat-row {
+  margin: 0 !important;
+  max-width: 460px !important;
+}
+@media (max-width:480px) {
+  .ph-stat-row.hb-stat-row {
+    display: flex !important;
+    flex-wrap: nowrap;
+  }
+  .hb-stat-row .ph-stat {
+    min-width: 0;
+    padding: 16px 6px;
+    border-right: 1px solid rgba(15,37,87,.07) !important;
+    border-bottom: none !important;
+    border-left: none !important;
+  }
+  .hb-stat-row .ph-stat:last-child { border-right: none !important; }
+  .hb-stat-row .ph-stat-n { font-size: 21px; }
+  .hb-stat-row .ph-stat-l { font-size: 8.5px; }
+}
+
 /* ===== Home Hero ===== */
 .hero {
   min-height: 100vh;
@@ -253,4 +316,97 @@
 @media (max-width: 600px) {
   .years-badge { right: 10px; bottom: 80px; }
   .years-badge svg { width: 100px; height: 100px; }
+}
+
+.home-benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 14px;
+}
+.home-benefit-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform .32s ease;
+}
+.home-benefit-card:hover {
+  transform: translateY(-6px);
+}
+.home-benefit-card:hover .home-benefit-image {
+  transform: scale(1.04);
+}
+.home-benefit-image {
+  width: 100%;
+  max-width: 300px;
+  height: 230px;
+  object-fit: contain;
+  object-position: center 30%;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse 62% 58% at center 32%, #000 55%, transparent 88%);
+          mask-image: radial-gradient(ellipse 62% 58% at center 32%, #000 55%, transparent 88%);
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
+}
+.home-benefit-content {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 280px;
+}
+.home-benefit-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--txt);
+}
+.home-benefit-desc {
+  font-size: 13.5px;
+  color: #5C646F;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+@media (max-width: 960px) {
+  .home-benefit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; }
+}
+@media (max-width: 680px) {
+  .home-benefit-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ===== Home Hero responsive =====
+   These live here (not in responsive.css) on purpose: home.css is a lazily
+   imported page stylesheet that loads AFTER responsive.css, so the base
+   .hero-* rules above would override any hero breakpoints placed in
+   responsive.css and lose the source-order tie. Keeping them here guarantees
+   the hero scales down on smaller screens. */
+@media (max-width: 1024px) {
+  .hero-inner { padding: 36px 24px; gap: 28px; flex-direction: column; align-items: flex-start; }
+  .hero-h1 { font-size: 40px; }
+  .hero-sub { max-width: 100%; }
+  .hero-right { max-width: 100%; }
+  .monitor { border-radius: 12px; }
+}
+@media (max-width: 768px) {
+  .hero-h1 { font-size: 34px; }
+  .hero-left { margin-top: 14vh; }
+}
+@media (max-width: 600px) {
+  .hero { min-height: auto; }
+  .hero-inner { padding: 22px 16px; gap: 18px; }
+  .hero-left { margin-top: 9vh; }
+  .hero-h1 { font-size: 28px; letter-spacing: -1px; }
+  .hero-sub { font-size: 14px; }
+  .hero-btns { gap: 10px; }
+  .hero-stats { display: none; }
+  .mon-url { font-size: 11px; padding: 6px; }
+}
+@media (max-width: 480px) {
+  .hero-h1 { font-size: 26px; letter-spacing: -.8px; }
+  .hero-sub { font-size: 13.5px; }
+  .hero-btns { flex-direction: column; gap: 10px; }
+  .hero-btns .btn-prim, .hero-btns .btn-ghost { width: 100%; justify-content: center; }
+}
+@media (max-width: 380px) {
+  .hero-h1 { font-size: 22px; }
 }

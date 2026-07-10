@@ -1,13 +1,17 @@
 /* ===== Responsive ===== */
 
+/* ── Global safety net: never allow sideways scroll on any viewport ──
+   Use overflow-x: clip (not hidden): hidden turns html/body into a scroll
+   container and shifts position:fixed right:0 elements (e.g. the chatbot
+   icon bar) inward off the edge. clip prevents horizontal scroll without
+   that side effect. */
+html, body { overflow-x: clip; }
+/* Media should never force the page wider than the screen */
+img, svg, video, canvas, iframe { max-width: 100%; }
+
 /* ── Laptop ≤1024px ── */
 @media (max-width:1024px) {
-  /* Nav */
-  .rc-nav { padding:0 24px; height:64px; }
-  .nav-brand-wordmark span:first-child { font-size:18px; }
-  .nav-brand-wordmark span:last-child { font-size:8.5px; }
-  .nl { padding:8px 10px; font-size:12px; }
-  .nav-pill { gap:2px; padding:5px 5px 5px 10px; }
+  /* Nav responsive rules live in nav.css (bundled after this file so they win the source-order tie) */
   /* Layout */
   .cxl { padding:0 24px; }
   .sec-light,.sec-grey,.sec-dark { padding:56px 0; }
@@ -15,12 +19,7 @@
   /* Page hero */
   .page-hero { padding:80px 0; min-height:420px; }
   .ph-title { font-size:38px; }
-  /* Home hero */
-  .hero-inner { padding:36px 24px; gap:28px; flex-direction:column; align-items:flex-start; }
-  .hero-h1 { font-size:40px; }
-  .hero-sub { max-width:100%; }
-  .hero-right { max-width:100%; }
-  .monitor { border-radius:12px; }
+  /* Home hero responsive rules live in home.css (bundled after this file so they win the source-order tie) */
   /* Cards */
   .feat-card { padding:22px; }
   /* CTA band */
@@ -31,12 +30,7 @@
 
 /* ── Tablet ≤768px ── */
 @media (max-width:768px) {
-  /* Nav — collapse links into hamburger, keep CTA pill visible */
-  .rc-nav { padding:0 20px; }
-  .nav-links { display:none; }
-  .nav-pill { gap:0; padding:5px 5px 5px 8px; }
-  .nav-cta { padding:9px 14px; font-size:12.5px; }
-  .nav-hamburger { display:flex; margin-left:8px; }
+  /* Nav responsive rules live in nav.css */
   /* Layout */
   .cxl { padding:0 20px; }
   .sec-light,.sec-grey,.sec-dark { padding:44px 0; }
@@ -48,9 +42,7 @@
   .ph-title { font-size:30px; letter-spacing:-1.2px; }
   .ph-stat-row { flex-wrap:wrap; }
   .ph-stat { flex:1; min-width:130px; }
-  /* Home hero */
-  .hero-h1 { font-size:34px; }
-  .hero-left { margin-top:14vh; }
+  /* Home hero responsive rules live in home.css */
   /* CTA band */
   .cta-band { padding:56px 0; }
   .cta-band > div { padding:0 24px !important; }
@@ -61,6 +53,7 @@
   div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns:1fr !important; gap:28px !important; }
   div[style*="grid-template-columns: 1fr 1.5fr"] { grid-template-columns:1fr !important; gap:28px !important; }
   div[style*="grid-template-columns: 4fr 2fr"] { grid-template-columns:1fr !important; gap:28px !important; }
+  .bp-bid-grid { grid-template-columns:1fr !important; gap:32px !important; }
   /* 3-col → 2-col */
   div[style*="grid-template-columns: repeat(3,1fr)"],
   div[style*="grid-template-columns: repeat(3, 1fr)"],
@@ -68,28 +61,17 @@
   /* 5-col → 3-col */
   div[style*="grid-template-columns: repeat(5,1fr)"],
   div[style*="grid-template-columns: repeat(5, 1fr)"] { grid-template-columns:repeat(3,1fr) !important; }
+  /* 4-col → 2-col */
+  div[style*="grid-template-columns: repeat(4,1fr)"],
+  div[style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns:repeat(2,1fr) !important; gap:18px !important; }
 }
 
 /* ── Large mobile ≤600px ── */
 @media (max-width:600px) {
-  /* Nav — hide pill entirely, hamburger only */
-  .rc-nav { height:56px; width:calc(100% - 24px); top:12px; padding:0 16px; }
-  .rc-nav.scrolled { padding:0 16px; height:60px; }
-  .nav-pill { display:none; }
-  .nav-hamburger { display:flex; }
-  .nav-brand-wordmark span:first-child { font-size:19px; }
-  .nav-brand-wordmark span:last-child { display:none; }
+  /* Nav responsive rules live in nav.css */
   /* Page hero */
   .page-hero { padding:60px 0; min-height:340px; }
-  /* Home hero */
-  .hero { min-height:auto; }
-  .hero-inner { padding:22px 16px; gap:18px; }
-  .hero-left { margin-top:9vh; }
-  .hero-h1 { font-size:28px; letter-spacing:-1px; }
-  .hero-sub { font-size:14px; }
-  .hero-btns { gap:10px; }
-  .hero-stats { display:none; }
-  .mon-url { font-size:11px; padding:6px; }
+  /* Home hero responsive rules live in home.css */
 }
 
 /* ── Mobile ≤480px ── */
@@ -104,15 +86,12 @@
   .page-hero { padding:56px 0; min-height:320px; }
   .ph-title { font-size:24px; letter-spacing:-.8px; }
   .pg-badge { font-size:9.5px; padding:5px 14px; }
+  /* Home hero responsive rules live in home.css */
   .ph-stat-row { display:grid !important; grid-template-columns:1fr 1fr; border-radius:12px; }
   .ph-stat { border-right:none !important; border-bottom:1px solid rgba(15,37,87,.07); }
   .ph-stat:nth-child(2n) { border-left:1px solid rgba(15,37,87,.07); }
   .ph-stat:nth-last-child(-n+2) { border-bottom:none !important; }
-  /* Home hero */
-  .hero-h1 { font-size:26px; letter-spacing:-.8px; }
-  .hero-sub { font-size:13.5px; }
-  .hero-btns { flex-direction:column; gap:10px; }
-  .hero-btns .btn-prim, .hero-btns .btn-ghost { width:100%; justify-content:center; }
+  /* Home hero responsive rules live in home.css */
   /* CTA band */
   .cta-band { padding:40px 0; }
   .cta-band > div { padding:0 16px !important; }
@@ -129,6 +108,7 @@
   div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns:1fr !important; gap:18px !important; }
   div[style*="grid-template-columns: 1fr 1.5fr"] { grid-template-columns:1fr !important; gap:18px !important; }
   div[style*="grid-template-columns: 4fr 2fr"] { grid-template-columns:1fr !important; gap:18px !important; }
+  .bp-bid-grid { grid-template-columns:1fr !important; gap:22px !important; }
   div[style*="grid-template-columns: repeat(2,1fr)"],
   div[style*="grid-template-columns: repeat(2, 1fr)"] { grid-template-columns:1fr !important; gap:14px !important; }
   div[style*="grid-template-columns: repeat(3,1fr)"],
@@ -136,6 +116,8 @@
   .home-feat-grid, .home-trades-grid { grid-template-columns:1fr !important; gap:14px !important; }
   div[style*="grid-template-columns: repeat(5,1fr)"],
   div[style*="grid-template-columns: repeat(5, 1fr)"] { grid-template-columns:repeat(2,1fr) !important; }
+  div[style*="grid-template-columns: repeat(4,1fr)"],
+  div[style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns:1fr !important; gap:14px !important; }
   .rc-form div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns:1fr !important; gap:12px !important; }
 }
 
@@ -143,10 +125,8 @@
 @media (max-width:380px) {
   .sec-h2 { font-size:20px; }
   .ph-title { font-size:20px; letter-spacing:-.5px; }
-  .hero-h1 { font-size:22px; }
   .cxl { padding:0 14px; }
   .btn-prim,.btn-ghost { padding:11px 18px !important; font-size:13px !important; }
-  .nav-cta { padding:8px 13px; font-size:12px; }
   .feat-card,.tcard,.why-card { padding:14px; }
 }
 
@@ -159,4 +139,6 @@
 @media (max-width:480px) {
   .demo-perks-bar { padding:14px 16px !important; }
   .demo-perks-bar > div { flex-direction:column !important; align-items:flex-start !important; gap:14px !important; }
+  /* Demo "500+/30 min/Free" mini stat grid — 3-up is too cramped on phones */
+  div[style*="grid-template-columns: 1fr 1fr 1fr"] { grid-template-columns:repeat(3,1fr) !important; gap:8px !important; }
 }

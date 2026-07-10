@@ -1,6 +1,38 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../../styles/components/chatbot.css';
 
+const ChatIcon = () => (
+  <svg width="23" height="23" viewBox="0 0 24 24" fill="none">
+    <path d="M4 6c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2h-5l-4 3v-3H6c-1.1 0-2-.9-2-2V6z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+  </svg>
+);
+
+const PhoneIcon = () => (
+  <svg width="23" height="23" viewBox="0 0 24 24" fill="none">
+    <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1.1L6.6 10.8z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" />
+  </svg>
+);
+
+const MailIcon = () => (
+  <svg width="23" height="23" viewBox="0 0 24 24" fill="none">
+    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M4 6.5l8 6 8-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const WhatsAppIcon = () => (
+  <svg width="23" height="23" viewBox="0 0 24 24" fill="none">
+    <path d="M12 3.5a8.5 8.5 0 00-7.3 12.8L3.5 20.5l4.4-1.2A8.5 8.5 0 1012 3.5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+    <path d="M9.3 9.6c.15-.45.55-.75 1-.65l.7.15c.35.08.6.35.7.7l.2.85c.1.35 0 .7-.25.9l-.4.35c.4.85 1.05 1.5 1.9 1.9l.35-.4c.2-.25.55-.35.9-.25l.85.2c.35.1.62.35.7.7l.15.7c.1.45-.2.85-.65 1-1.9.6-4.1-.1-5.4-1.5-1.4-1.3-2.1-3.5-1.5-5.4z" stroke="currentColor" strokeWidth="1.05" strokeLinejoin="round" strokeLinecap="round" />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+    <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+  </svg>
+);
+
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -17,7 +49,7 @@ const Chatbot = () => {
     quote: ["📋 Once your bid is done, one click generates a professional branded PDF or Word quote letter — ready to send to your client immediately."],
     trades: ["🏗 Real Cost supports: Electrical, Mechanical/HVAC, Plumbing, Fire Alarm, Voice & Data, Security, Audio/Visual, Heat Tracing, and Mechanical Control."],
     pricing_can: ["📍 Material rates auto-adjust to your city's regional pricing tier (L1/L2/L3) — covering Toronto, Ottawa, Montreal, Calgary, Vancouver, Quebec and more."],
-    contact: ["📞 (647) 677-8399 · info@realcostestimating.ca · Toronto, Ontario · Mon–Fri 9AM–6PM ET"],
+    contact: ["📞 (647) 677-8399 · info@realcostestimating.ca · 1200 Bloor Street West, Toronto · Mon–Fri 9AM–6PM ET"],
     default: ["👋 Hi! I can help with anything about Real Cost — features, pricing, workflows, or how to get started. What would you like to know?"]
   };
 
@@ -134,18 +166,20 @@ const Chatbot = () => {
           <button className="csend" onClick={handleSend}>➤</button>
         </div>
       </div>
-      <button className="cbtn" onClick={toggle}>
-        {isOpen ? (
-          <span className="cbtn-close">×</span>
-        ) : (
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 7C4 5.34315 5.34315 4 7 4H21C22.6569 4 24 5.34315 24 7V17C24 18.6569 22.6569 20 21 20H15L9 24V20H7C5.34315 20 4 18.6569 4 17V7Z" fill="white" fillOpacity="0.95"/>
-            <circle cx="10" cy="13" r="1.5" fill="#0F2557"/>
-            <circle cx="14" cy="13" r="1.5" fill="#0F2557"/>
-            <circle cx="18" cy="13" r="1.5" fill="#0F2557"/>
-          </svg>
-        )}
-      </button>
+      <div className="cicon-stack">
+        <button className={`cistack-btn${isOpen ? ' active' : ''}`} onClick={toggle} aria-label="Chat with us">
+          {isOpen ? <CloseIcon /> : <ChatIcon />}
+        </button>
+        <a className="cistack-btn" href="tel:6476778399" aria-label="Call us">
+          <PhoneIcon />
+        </a>
+        <a className="cistack-btn" href="mailto:info@realcostestimating.ca" aria-label="Email us">
+          <MailIcon />
+        </a>
+        <a className="cistack-btn" href="https://wa.me/16476778399" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+          <WhatsAppIcon />
+        </a>
+      </div>
     </div>
   );
 };

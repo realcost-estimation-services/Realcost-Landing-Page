@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import Testimonials from '../components/ui/Testimonials';
+import { Reveal, RevealGroup } from '../components/ui/Reveal';
 import '../styles/pages/home.css';
 
 const Home = ({ onNavigate }) => {
@@ -26,19 +28,29 @@ const Home = ({ onNavigate }) => {
         <div className="hero-tint"></div>
         <div className="hero-grid"></div>
         <div className="hero-inner">
-          <div className="hero-left">
-            <div className="hero-badge"><div className="badge-dot"></div>⚡ Professional Electrical Estimating Software</div>
+          <motion.div
+            className="hero-left"
+            initial={{ opacity: 0, y: 34 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.div className="hero-badge" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }}><div className="badge-dot"></div>⚡ Professional Electrical Estimating Software</motion.div>
             <h1 className="hero-h1">Tired of overpriced,<br />over-complicated software?<br /><em>Your wait is over.</em></h1>
             <p className="hero-sub">Switch to <strong>Real Cost</strong> for a premium estimating experience — upload your drawings, count symbols, build your bid, and generate a quote letter, all in one place.</p>
-            <div className="hero-btns">
-              <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Switch to Real Cost now</a>
-              <button className="btn-ghost" onClick={() => onNavigate('demo')}>📅 Request Demo</button>
-            </div>
-          </div>
+            <motion.div className="hero-btns" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }}>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Switch to Real Cost now</motion.a>
+              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('demo')}>📅 Request Demo</motion.button>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* 15-year badge */}
-        <div className="years-badge">
+        <motion.div
+          className="years-badge"
+          initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0, y: [0, -8, 0] }}
+          transition={{ scale: { duration: 0.95, delay: 0.55, ease: [0.22, 1, 0.36, 1] }, opacity: { duration: 0.95, delay: 0.55 }, rotate: { duration: 0.95, delay: 0.55 }, y: { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.1 } }}
+        >
           <svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="gR" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -107,6 +119,42 @@ const Home = ({ onNavigate }) => {
             {/* ── Three stars ── */}
             <text x="80" y="121" textAnchor="middle" fontSize="9" fill="rgba(218,178,40,0.55)" letterSpacing="7" fontFamily="Plus Jakarta Sans,sans-serif">★ ★ ★</text>
           </svg>
+        </motion.div>
+      </section>
+
+      {/* Smart Software / Download Brochure */}
+      <section className="sec-light">
+        <div className="cxl">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center' }}>
+            <Reveal>
+              <div className="sec-eyebrow">Smart estimating software</div>
+              <div className="sec-h2" style={{ marginBottom: '16px' }}>Smart Software for<br />Accurate Estimating</div>
+              <p className="sec-sub" style={{ marginBottom: '28px', maxWidth: '440px' }}>
+                We build user-focused estimating software that aligns with your business goals — upload drawings, auto-count symbols, build your bid, and send a branded quote letter, all in one place.
+              </p>
+              <div className="ph-stat-row hb-stat-row">
+                <div className="ph-stat"><div className="ph-stat-n">15+</div><div className="ph-stat-l">Years Experience</div></div>
+                <div className="ph-stat"><div className="ph-stat-n">500+</div><div className="ph-stat-l">Contractors Served</div></div>
+                <div className="ph-stat"><div className="ph-stat-n">9</div><div className="ph-stat-l">Trades Supported</div></div>
+              </div>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '32px' }}>
+                <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={process.env.PUBLIC_URL + '/downloads/real-cost-brochure.pdf'} download>
+                  📄 Download Brochure
+                </motion.a>
+                <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ol-blue" onClick={() => onNavigate('demo')}>
+                  See it in action
+                </motion.button>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1} initial={{ opacity: 0, x: 36 }} whileInView={{ opacity: 1, x: 0 }}>
+              <div className="hb-image-col">
+                <div className="hb-accent" aria-hidden="true" />
+                <div className="hb-image-card">
+                  <img src={process.env.PUBLIC_URL + '/images/misc/brochure.png'} alt="Real Cost brochure" />
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -114,22 +162,22 @@ const Home = ({ onNavigate }) => {
       <section className="sec-light">
         <div className="cxl">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '72px', alignItems: 'center' }}>
-            <div>
+            <Reveal>
               <div className="sec-eyebrow">What is Real Cost?</div>
-              <div className="sec-h2">Your team does the estimates.<br />Real Cost makes it fast.</div>
+              <div className="sec-h2">Built for Electrical<br />Contractors in Canada</div>
               <p className="sec-sub" style={{ marginBottom: '20px' }}>Real Cost is a <strong style={{ color: 'var(--txt)', fontWeight: '600' }}>digital estimation platform</strong> built for trade contractors. Upload your PDF drawings, automatically count symbols, build out a full bid page, and generate a branded quote letter — all without leaving the app.</p>
               <p className="sec-sub" style={{ marginBottom: '32px' }}>Whether you do electrical, mechanical, plumbing, fire alarm, or data — Real Cost gives your team the tools to produce accurate estimates faster than any spreadsheet or manual process.</p>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            </Reveal>
+            <RevealGroup style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} delay={0.1}>
               <div className="why-card"><div className="why-ico">📁</div><div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--txt)', marginBottom: '7px' }}>Upload PDF Drawings</div><div style={{ fontSize: '13px', color: '#6B7489', lineHeight: '1.7', fontWeight: '300' }}>Multi-page blueprint sets. Navigate every page on a digital canvas inside the app.</div></div>
               <div className="why-card"><div className="why-ico">🔍</div><div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--txt)', marginBottom: '7px' }}>Symbol Auto-Count</div><div style={{ fontSize: '13px', color: '#6B7489', lineHeight: '1.7', fontWeight: '300' }}>Draw a box around a symbol — the platform finds all matches across every page instantly.</div></div>
               <div className="why-card"><div className="why-ico">💰</div><div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--txt)', marginBottom: '7px' }}>Build Your Bid</div><div style={{ fontSize: '13px', color: '#6B7489', lineHeight: '1.7', fontWeight: '300' }}>Material, labour, overhead, markup, duration — all calculated on your bid page.</div></div>
               <div className="why-card"><div className="why-ico">📋</div><div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--txt)', marginBottom: '7px' }}>One-Click Quote Letter</div><div style={{ fontSize: '13px', color: '#6B7489', lineHeight: '1.7', fontWeight: '300' }}>Generate a professional branded PDF quote letter ready to send to your client.</div></div>
-            </div>
+            </RevealGroup>
           </div>
 
           {/* YouTube demo */}
-          <div style={{ marginTop: '52px', maxWidth: '860px', margin: '52px auto 0' }}>
+          <Reveal delay={0.15} style={{ marginTop: '52px', maxWidth: '860px', margin: '52px auto 0' }}>
             <div style={{ textAlign: 'center', fontSize: '11px', fontWeight: '600', color: '#8A92A6', textTransform: 'uppercase', letterSpacing: '.14em', marginBottom: '22px' }}>Watch it in action</div>
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: '14px', overflow: 'hidden', boxShadow: '0 28px 64px rgba(0,0,0,.22)', border: '1px solid rgba(15,37,87,.10)' }}>
               <iframe
@@ -141,12 +189,222 @@ const Home = ({ onNavigate }) => {
               />
             </div>
 
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Benefits section */}
+      <section className="sec-light">
+        <div className="cxl">
+          <Reveal style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto 42px' }}>
+            <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>Benefits of job estimating software</div>
+            <div className="sec-h2">Give your estimating process a major upgrade</div>
+            <p className="sec-sub" style={{ margin: '0 auto', maxWidth: '720px' }}>
+              Goodbye guesswork. Hello improved business operations. Upgrade the way your teams tackle projects with estimating software that delivers improved accuracy, saves time, and brings your teams and customers together in a single place.
+            </p>
+          </Reveal>
+          <RevealGroup className="home-benefit-grid" style={{ gap: '18px' }}>
+            {[
+              { img: '/images/home/benefits_1.png', title: 'Bring your teams together', copy: 'Centralised communication and task tracking keeps everyone connected and aligned.' },
+              { img: '/images/home/benefits_2.png', title: 'Forecast projects accurately', copy: 'Create precise estimates to anticipate costs, timelines, and resources.' },
+              { img: '/images/home/benefits_3.png', title: 'Save time and resources', copy: 'Reduce manual work and ensure the right people and materials are on every job.' },
+              { img: '/images/home/benefits_4.png', title: 'Improve customer experience', copy: 'Deliver quotes faster and keep customers informed, building trust and meeting expectations.' },
+            ].map((item) => (
+              <div key={item.title} className="home-benefit-card">
+                <img className="home-benefit-image" src={process.env.PUBLIC_URL + item.img} alt={item.title} loading="lazy" />
+                <div className="home-benefit-content">
+                  <div className="home-benefit-title">{item.title}</div>
+                  <div className="home-benefit-desc">{item.copy}</div>
+                </div>
+              </div>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="sec-grey">
+        <div className="cxl">
+          <div style={{ display: 'grid', gridTemplateColumns: '4fr 2fr', gap: '52px', alignItems: 'center' }}>
+            {/* Left: monitor canvas */}
+            <Reveal className="monitor-3d-wrap" y={0} style={{ opacity: 0 }} initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }}>
+              <div ref={monitorRef2} className="monitor monitor-3d">
+                <div className="mon-bar">
+                  <div className="wdot" style={{ background: '#FF5F57' }}></div>
+                  <div className="wdot" style={{ background: '#FFBD2E' }}></div>
+                  <div className="wdot" style={{ background: '#28C840' }}></div>
+                  <div className="mon-url">realcost.ca / project / estimate</div>
+                </div>
+                <div className="mon-tabs">
+                  <button className={`mt ${tab2 === 0 ? 'on' : ''}`} onClick={() => setTab2(0)}>🗺 Takeoff Canvas</button>
+                  <button className={`mt ${tab2 === 1 ? 'on' : ''}`} onClick={() => setTab2(1)}>💰 Bid Page</button>
+                  <button className={`mt ${tab2 === 2 ? 'on' : ''}`} onClick={() => setTab2(2)}>📄 Quote Letter</button>
+                </div>
+                <div style={{ display: tab2 === 0 ? 'block' : 'none', background: '#F2F4FC' }}>
+                  <img src={process.env.PUBLIC_URL + '/images/features/take_off.png'} alt="Digital takeoff canvas" style={{ width: '100%', display: 'block' }} />
+                </div>
+                <div style={{ display: tab2 === 1 ? 'block' : 'none', background: '#F2F4FC' }}>
+                  <img src={process.env.PUBLIC_URL + '/images/features/bid_page.png'} alt="Bid page" style={{ width: '100%', display: 'block' }} />
+                </div>
+                <div style={{ display: tab2 === 2 ? 'block' : 'none', background: '#F2F4FC' }}>
+                  <img src={process.env.PUBLIC_URL + '/images/features/quote_letter.png'} alt="Quote letter" style={{ width: '100%', display: 'block' }} />
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Right: heading + timeline steps */}
+            <Reveal initial={{ opacity: 0, x: 36 }} whileInView={{ opacity: 1, x: 0 }}>
+              <div className="sec-eyebrow">How it works</div>
+              <div className="sec-h2" style={{ fontSize: '34px', marginBottom: '10px' }}>From drawings<br />to quote in 4 steps</div>
+              <p className="sec-sub" style={{ marginBottom: '36px' }}>Your whole estimation workflow — in one app.</p>
+
+              <div style={{ position: 'relative' }}>
+                <div style={{ position: 'absolute', left: '14px', top: '30px', bottom: '30px', width: '1.5px', background: 'linear-gradient(to bottom, rgba(17,38,70,.15), rgba(201,168,76,.4), rgba(17,38,70,.08))', borderRadius: '2px' }} />
+                {[
+                  { n: '1', label: 'Upload Drawings',    desc: 'Upload your PDF plan set. Every page renders on a navigable digital takeoff canvas.', gold: false },
+                  { n: '2', label: 'Symbol Auto-Count',  desc: 'Draw a box around any symbol — the platform finds all matches across every page instantly.', gold: false },
+                  { n: '3', label: 'Build Your Bid',     desc: 'Material, labour, overhead, markup and duration auto-calculated on your bid page.', gold: false },
+                  { n: '4', label: 'Send Quote Letter',  desc: 'One click generates a branded PDF quote letter ready to submit to your client.', gold: true },
+                ].map(({ n, label, desc, gold }) => (
+                  <div key={n} style={{ display: 'flex', gap: '20px', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
+                    <div style={{ width: '30px', height: '30px', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '700', background: gold ? 'var(--grd-gold)' : 'var(--grd-sap)', color: gold ? '#0A1428' : '#fff', border: gold ? '1.5px solid rgba(201,168,76,.5)' : '1.5px solid rgba(45,80,137,.25)', boxShadow: '0 3px 10px rgba(15,37,87,.20)' }}>
+                      {n}
+                    </div>
+                    <div style={{ paddingTop: '3px' }}>
+                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--txt)', marginBottom: '5px', letterSpacing: '-0.2px' }}>{label}</div>
+                      <div style={{ fontSize: '12.5px', color: '#6B7489', lineHeight: '1.72', fontWeight: '300' }}>{desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
           </div>
         </div>
       </section>
 
+      {/* Features preview */}
+      <section className="sec-light" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="cxl">
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '56px', flexWrap: 'wrap', gap: '20px' }}>
+            <div>
+              <div className="sec-eyebrow">Platform features</div>
+              <div className="sec-h2">Everything you need to win bids.</div>
+              <p className="sec-sub" style={{ maxWidth: '420px', margin: 0 }}>Built specifically for trade estimators in Canada.</p>
+            </div>
+            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ol-blue" onClick={() => onNavigate('features')}>View all features →</motion.button>
+          </div>
+          <RevealGroup className="home-feat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '18px' }}>
+            {[
+              {
+                color: '#4F46E5', accent: 'linear-gradient(90deg,#4F46E5,#7C5CE6)', bg: 'rgba(79,70,229,.15)', title: 'Digital Takeoff Canvas',  desc: 'Navigate multi-page PDF drawings on screen. Place symbols manually or let the app do it.',
+                path: <><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" /><line x1="8" y1="2" x2="8" y2="18" /><line x1="16" y1="6" x2="16" y2="22" /></>,
+              },
+              {
+                color: '#0EA5E9', accent: 'linear-gradient(90deg,#0EA5E9,#38BDF8)', bg: 'rgba(14,165,233,.14)',  title: 'Symbol Auto-Count',       desc: 'Box-select a reference symbol and the platform matches it across every drawing page in seconds.',
+                path: <><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></>,
+              },
+              {
+                color: '#C5A047', accent: 'linear-gradient(90deg,#C5A047,#E4C778)', bg: 'rgba(197,160,71,.15)',  title: 'Canadian City Pricing',   desc: 'L1/L2/L3 tiers for Toronto, Ottawa, Montreal, Calgary, Vancouver and more.',
+                path: <><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></>,
+              },
+              
+            ].map(({ color, accent, bg, title, desc, path }) => (
+              <motion.div key={title} style={{ background: '#fff', border: '1px solid #E8EEF8', borderRadius: '18px', padding: '28px 26px', position: 'relative', overflow: 'hidden', boxShadow: '0 1px 6px rgba(15,37,87,.05)', height: '100%' }}
+                whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(15,37,87,.10)', borderColor: 'rgba(201,168,76,.35)' }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2.5px', background: accent, borderRadius: '18px 18px 0 0' }} />
+                <motion.div whileHover={{ scale: 1.12, rotate: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 15 }} style={{ width: '48px', height: '48px', borderRadius: '14px', background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '18px', border: '1px solid rgba(15,37,87,.06)' }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{path}</svg>
+                </motion.div>
+                <div style={{ fontSize: '14.5px', fontWeight: '600', color: 'var(--txt)', marginBottom: '8px', letterSpacing: '-.2px' }}>{title}</div>
+                <div style={{ fontSize: '12.5px', color: '#6B7489', lineHeight: '1.76', fontWeight: '300' }}>{desc}</div>
+              </motion.div>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* Trades — premium horizontal cards */}
+      <section className="sec-grey">
+        <div className="cxl">
+          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+            <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>Supported trades</div>
+            <div className="sec-h2">Built for every trade on the job.</div>
+            <p className="sec-sub" style={{ maxWidth: '440px', margin: '0 auto' }}>Real Cost works for all major construction trades — not just electrical.</p>
+          </div>
+          <RevealGroup className="home-trades-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px', maxWidth: '1100px', margin: '0 auto' }}>
+            {[
+              { ico: '⚡', bg: 'rgba(245,158,11,.10)', border: 'rgba(245,158,11,.22)', title: 'Electrical',         desc: 'Lighting, branch wiring, distribution, panels, feeders.',  img: process.env.PUBLIC_URL + '/images/trades/electrical.jpg' },
+              { ico: '🌡', bg: 'rgba(14,165,233,.10)',  border: 'rgba(14,165,233,.22)',  title: 'Mechanical / HVAC', desc: 'Ductwork, equipment, piping, ventilation systems.',          img: process.env.PUBLIC_URL + '/images/trades/mechanical.jpg' },
+              { ico: '🔧', bg: 'rgba(16,185,129,.10)', border: 'rgba(16,185,129,.22)', title: 'Plumbing',          desc: 'Fixtures, piping, drainage, water supply systems.',          img: process.env.PUBLIC_URL + '/images/trades/plumbing.jpg' },
+            ].map(({ ico, bg, border, title, desc, img }) => (
+              <motion.div key={title} style={{ background: '#fff', border: '1px solid #E8EEF8', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(15,37,87,.06)' }}
+                whileHover={{ y: -8, boxShadow: '0 24px 48px rgba(15,37,87,.12)', borderColor: border }}
+                transition={{ type: 'spring', stiffness: 280, damping: 20 }}>
+                <div style={{ overflow: 'hidden' }}>
+                  <motion.img whileHover={{ scale: 1.08 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} src={img} alt={title} style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
+                </div>
+                <div style={{ padding: '28px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: bg, border: `1px solid ${border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', flexShrink: 0 }}>{ico}</div>
+                    <div style={{ fontSize: '16px', fontWeight: '700', color: 'var(--txt)', letterSpacing: '-.3px' }}>{title}</div>
+                  </div>
+                  <div style={{ fontSize: '13px', color: '#6B7489', lineHeight: '1.78', fontWeight: '300' }}>{desc}</div>
+                </div>
+              </motion.div>
+            ))}
+          </RevealGroup>
+
+        </div>
+      </section>
+
+      {/* Project coverage */}
+      <section style={{ padding: '96px 0', background: '#fff', borderTop: '1px solid rgba(220,226,240,.7)', borderBottom: '1px solid rgba(220,226,240,.7)' }}>
+        <div className="cxl">
+          <div className="hm-coverage-grid" style={{ display: 'grid', gap: '64px', alignItems: 'center' }}>
+            <Reveal initial={{ opacity: 0, x: -32 }} whileInView={{ opacity: 1, x: 0 }}>
+              <div className="sec-eyebrow">Project coverage</div>
+              <div className="sec-h2">
+                Estimate Any Electrical<br />
+                <span style={{ background: 'var(--grd-gold)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Project</span>
+              </div>
+              <p className="sec-sub" style={{ fontSize: '16px', fontWeight: '500', color: 'var(--sap)', marginBottom: '32px' }}>
+                Any project size, any voltage type, Real Cost can help.
+              </p>
+              <div className="hm-coverage-list" style={{ display: 'grid', gap: '20px 28px' }}>
+                {[
+                  'Commercial Estimating',
+                  'High Voltage Estimating',
+                  'Industrial Estimating',
+                  'Medium Voltage Estimating',
+                  'Low Voltage Estimating',
+                ].map((item) => (
+                  <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--grd-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: '#0A1428', fontWeight: '800', flexShrink: 0 }}>✓</div>
+                    <span style={{ fontSize: '14.5px', fontWeight: '500', color: 'var(--txt)' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            {/* Illustration */}
+            <Reveal initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} style={{ display: 'flex', justifyContent: 'center' }}>
+              <img src={process.env.PUBLIC_URL + '/images/misc/project.png'} alt="Electrical project estimating" style={{ width: '100%', maxWidth: '340px', height: 'auto', display: 'block' }} />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="sec-light">
+        <div className="cxl">
+          <Reveal><Testimonials /></Reveal>
+        </div>
+      </section>
+
       {/* Trust bar */}
-      <section style={{ padding: '36px 0', background: '#fff', borderTop: '1px solid rgba(220,226,240,.7)', borderBottom: '1px solid rgba(220,226,240,.7)' }}>
+      <Reveal as="section" style={{ padding: '36px 0', background: '#fff', borderTop: '1px solid rgba(220,226,240,.7)', borderBottom: '1px solid rgba(220,226,240,.7)' }}>
         <div className="cxl">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '48px', flexWrap: 'wrap' }}>
 
@@ -209,152 +467,19 @@ const Home = ({ onNavigate }) => {
 
           </div>
         </div>
-      </section>
-
-      {/* How it works */}
-      <section className="sec-grey">
-        <div className="cxl">
-          <div style={{ display: 'grid', gridTemplateColumns: '4fr 2fr', gap: '52px', alignItems: 'center' }}>
-            {/* Left: monitor canvas */}
-            <div className="monitor-3d-wrap">
-              <div ref={monitorRef2} className="monitor monitor-3d">
-                <div className="mon-bar">
-                  <div className="wdot" style={{ background: '#FF5F57' }}></div>
-                  <div className="wdot" style={{ background: '#FFBD2E' }}></div>
-                  <div className="wdot" style={{ background: '#28C840' }}></div>
-                  <div className="mon-url">d3jt1vpskh0hbe.cloudfront.net / project / estimate</div>
-                </div>
-                <div className="mon-tabs">
-                  <button className={`mt ${tab2 === 0 ? 'on' : ''}`} onClick={() => setTab2(0)}>🗺 Takeoff Canvas</button>
-                  <button className={`mt ${tab2 === 1 ? 'on' : ''}`} onClick={() => setTab2(1)}>💰 Bid Page</button>
-                  <button className={`mt ${tab2 === 2 ? 'on' : ''}`} onClick={() => setTab2(2)}>📄 Quote Letter</button>
-                </div>
-                <div style={{ display: tab2 === 0 ? 'block' : 'none', background: '#F2F4FC' }}>
-                  <img src={process.env.PUBLIC_URL + '/images/features/take_off.png'} alt="Digital takeoff canvas" style={{ width: '100%', display: 'block' }} />
-                </div>
-                <div style={{ display: tab2 === 1 ? 'block' : 'none', background: '#F2F4FC' }}>
-                  <img src={process.env.PUBLIC_URL + '/images/features/bid_page.png'} alt="Bid page" style={{ width: '100%', display: 'block' }} />
-                </div>
-                <div style={{ display: tab2 === 2 ? 'block' : 'none', background: '#F2F4FC' }}>
-                  <img src={process.env.PUBLIC_URL + '/images/features/quote_letter.png'} alt="Quote letter" style={{ width: '100%', display: 'block' }} />
-                </div>
-              </div>
-            </div>
-
-            {/* Right: heading + timeline steps */}
-            <div>
-              <div className="sec-eyebrow">How it works</div>
-              <div className="sec-h2" style={{ fontSize: '34px', marginBottom: '10px' }}>From drawings<br />to quote in 4 steps</div>
-              <p className="sec-sub" style={{ marginBottom: '36px' }}>Your whole estimation workflow — in one app.</p>
-
-              <div style={{ position: 'relative' }}>
-                <div style={{ position: 'absolute', left: '14px', top: '30px', bottom: '30px', width: '1.5px', background: 'linear-gradient(to bottom, rgba(17,38,70,.15), rgba(201,168,76,.4), rgba(17,38,70,.08))', borderRadius: '2px' }} />
-                {[
-                  { n: '1', label: 'Upload Drawings',    desc: 'Upload your PDF plan set. Every page renders on a navigable digital takeoff canvas.', gold: false },
-                  { n: '2', label: 'Symbol Auto-Count',  desc: 'Draw a box around any symbol — the platform finds all matches across every page instantly.', gold: false },
-                  { n: '3', label: 'Build Your Bid',     desc: 'Material, labour, overhead, markup and duration auto-calculated on your bid page.', gold: false },
-                  { n: '4', label: 'Send Quote Letter',  desc: 'One click generates a branded PDF quote letter ready to submit to your client.', gold: true },
-                ].map(({ n, label, desc, gold }) => (
-                  <div key={n} style={{ display: 'flex', gap: '20px', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
-                    <div style={{ width: '30px', height: '30px', borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '700', background: gold ? 'var(--grd-gold)' : 'var(--grd-sap)', color: gold ? '#0A1428' : '#fff', border: gold ? '1.5px solid rgba(201,168,76,.5)' : '1.5px solid rgba(45,80,137,.25)', boxShadow: '0 3px 10px rgba(15,37,87,.20)' }}>
-                      {n}
-                    </div>
-                    <div style={{ paddingTop: '3px' }}>
-                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--txt)', marginBottom: '5px', letterSpacing: '-0.2px' }}>{label}</div>
-                      <div style={{ fontSize: '12.5px', color: '#6B7489', lineHeight: '1.72', fontWeight: '300' }}>{desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Features preview */}
-      <section className="sec-light" style={{ position: 'relative', overflow: 'hidden' }}>
-        <div className="cxl">
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '56px', flexWrap: 'wrap', gap: '20px' }}>
-            <div>
-              <div className="sec-eyebrow">Platform features</div>
-              <div className="sec-h2">Everything you need to win bids.</div>
-              <p className="sec-sub" style={{ maxWidth: '420px', margin: 0 }}>Built specifically for trade estimators in Canada.</p>
-            </div>
-            <button className="btn-ol-blue" onClick={() => onNavigate('features')}>View all features →</button>
-          </div>
-          <div className="home-feat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '18px' }}>
-            {[
-              { ico: '🗺', accent: 'linear-gradient(90deg,#4F46E5,#7C5CE6)', bg: 'rgba(79,70,229,.15)', title: 'Digital Takeoff Canvas',  desc: 'Navigate multi-page PDF drawings on screen. Place symbols manually or let the app do it.' },
-              { ico: '🔍', accent: 'linear-gradient(90deg,#0EA5E9,#38BDF8)', bg: 'rgba(14,165,233,.14)',  title: 'Symbol Auto-Count',       desc: 'Box-select a reference symbol and the platform matches it across every drawing page in seconds.' },
-              { ico: '📍', accent: 'linear-gradient(90deg,#C5A047,#E4C778)', bg: 'rgba(197,160,71,.15)',  title: 'Canadian City Pricing',   desc: 'L1/L2/L3 tiers for Toronto, Ottawa, Montreal, Calgary, Vancouver and more.' },
-              { ico: '🚚', accent: 'linear-gradient(90deg,#10B981,#34D399)', bg: 'rgba(16,185,129,.13)',  title: 'Supplier RFQs',           desc: 'Send quote requests to distributors and compare prices side-by-side in the bid page.' },
-              { ico: '📊', accent: 'linear-gradient(90deg,#F59E0B,#FCD34D)', bg: 'rgba(245,158,11,.13)',  title: 'Estimate Graph',          desc: 'Visual breakdown of your bid — material, labour, overhead, and markup at a glance.' },
-              { ico: '👥', accent: 'linear-gradient(90deg,#8B5CF6,#A78BFA)', bg: 'rgba(139,92,246,.14)',  title: 'Team Management',         desc: 'Owner and estimator roles. Assign projects, track progress, manage your subscription.' },
-            ].map(({ ico, accent, bg, title, desc }) => (
-              <div key={title} style={{ background: '#fff', border: '1px solid #E8EEF8', borderRadius: '18px', padding: '28px 26px', position: 'relative', overflow: 'hidden', transition: 'all .28s', boxShadow: '0 1px 6px rgba(15,37,87,.05)' }}
-                onMouseEnter={e => { e.currentTarget.style.transform='translateY(-5px)'; e.currentTarget.style.boxShadow='0 20px 40px rgba(15,37,87,.10)'; e.currentTarget.style.borderColor='rgba(201,168,76,.35)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 1px 6px rgba(15,37,87,.05)'; e.currentTarget.style.borderColor='#E8EEF8'; }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2.5px', background: accent, borderRadius: '18px 18px 0 0' }} />
-                <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '22px', marginBottom: '18px', border: '1px solid rgba(15,37,87,.06)' }}>{ico}</div>
-                <div style={{ fontSize: '14.5px', fontWeight: '600', color: 'var(--txt)', marginBottom: '8px', letterSpacing: '-.2px' }}>{title}</div>
-                <div style={{ fontSize: '12.5px', color: '#6B7489', lineHeight: '1.76', fontWeight: '300' }}>{desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trades — premium horizontal cards */}
-      <section className="sec-grey">
-        <div className="cxl">
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>Supported trades</div>
-            <div className="sec-h2">Built for every trade on the job.</div>
-            <p className="sec-sub" style={{ maxWidth: '440px', margin: '0 auto' }}>Real Cost works for all major construction trades — not just electrical.</p>
-          </div>
-          <div className="home-trades-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px', maxWidth: '1100px', margin: '0 auto' }}>
-            {[
-              { ico: '⚡', bg: 'rgba(245,158,11,.10)', border: 'rgba(245,158,11,.22)', title: 'Electrical',         desc: 'Lighting, branch wiring, distribution, panels, feeders.',  img: process.env.PUBLIC_URL + '/images/trades/electrical.jpg' },
-              { ico: '🌡', bg: 'rgba(14,165,233,.10)',  border: 'rgba(14,165,233,.22)',  title: 'Mechanical / HVAC', desc: 'Ductwork, equipment, piping, ventilation systems.',          img: process.env.PUBLIC_URL + '/images/trades/mechanical.jpg' },
-              { ico: '🔧', bg: 'rgba(16,185,129,.10)', border: 'rgba(16,185,129,.22)', title: 'Plumbing',          desc: 'Fixtures, piping, drainage, water supply systems.',          img: process.env.PUBLIC_URL + '/images/trades/plumbing.jpg' },
-            ].map(({ ico, bg, border, title, desc, img }) => (
-              <div key={title} style={{ background: '#fff', border: '1px solid #E8EEF8', borderRadius: '20px', overflow: 'hidden', transition: 'all .22s', boxShadow: '0 2px 8px rgba(15,37,87,.06)' }}
-                onMouseEnter={e => { e.currentTarget.style.transform='translateY(-6px)'; e.currentTarget.style.boxShadow='0 24px 48px rgba(15,37,87,.12)'; e.currentTarget.style.borderColor=border; }}
-                onMouseLeave={e => { e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 2px 8px rgba(15,37,87,.06)'; e.currentTarget.style.borderColor='#E8EEF8'; }}>
-                <img src={img} alt={title} style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
-                <div style={{ padding: '28px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
-                    <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: bg, border: `1px solid ${border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', flexShrink: 0 }}>{ico}</div>
-                    <div style={{ fontSize: '16px', fontWeight: '700', color: 'var(--txt)', letterSpacing: '-.3px' }}>{title}</div>
-                  </div>
-                  <div style={{ fontSize: '13px', color: '#6B7489', lineHeight: '1.78', fontWeight: '300' }}>{desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="sec-light">
-        <div className="cxl">
-          <Testimonials />
-        </div>
-      </section>
+      </Reveal>
 
       {/* CTA Band */}
       <div className="cta-band">
-        <div style={{ position: 'relative', zIndex: 1, padding: '0 80px' }}>
+        <Reveal style={{ position: 'relative', zIndex: 1, padding: '0 80px' }}>
           <div className="gold-divider"></div>
           <h2 style={{ fontSize: '42px', fontWeight: '800', color: '#fff', letterSpacing: '-1.3px', marginBottom: '14px' }}>Ready to do faster estimates?</h2>
           <p style={{ fontSize: '16px', color: 'rgba(220,228,248,.65)', maxWidth: '500px', margin: '0 auto 40px', lineHeight: '1.78', fontWeight: '300' }}>14-day free trial. No credit card required. Your whole team can be estimating digitally today.</p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start free trial</a>
-            <button className="btn-ol-inv" onClick={() => onNavigate('contact')}>📞 Talk to us</button>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start free trial</motion.a>
+            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ol-inv" onClick={() => onNavigate('contact')}>📞 Talk to us</motion.button>
           </div>
-        </div>
+        </Reveal>
       </div>
     </div>
   );

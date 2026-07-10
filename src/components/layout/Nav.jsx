@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import '../../styles/components/nav.css';
 
 const Nav = ({ currentPage, onNavigate, lightHero }) => {
@@ -87,35 +88,57 @@ const Nav = ({ currentPage, onNavigate, lightHero }) => {
       </nav>
 
       {/* Mobile drawer overlay */}
-      {menuOpen && (
-        <div className="nav-drawer" onClick={() => setMenuOpen(false)}>
-          <div className="nav-drawer-inner" onClick={e => e.stopPropagation()}>
-            <div className="nav-drawer-brand">
-              <img src={process.env.PUBLIC_URL + '/images/brand/logo.png'} width="28" height="28" alt="Real Cost"
-                style={{ borderRadius: '6px', objectFit: 'contain', flexShrink: 0, background: '#fff', padding: '4px', boxShadow: '0 2px 8px rgba(0,0,0,.18)' }} />
-              <span>Real Cost</span>
-            </div>
-            <nav className="nav-drawer-links">
-              {pages.map(p => (
-                <button
-                  key={p.id}
-                  className={`nav-drawer-link ${currentPage === p.id ? 'active' : ''}`}
-                  onClick={() => handleNav(p.id)}
-                >
-                  {p.label}
-                </button>
-              ))}
-            </nav>
-            <button
-              className="btn-prim"
-              style={{ width: '100%', justifyContent: 'center', marginTop: '8px' }}
-              onClick={() => handleNav('demo')}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="nav-drawer"
+            onClick={() => setMenuOpen(false)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+          >
+            <motion.div
+              className="nav-drawer-inner"
+              onClick={e => e.stopPropagation()}
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 320, damping: 34 }}
             >
-              📅 Request Demo
-            </button>
-          </div>
-        </div>
-      )}
+              <div className="nav-drawer-brand">
+                <img src={process.env.PUBLIC_URL + '/images/brand/logo.png'} width="28" height="28" alt="Real Cost"
+                  style={{ borderRadius: '6px', objectFit: 'contain', flexShrink: 0, background: '#fff', padding: '4px', boxShadow: '0 2px 8px rgba(0,0,0,.18)' }} />
+                <span>Real Cost</span>
+              </div>
+              <nav className="nav-drawer-links">
+                {pages.map((p, i) => (
+                  <motion.button
+                    key={p.id}
+                    className={`nav-drawer-link ${currentPage === p.id ? 'active' : ''}`}
+                    onClick={() => handleNav(p.id)}
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.08 + i * 0.04 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    {p.label}
+                  </motion.button>
+                ))}
+              </nav>
+              <motion.button
+                className="btn-prim"
+                style={{ width: '100%', justifyContent: 'center', marginTop: '8px' }}
+                onClick={() => handleNav('demo')}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                📅 Request Demo
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

@@ -198,9 +198,8 @@ const Testimonials = () => {
     <div className="testimonials-section">
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '44px', flexWrap: 'wrap', gap: '20px' }}>
         <div>
-          <div className="sec-eyebrow">What contractors say</div>
-          <div className="sec-h2">Estimators love Real Cost.</div>
-          <p className="sec-sub" style={{ maxWidth: '380px', marginTop: '8px' }}>Rated 4.6/5 on Capterra, GetApp &amp; Software Advice.</p>
+          <div className="sec-h2">Loved by Contractors Everywhere</div>
+          <p className="sec-sub" style={{ maxWidth: '380px', marginTop: '8px' }}>Don't take our word for it — hear from real users.</p>
         </div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button onClick={() => slide(-1)} style={{ width: '42px', height: '42px', borderRadius: '50%', background: '#fff', border: '1.5px solid #DCE2F0', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', color: '#0F2557', transition: 'all .2s', boxShadow: '0 2px 8px rgba(15,37,87,.08)' }}>‹</button>

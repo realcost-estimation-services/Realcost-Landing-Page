@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import FAQItem from '../components/ui/FAQItem';
+import { Reveal, RevealGroup } from '../components/ui/Reveal';
 
 const faqGroups = [
   {
@@ -69,31 +71,36 @@ const FAQ = ({ onNavigate }) => {
         <div className="page-hero-bg" style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/images/about/our_bg.png'})` }} />
         <div style={{ position: 'absolute', inset: 0, zIndex: 0, background: 'linear-gradient(105deg,rgba(10,20,40,.97) 0%,rgba(15,37,87,.93) 45%,rgba(15,37,87,.55) 70%,transparent 100%)' }} />
         <div className="cxl" style={{ textAlign: 'left' }}>
-          <div style={{ maxWidth: '600px' }}>
+          <motion.div
+            style={{ maxWidth: '600px' }}
+            initial={{ opacity: 0, y: 34 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="pg-badge">FAQ</div>
             <div className="ph-title">Frequently Asked<br />Questions</div>
             <p className="sec-sub" style={{ margin: '0 0 32px' }}>
               Everything you need to know about Real Cost — from getting started to billing, security, and why we're different.
             </p>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial →</a>
-              <button className="btn-ghost" onClick={() => onNavigate('contact')}>Contact us</button>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial →</motion.a>
+              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('contact')}>Contact us</motion.button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ── Stats strip ── */}
       <div style={{ background: '#fff', borderBottom: '1px solid #E8EEF8' }}>
         <div className="cxl">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
+          <RevealGroup style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
             {stats.map(({ val, label }, i) => (
               <div key={i} style={{ padding: '26px 0', textAlign: 'center', borderRight: i < 3 ? '1px solid #E8EEF8' : 'none' }}>
                 <div style={{ fontSize: '20px', fontWeight: '800', color: '#112646', letterSpacing: '-.4px', marginBottom: '3px' }}>{val}</div>
                 <div style={{ fontSize: '12px', color: '#999', fontWeight: '400' }}>{label}</div>
               </div>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </div>
 
@@ -102,7 +109,7 @@ const FAQ = ({ onNavigate }) => {
         <div className="cxl" style={{ maxWidth: '860px' }}>
 
           {/* Section heading */}
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <Reveal style={{ textAlign: 'center', marginBottom: '48px' }}>
             <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '.18em', color: '#C5A047', marginBottom: '12px' }}>
               Common Questions
             </div>
@@ -112,10 +119,10 @@ const FAQ = ({ onNavigate }) => {
             <p style={{ fontSize: '15px', color: '#888', lineHeight: '1.7', margin: 0, fontWeight: '300' }}>
               Browse by category or scroll through all questions below.
             </p>
-          </div>
+          </Reveal>
 
           {/* Category tabs */}
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '40px' }}>
+          <Reveal delay={0.05} style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '40px' }}>
             {faqGroups.map(g => (
               <button
                 key={g.cat}
@@ -141,17 +148,17 @@ const FAQ = ({ onNavigate }) => {
                 </span>
               </button>
             ))}
-          </div>
+          </Reveal>
 
           {/* Active category label */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #E4E9F2' }}>
+          <Reveal delay={0.05} style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #E4E9F2' }}>
             <span style={{ fontSize: '18px' }}>{activeGroup.icon}</span>
             <span style={{ fontSize: '13px', fontWeight: '700', color: '#112646', textTransform: 'uppercase', letterSpacing: '.1em' }}>{activeGroup.cat}</span>
             <span style={{ fontSize: '12px', color: '#aaa', marginLeft: 'auto' }}>{activeGroup.items.length} questions</span>
-          </div>
+          </Reveal>
 
           {/* Accordion */}
-          <div>
+          <RevealGroup>
             {activeGroup.items.map((item, i) => (
               <FAQItem
                 key={item.q}
@@ -161,23 +168,23 @@ const FAQ = ({ onNavigate }) => {
                 onToggle={() => setOpenIndex(prev => prev === i ? null : i)}
               />
             ))}
-          </div>
+          </RevealGroup>
 
           {/* Still have questions inline card */}
-          <div style={{ marginTop: '48px', background: '#fff', border: '1px solid #E4E9F2', borderRadius: '16px', padding: '32px 36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px', boxShadow: '0 2px 12px rgba(15,37,87,.06)' }}>
+          <Reveal style={{ marginTop: '48px', background: '#fff', border: '1px solid #E4E9F2', borderRadius: '16px', padding: '32px 36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px', boxShadow: '0 2px 12px rgba(15,37,87,.06)' }}>
             <div>
               <div style={{ fontSize: '16px', fontWeight: '700', color: '#112646', marginBottom: '6px' }}>Still have questions?</div>
               <div style={{ fontSize: '13px', color: '#888', fontWeight: '300' }}>Our team responds the same day on business days — no bots, no queues.</div>
             </div>
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              <button onClick={() => onNavigate('contact')} style={{ padding: '11px 24px', borderRadius: '10px', border: 'none', background: '#112646', color: '#fff', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
+              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} onClick={() => onNavigate('contact')} style={{ padding: '11px 24px', borderRadius: '10px', border: 'none', background: '#112646', color: '#fff', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
                 Contact us →
-              </button>
-              <a href="tel:6476778399" style={{ padding: '11px 20px', borderRadius: '10px', border: '1.5px solid #E0E6F0', background: '#fff', color: '#112646', fontSize: '13px', fontWeight: '600', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              </motion.button>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="tel:6476778399" style={{ padding: '11px 20px', borderRadius: '10px', border: '1.5px solid #E0E6F0', background: '#fff', color: '#112646', fontSize: '13px', fontWeight: '600', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                 📞 (647) 677-8399
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </Reveal>
 
         </div>
       </section>
@@ -185,19 +192,21 @@ const FAQ = ({ onNavigate }) => {
       {/* ── Bottom CTA ── */}
       <section style={{ background: '#0B1629', padding: '80px 0' }}>
         <div className="cxl" style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '.18em', color: '#C5A047', marginBottom: '16px' }}>
-            Premium support included
-          </div>
-          <h2 style={{ fontSize: '36px', fontWeight: '800', color: '#fff', letterSpacing: '-1px', marginBottom: '14px' }}>
-            Ready to start estimating smarter?
-          </h2>
-          <p style={{ fontSize: '15px', color: 'rgba(255,255,255,.50)', maxWidth: '400px', margin: '0 auto 36px', lineHeight: '1.78', fontWeight: '300' }}>
-            14-day free trial. Every feature included. No credit card required.
-          </p>
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial →</a>
-            <button className="btn-ghost" onClick={() => onNavigate('contact')}>Talk to us</button>
-          </div>
+          <Reveal>
+            <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '.18em', color: '#C5A047', marginBottom: '16px' }}>
+              Premium support included
+            </div>
+            <h2 style={{ fontSize: '36px', fontWeight: '800', color: '#fff', letterSpacing: '-1px', marginBottom: '14px' }}>
+              Ready to start estimating smarter?
+            </h2>
+            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,.50)', maxWidth: '400px', margin: '0 auto 36px', lineHeight: '1.78', fontWeight: '300' }}>
+              14-day free trial. Every feature included. No credit card required.
+            </p>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial →</motion.a>
+              <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('contact')}>Talk to us</motion.button>
+            </div>
+          </Reveal>
         </div>
       </section>
 

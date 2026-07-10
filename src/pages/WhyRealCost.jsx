@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Reveal, RevealGroup } from '../components/ui/Reveal';
 import '../styles/pages/why-real-cost.css';
 
 
@@ -42,11 +44,16 @@ const WhyRealCost = ({ onNavigate }) => {
 
         <div className="cxl" style={{ position:'relative', zIndex:1 }}>
           <div style={{ maxWidth:'620px' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 34 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+          >
           {/* badge */}
-          <div style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(201,168,76,.13)', border:'1px solid rgba(201,168,76,.30)', color:'#E4C778', fontSize:'10px', fontWeight:'700', padding:'5px 15px', borderRadius:'24px', letterSpacing:'.10em', textTransform:'uppercase', marginBottom:'16px' }}>
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }} style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(201,168,76,.13)', border:'1px solid rgba(201,168,76,.30)', color:'#E4C778', fontSize:'10px', fontWeight:'700', padding:'5px 15px', borderRadius:'24px', letterSpacing:'.10em', textTransform:'uppercase', marginBottom:'16px' }}>
             <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#E4C778', boxShadow:'0 0 8px rgba(228,199,120,.7)', display:'inline-block', animation:'blink 2.4s ease-in-out infinite' }} />
             ⚡ Why Real Cost?
-          </div>
+          </motion.div>
 
           {/* heading */}
           <h1 className="wrc-hero-h1" style={{ fontWeight:'800', color:'#fff', lineHeight:'1.08', margin:'0 0 16px' }}>
@@ -62,10 +69,11 @@ const WhyRealCost = ({ onNavigate }) => {
           </p>
 
           {/* CTAs */}
-          <div className="wrc-hero-ctas" style={{ display:'flex', gap:'12px', flexWrap:'wrap', marginBottom:'44px' }}>
-            <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial</a>
-            <button className="btn-ghost" onClick={() => onNavigate('demo')}>📅 Request Demo</button>
-          </div>
+          <motion.div className="wrc-hero-ctas" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }} style={{ display:'flex', gap:'12px', flexWrap:'wrap', marginBottom:'44px' }}>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial</motion.a>
+            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('demo')}>📅 Request Demo</motion.button>
+          </motion.div>
+          </motion.div>
           </div>
 
           {/* scrolling feature ticker */}
@@ -74,9 +82,9 @@ const WhyRealCost = ({ onNavigate }) => {
             <div className="wrc-ticker-fade-r" style={{ position:'absolute', right:0, top:0, bottom:0, width:'100px', background:'linear-gradient(270deg,#0E1E3A 0%,transparent 100%)', zIndex:2, pointerEvents:'none' }} />
             <div style={{ display:'flex', gap:'10px', animation:'ticker 32s linear infinite', width:'max-content' }}>
               {[...perks, ...perks].map(({ title }, i) => (
-                <div key={i} style={{ display:'inline-flex', alignItems:'center', gap:'9px', background:'rgba(255,255,255,.06)', border:'1px solid rgba(255,255,255,.09)', borderRadius:'8px', padding:'9px 18px', flexShrink:0 }}>
-                  <span style={{ fontSize:'10px', color:'#C9A84C', lineHeight:1 }}>✦</span>
-                  <span style={{ fontSize:'12.5px', fontWeight:'500', color:'rgba(210,220,248,.68)', letterSpacing:'.01em', whiteSpace:'nowrap' }}>{title}</span>
+                <div key={i} style={{ display:'inline-flex', alignItems:'center', gap:'9px', background:'rgba(255,255,255,.14)', border:'1px solid rgba(255,255,255,.25)', borderRadius:'8px', padding:'9px 18px', flexShrink:0 }}>
+                  <span style={{ fontSize:'10px', color:'#E4C778', lineHeight:1 }}>✦</span>
+                  <span style={{ fontSize:'12.5px', fontWeight:'600', color:'rgba(255,255,255,.92)', letterSpacing:'.01em', whiteSpace:'nowrap' }}>{title}</span>
                 </div>
               ))}
             </div>
@@ -89,7 +97,7 @@ const WhyRealCost = ({ onNavigate }) => {
       <section className="sec-light">
         <div className="cxl">
           <div className="wrc-2col">
-            <div>
+            <Reveal initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }}>
               <div className="sec-eyebrow">Our Expertise</div>
               <div className="sec-h2">15 Years of Job-Winning<br />Formulas & Assemblies</div>
               <p className="sec-sub" style={{ marginBottom: '20px' }}>
@@ -99,13 +107,13 @@ const WhyRealCost = ({ onNavigate }) => {
                 Tailored for electrical contractors with quality and care — bringing you nothing but the best through <strong style={{ color: 'var(--txt)', fontWeight: '600' }}>technology & innovation</strong>.
               </p>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Get Started</a>
-                <button className="btn-ghost" style={{ background: 'rgba(17,38,70,.07)', color: 'var(--sap)', border: '1px solid rgba(17,38,70,.18)', backdropFilter: 'none' }} onClick={() => onNavigate('pricing')}>See Pricing</button>
+                <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Get Started</motion.a>
+                <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" style={{ background: 'rgba(17,38,70,.07)', color: 'var(--sap)', border: '1px solid rgba(17,38,70,.18)', backdropFilter: 'none' }} onClick={() => onNavigate('pricing')}>See Pricing</motion.button>
               </div>
-            </div>
-            <div style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 28px 72px rgba(17,38,70,.16), 0 0 0 1px rgba(17,38,70,.07)' }}>
+            </Reveal>
+            <Reveal initial={{ opacity: 0, x: 36 }} whileInView={{ opacity: 1, x: 0 }} style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 28px 72px rgba(17,38,70,.16), 0 0 0 1px rgba(17,38,70,.07)' }}>
               <img src={process.env.PUBLIC_URL + '/images/about/why_realcost.png'} alt="Why Real Cost" style={{ width: '100%', display: 'block' }} />
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -113,13 +121,15 @@ const WhyRealCost = ({ onNavigate }) => {
       {/* ── Why Choose Us ── */}
       <section className="sec-grey">
         <div className="cxl">
-          <div style={{ marginBottom: '36px' }}>
-            <div className="sec-eyebrow">What You Get</div>
-            <div className="sec-h2">Why Choose Real Cost?</div>
-          </div>
+          <Reveal>
+            <div style={{ marginBottom: '36px' }}>
+              <div className="sec-eyebrow">What You Get</div>
+              <div className="sec-h2">Why Choose Real Cost?</div>
+            </div>
+          </Reveal>
           <div className="wrc-perks-inner" style={{ background: 'var(--blight)', borderRadius: '22px', border: '1px solid rgba(17,38,70,.07)' }}>
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'var(--grd-prim)' }} />
-            <div className="wrc-perks-grid">
+            <RevealGroup className="wrc-perks-grid">
               {perks.map(({ title, desc }, i) => (
                 <div key={title} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                   <div style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'var(--grd-prim)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: '800', color: '#fff', flexShrink: 0, letterSpacing: '.5px', boxShadow: '0 4px 14px rgba(79,70,229,.28)' }}>
@@ -131,7 +141,7 @@ const WhyRealCost = ({ onNavigate }) => {
                   </div>
                 </div>
               ))}
-            </div>
+            </RevealGroup>
           </div>
         </div>
       </section>
@@ -144,9 +154,9 @@ const WhyRealCost = ({ onNavigate }) => {
           <div className="wrc-2col-wide">
 
             {/* Left: photo collage */}
-            <div className="wrc-collage-wrap">
-              <div style={{ position: 'absolute', left: '-16px', top: '32px', width: '56%', height: '56%', borderRadius: '20px', background: 'linear-gradient(135deg,rgba(79,70,229,.13),rgba(197,160,71,.10))', zIndex: 0 }} />
-              <div style={{ position: 'absolute', right: '-12px', bottom: '28px', width: '44%', height: '38%', borderRadius: '16px', background: 'linear-gradient(135deg,rgba(197,160,71,.10),rgba(79,70,229,.07))', zIndex: 0 }} />
+            <Reveal as="div" className="wrc-collage-wrap" initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }}>
+              <div style={{ position: 'absolute', left: '-14px', top: '32px', width: '56%', height: '56%', borderRadius: '20px', background: 'linear-gradient(135deg,rgba(79,70,229,.13),rgba(197,160,71,.10))', zIndex: 0 }} />
+              <div style={{ position: 'absolute', right: '-14px', bottom: '28px', width: '44%', height: '38%', borderRadius: '16px', background: 'linear-gradient(135deg,rgba(197,160,71,.10),rgba(79,70,229,.07))', zIndex: 0 }} />
               <div style={{ position: 'absolute', right: 0, top: 0, width: '68%', height: '62%', borderRadius: '16px', overflow: 'hidden', zIndex: 1, boxShadow: '0 20px 56px rgba(17,38,70,.18), 0 0 0 1px rgba(17,38,70,.06)' }}>
                 <img src={process.env.PUBLIC_URL + '/images/about/2nd.png'} alt="Team working" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
@@ -163,10 +173,10 @@ const WhyRealCost = ({ onNavigate }) => {
                   <div style={{ fontSize: '10px', fontWeight: '600', color: '#8A92A6', textTransform: 'uppercase', letterSpacing: '.07em', marginTop: '2px' }}>Contractors Served</div>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Right: text */}
-            <div>
+            <Reveal initial={{ opacity: 0, x: 36 }} whileInView={{ opacity: 1, x: 0 }}>
               <div className="sec-eyebrow">Our Story</div>
               <div className="sec-h2">Bringing You Nothing<br />But the Best!</div>
               <p className="sec-sub" style={{ marginBottom: '20px' }}>
@@ -187,7 +197,7 @@ const WhyRealCost = ({ onNavigate }) => {
                   </div>
                 ))}
               </div>
-            </div>
+            </Reveal>
 
           </div>
         </div>
@@ -198,7 +208,7 @@ const WhyRealCost = ({ onNavigate }) => {
         <div className="cxl">
           <div className="wrc-2col">
 
-            <div style={{ background: 'linear-gradient(135deg,rgba(17,38,70,.05),rgba(197,160,71,.09))', borderRadius: '22px', padding: '48px 40px', border: '1px solid rgba(17,38,70,.09)', position: 'relative', overflow: 'hidden' }}>
+            <Reveal initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }} style={{ background: 'linear-gradient(135deg,rgba(17,38,70,.05),rgba(197,160,71,.09))', borderRadius: '22px', padding: '48px 40px', border: '1px solid rgba(17,38,70,.09)', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'var(--grd-gold)' }} />
               <div style={{ fontSize: '11px', fontWeight: '700', color: 'var(--gold2)', textTransform: 'uppercase', letterSpacing: '.12em', marginBottom: '14px' }}>Built By Estimators, For Estimators</div>
               <div style={{ fontSize: '28px', fontWeight: '800', color: 'var(--txt)', letterSpacing: '-.8px', lineHeight: '1.2', marginBottom: '16px' }}>
@@ -207,9 +217,9 @@ const WhyRealCost = ({ onNavigate }) => {
               <p className="sec-sub" style={{ marginBottom: 0 }}>
                 Every formula, assembly, and workflow in Real Cost was designed by a panel of the country's top electrical estimators — not by software engineers guessing at your workflow.
               </p>
-            </div>
+            </Reveal>
 
-            <div>
+            <Reveal initial={{ opacity: 0, x: 36 }} whileInView={{ opacity: 1, x: 0 }}>
               <div className="sec-eyebrow">Making A Difference Through Technology & Innovation</div>
               <div className="sec-h2" style={{ marginBottom: '28px' }}>Proudly Serving<br />Esteemed Titans</div>
               {checkItems.map(({ t, d }) => (
@@ -221,15 +231,161 @@ const WhyRealCost = ({ onNavigate }) => {
                   </div>
                 </div>
               ))}
-            </div>
+            </Reveal>
 
           </div>
         </div>
       </section>
 
+      {/* ── Mission ── */}
+      <section className="sec-light">
+        <div className="cxl">
+          <div className="wrc-2col" style={{ alignItems: 'center', gap: '64px' }}>
+            {/* Left: text */}
+            <Reveal initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }}>
+              <div className="sec-eyebrow">Our Mission</div>
+              <div className="sec-h2" style={{ marginBottom: '20px' }}>
+                Supporting the Growth of<br />Electrical Contractors
+              </div>
+              <p className="sec-sub" style={{ marginBottom: '20px', fontSize: '15px', lineHeight: '1.88' }}>
+                Real Cost's mission is to support the growth of electrical contractors in Canada by providing a premium quality software that enhances their ability to bid with confidence. We strive to deliver excellence through prompt service, professional guidance, and strong relationships.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                {[
+                  'Premium quality software built for electrical contractors',
+                  'Bid with confidence on every project',
+                  'Prompt service and professional guidance',
+                  'Strong, lasting client relationships',
+                ].map((pt) => (
+                  <div key={pt} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'var(--grd-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#0A1428', flexShrink: 0, marginTop: '2px', fontWeight: '800' }}>✓</div>
+                    <div style={{ fontSize: '13.5px', color: 'var(--txt)', lineHeight: '1.65', fontWeight: '400' }}>{pt}</div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            {/* Right: image */}
+            <Reveal initial={{ opacity: 0, x: 36 }} whileInView={{ opacity: 1, x: 0 }} style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(15,37,87,.13)', width: '100%', aspectRatio: '4/3' }}>
+              <img
+                src={process.env.PUBLIC_URL + '/images/about/3rd_colash.png'}
+                alt="Our Mission"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Vision ── */}
+      <section className="sec-grey">
+        <div className="cxl">
+          <div className="wrc-2col" style={{ alignItems: 'center', gap: '64px' }}>
+            {/* Left: image */}
+            <Reveal initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }} style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(15,37,87,.13)', width: '100%', aspectRatio: '4/3', order: -1 }}>
+              <img
+                src={process.env.PUBLIC_URL + '/images/trades/electrical.jpg'}
+                alt="Our Vision"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </Reveal>
+
+            {/* Right: text */}
+            <Reveal initial={{ opacity: 0, x: 36 }} whileInView={{ opacity: 1, x: 0 }}>
+              <div className="sec-eyebrow">Our Vision</div>
+              <div className="sec-h2" style={{ marginBottom: '20px' }}>
+                Canada's Most Trusted<br />Software Solution
+              </div>
+              <p className="sec-sub" style={{ marginBottom: '18px', fontSize: '15px', lineHeight: '1.88' }}>
+                To become Canada's most trusted and reliable software solution for electrical contractors — setting the benchmark for excellence and reliability in the industry.
+              </p>
+              <p className="sec-sub" style={{ marginBottom: '28px', fontSize: '15px', lineHeight: '1.88' }}>
+                We aim to elevate industry standards by offering reliable products, transparent service, and a customer-first experience across the country.
+              </p>
+              <RevealGroup style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                {[
+                  { label: 'Reliable Products',      desc: 'Tested and proven solutions trusted by 500+ contractors.' },
+                  { label: 'Transparent Service',    desc: 'No surprises — clear pricing and honest communication.' },
+                  { label: 'Customer-First',          desc: 'Every decision starts with what is best for our clients.' },
+                  { label: 'Industry Benchmark',      desc: 'Setting the standard for excellence in Canada.' },
+                ].map(({ label, desc }) => (
+                  <div key={label} style={{ background: '#fff', border: '1px solid rgba(220,226,240,.9)', borderRadius: '14px', padding: '18px 16px' }}>
+                    <div style={{ width: '28px', height: '3px', background: 'var(--grd-gold)', borderRadius: '2px', marginBottom: '12px' }} />
+                    <div style={{ fontSize: '13px', fontWeight: '700', color: 'var(--txt)', marginBottom: '5px' }}>{label}</div>
+                    <div style={{ fontSize: '12px', color: '#8A92A6', lineHeight: '1.6', fontWeight: '300' }}>{desc}</div>
+                  </div>
+                ))}
+              </RevealGroup>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Quality We Provide ── */}
+      <section className="sec-light">
+        <div className="cxl">
+          <Reveal>
+            <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 52px' }}>
+              <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>Quality We Provide</div>
+              <div className="sec-h2">Quality at the Heart<br />of Everything We Do</div>
+              <p className="sec-sub">
+                Every product we offer is sourced and tested for performance, ensuring long-lasting solutions for electrical contractors in Canada. Quality is not just a standard — it is our promise.
+              </p>
+            </div>
+          </Reveal>
+          <RevealGroup style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }}>
+            {[
+              { label: 'Tested Performance',     desc: 'Every product and formula is validated against thousands of real-world projects before it reaches your hands.' },
+              { label: 'Long-Lasting Solutions',  desc: 'Built to withstand the demands of the trade — reliable, consistent, and continuously refined.' },
+              { label: 'Canadian Standard',       desc: 'Designed specifically for the Canadian electrical market with city-wise pricing and local compliance in mind.' },
+            ].map(({ label, desc }) => (
+              <div key={label} style={{ background: '#fff', border: '1px solid rgba(220,226,240,.85)', borderRadius: '18px', padding: '32px 28px', boxShadow: '0 4px 24px rgba(15,37,87,.06)' }}>
+                <div style={{ width: '36px', height: '4px', background: 'var(--grd-gold)', borderRadius: '2px', marginBottom: '20px' }} />
+                <div style={{ fontSize: '16px', fontWeight: '700', color: 'var(--txt)', marginBottom: '10px', letterSpacing: '-.3px' }}>{label}</div>
+                <div style={{ fontSize: '13.5px', color: '#6B7489', lineHeight: '1.78', fontWeight: '300' }}>{desc}</div>
+              </div>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* ── Our Philosophy ── */}
+      <section className="sec-grey">
+        <div className="cxl">
+          <Reveal>
+            <div style={{ textAlign: 'center', maxWidth: '620px', margin: '0 auto 52px' }}>
+              <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>Our Philosophy</div>
+              <div className="sec-h2">Building Trust Through<br />Consistency & Integrity</div>
+              <p className="sec-sub">
+                Our philosophy revolves around understanding customer needs and offering dependable solutions that contribute to long-term satisfaction and sustainable development across Canada.
+              </p>
+            </div>
+          </Reveal>
+          <RevealGroup style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px', maxWidth: '900px', margin: '0 auto' }}>
+            {[
+              {
+                label: 'Quality',
+                body: 'We maintain the highest standards in every service we provide, ensuring flawless execution and reliable business solutions for electrical contractors.',
+              },
+              {
+                label: 'Integrity',
+                body: 'Our actions are guided by honesty, transparency, and ethical practices — building trust with every client we serve, every day.',
+              },
+            ].map(({ label, body }) => (
+              <div key={label} style={{ background: 'linear-gradient(135deg,#0E1E3A 0%,#1A3A72 100%)', borderRadius: '22px', padding: '44px 40px', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'var(--grd-gold)' }} />
+                <div style={{ position: 'absolute', bottom: '-40px', right: '-40px', width: '180px', height: '180px', borderRadius: '50%', background: 'radial-gradient(circle,rgba(197,160,71,.10) 0%,transparent 70%)', pointerEvents: 'none' }} />
+                <div style={{ fontSize: '26px', fontWeight: '800', color: '#fff', letterSpacing: '-.6px', marginBottom: '16px' }}>{label}</div>
+                <p style={{ fontSize: '14px', color: 'rgba(210,220,248,.72)', lineHeight: '1.82', fontWeight: '300', margin: 0 }}>{body}</p>
+              </div>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
       {/* ── CTA band ── */}
       <div className="cta-band">
-        <div className="wrc-cta-pad">
+        <Reveal as="div" className="wrc-cta-pad">
           <div style={{ fontSize: '11px', fontWeight: '700', color: 'rgba(228,199,120,.75)', textTransform: 'uppercase', letterSpacing: '.14em', marginBottom: '14px' }}>
             Bringing You Nothing But The Best
           </div>
@@ -240,10 +396,10 @@ const WhyRealCost = ({ onNavigate }) => {
             Making a difference through technology & innovation — 14-day free trial, no credit card required.
           </p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial</a>
-            <button className="btn-ol-inv" onClick={() => onNavigate('contact')}>Talk to Us</button>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial</motion.a>
+            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ol-inv" onClick={() => onNavigate('contact')}>Talk to Us</motion.button>
           </div>
-        </div>
+        </Reveal>
       </div>
 
     </div>

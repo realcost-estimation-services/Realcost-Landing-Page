@@ -455,8 +455,17 @@
    .hero-* rules above would override any hero breakpoints placed in
    responsive.css and lose the source-order tie. Keeping them here guarantees
    the hero scales down on smaller screens. */
+/* Tablet and below: the hero is sized by its content, not by the viewport. No
+   100vh, no vh-based offsets — the copy stacks under the nav and the section
+   ends where the copy ends, so short phones never squash and tall ones never
+   leave a dead band. The fixed 100px top padding clears the floating nav (16px
+   top + 64px tall). */
 @media (max-width: 1024px) {
-  .hero-inner { padding: 36px 24px; gap: 28px; flex-direction: column; align-items: flex-start; }
+  .hero { min-height: auto; align-items: flex-start; }
+  .hero-inner { padding: 100px 24px 56px; gap: 28px; flex-direction: column; align-items: flex-start; }
+  /* .hero-left is flex:1 at desktop; in the stacked column that would make it
+     grow, so pin it to its content height. */
+  .hero-left { margin-top: 0; flex: 0 0 auto; max-width: 100%; }
   .hero-h1 { font-size: 40px; }
   .hero-sub { max-width: 100%; }
   .hero-right { max-width: 100%; }
@@ -464,24 +473,16 @@
 }
 @media (max-width: 768px) {
   .hero-h1 { font-size: 34px; }
-  .hero-left { margin-top: 14vh; }
 }
 @media (max-width: 600px) {
-  /* Full-screen hero on phones. svh = the *small* viewport height, so the
-     section still fits when the mobile browser's address bar is expanded;
-     100vh alone would overflow by the toolbar's height. */
-  .hero { min-height: 100vh; min-height: 100svh; }
-  /* Copy sits in the lower half — the top of the frame stays open so the
-     background photo reads, and the text lands within thumb reach. */
-  .hero-inner { padding: 22px 16px 56px; gap: 18px; justify-content: flex-end; }
-  /* .hero-left is flex:1 — inside the column layout that makes it grow to the
-     full height and cancel justify-content, so pin it to its content height. */
-  .hero-left { margin-top: 0; flex: 0 0 auto; }
+  .hero-inner { padding: 96px 16px 48px; gap: 18px; }
   .hero-badge { margin-bottom: 18px; }
   .hero-h1 { font-size: 28px; letter-spacing: -1px; }
   .hero-sub { font-size: 14px; margin-bottom: 26px; }
   .hero-btns { gap: 10px; margin-bottom: 0; }
   .hero-stats { display: none; }
+  .years-badge { margin: 0 0 18px; }
+  .years-badge svg { width: 76px; height: 76px; }
   .mon-url { font-size: 11px; padding: 6px; }
 }
 @media (max-width: 480px) {
@@ -493,11 +494,19 @@
 @media (max-width: 380px) {
   .hero-h1 { font-size: 22px; }
 }
-/* Short phones (landscape, or small screens with a lot of hero copy): let the
-   hero grow past the viewport instead of squashing the text. */
-@media (max-width: 600px) and (max-height: 560px) {
+
+/* Chrome's "Desktop site" toggle on a phone. It ignores our viewport meta and
+   lays the page out at a fixed ~980px, so it lands above the 1024px breakpoint
+   above and would otherwise take the desktop 100vh / 18vh hero — which at that
+   viewport (~980x2100) stretches to ~2100px tall and strands the copy above a
+   huge empty band. Size the hero to its content there too.
+
+   The aspect guard is what makes this safe: a phone in desktop mode lands around
+   0.46–0.56, while the narrowest real tablet in this width range (iPad mini
+   portrait, 744x1133) is 0.66. Nothing genuine sits below 3/5, so this cannot
+   fire on a device we already handle. */
+@media (min-width: 1025px) and (max-aspect-ratio: 3/5) {
   .hero { min-height: auto; }
-  .hero-inner { padding: 88px 16px 40px; justify-content: flex-start; }
-  .years-badge { margin: 0 0 18px; }
-  .years-badge svg { width: 76px; height: 76px; }
+  .hero-inner { padding: 116px 40px 64px; }
+  .hero-left { margin-top: 0; }
 }

@@ -3,6 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    /* Chrome's "Desktop site" toggle ignores the viewport meta above: it lays the
+       page out at a fixed ~980px and zooms out to fit the phone, shrinking all the
+       text. Re-assert the meta here — some browsers honour a scripted update even
+       in desktop mode. Chrome Android often does not, which is fine: home.css has
+       an aspect-ratio fallback that keeps the hero laid out sanely either way.
+
+       The screen.width comparison is the tell. A touch device whose layout box is
+       far wider than its physical screen is being scaled down; a real tablet
+       reports the two as equal and is left alone. */
+    (function () {
+      var doc = document.documentElement;
+      var layoutWidth = doc.clientWidth || window.innerWidth || 0;
+      var screenWidth = (window.screen && window.screen.width) || 0;
+      var isTouch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+
+      if (!isTouch || !screenWidth) return;
+      if (layoutWidth <= 900 || layoutWidth <= screenWidth * 1.3) return;
+
+      var meta = document.querySelector('meta[name="viewport"]');
+      if (meta) meta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+    })();
+  </script>
   <meta name="theme-color" content="#112646" />
   <meta name="description" content="Real Cost — digital estimation platform for electrical, mechanical, and plumbing trades in Canada." />
   <title>Real Cost — Digital Estimation Platform</title>

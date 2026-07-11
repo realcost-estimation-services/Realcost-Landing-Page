@@ -88,13 +88,13 @@ const Demo = () => {
             <div className="ph-title">See Real Cost live.<br />No pressure.</div>
             <p className="sec-sub" style={{ margin: '0 0 32px' }}>A 30-minute walkthrough tailored to your trade — live takeoff, Canadian pricing, and quote generation on real drawings.</p>
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '32px' }}>
-              <span className="ph-chip">📅 30-minute session</span>
-              <span className="ph-chip">🎯 Tailored to your trade</span>
-              <span className="ph-chip">✓ No commitment</span>
+              <span className="ph-chip">30-minute session</span>
+              <span className="ph-chip">Tailored to your trade</span>
+              <span className="ph-chip">No commitment</span>
             </div>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" onClick={scrollToBooking}>Book your demo now →</motion.button>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="tel:6476778399" className="btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>📞 Prefer to call?</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="tel:6476778399" className="btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>Prefer to call?</motion.a>
             </div>
           </motion.div>
         </div>
@@ -103,15 +103,15 @@ const Demo = () => {
       <Reveal as="div" className="demo-perks-bar" style={{ background: '#fff', borderBottom: '1px solid var(--bdl)', padding: '22px 80px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '18px' }}>
           {[
-            { bg: 'var(--blight)', ico: '⏱', t: '30 minutes', s: 'Focused walkthrough' },
-            { bg: '#E6F7EE', ico: '✅', t: 'No commitment', s: 'Zero pressure, zero obligation' },
-            { bg: 'var(--rlight)', ico: '🎯', t: 'Tailored to you', s: 'We use your trade, your drawings' },
-            { bg: 'var(--blight)', ico: '🆓', t: 'Free trial included', s: '14 days full access after demo' },
+            { t: '30 minutes', s: 'Focused walkthrough' },
+            { t: 'No commitment', s: 'Zero pressure, zero obligation' },
+            { t: 'Tailored to you', s: 'We use your trade, your drawings' },
+            { t: 'Free trial included', s: '14 days full access after demo' },
           ].map((it, i, arr) => (
             <React.Fragment key={i}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: it.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>{it.ico}</div>
-                <div><div style={{ fontSize: '13px', fontWeight: '500', color: 'var(--txt)' }}>{it.t}</div><div style={{ fontSize: '12px', color: '#8A92A6', fontWeight: '300' }}>{it.s}</div></div>
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: '500', color: 'var(--txt)' }}>{it.t}</div>
+                <div style={{ fontSize: '12px', color: '#8A92A6', fontWeight: '300' }}>{it.s}</div>
               </div>
               {i < arr.length - 1 && <div style={{ width: '1px', height: '36px', background: 'var(--bdl)' }}></div>}
             </React.Fragment>
@@ -158,13 +158,13 @@ const Demo = () => {
                     <div className="rc-schedule-side">
                       <div className="rc-schedule-block">
                         <div className="rc-schedule-label">Meeting location</div>
-                        <div className="rc-schedule-value">📹 Video call (Zoom link provided)</div>
+                        <div className="rc-schedule-value">Video call (Zoom link provided)</div>
                       </div>
 
                       <div className="rc-schedule-block rc-schedule-times-block">
                         <div className="rc-schedule-label">What time works best?</div>
                         <div className="rc-schedule-sub">Showing times for {dateHeading}</div>
-                        <div className="rc-schedule-tz">🌐 Eastern Time — Toronto, Canada</div>
+                        <div className="rc-schedule-tz">Eastern Time — Toronto, Canada</div>
                         <div className="rc-schedule-slots">
                           {TIME_SLOTS.map((slot) => (
                             <button key={slot} className={`rc-slot ${selectedTime === slot ? 'active' : ''}`} onClick={() => setSelectedTime(slot)} disabled={!selectedDate}>{slot}</button>
@@ -217,7 +217,6 @@ const Demo = () => {
                 {/* success */}
                 {step === 'success' && (
                   <div className="rc-shell-body" style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '52px', marginBottom: '18px' }}>🎉</div>
                     <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: '24px', fontWeight: '800', color: 'var(--txt)', marginBottom: '9px' }}>You're booked!</div>
                     <div style={{ fontSize: '15px', color: '#6B7489', maxWidth: '360px', margin: '0 auto 22px', lineHeight: '1.8', fontWeight: '300' }}>Thanks {form.fname}! Your demo is confirmed for {confirmText}. We've sent the details to {form.email}.</div>
                     <div style={{ background: 'var(--blight)', border: '1px solid rgba(45,107,228,.18)', borderRadius: '12px', padding: '18px', maxWidth: '350px', margin: '0 auto 24px', textAlign: 'left' }}>
@@ -237,14 +236,14 @@ const Demo = () => {
                 <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: '15px', fontWeight: '700', color: 'var(--txt)', marginBottom: '20px' }}>What we'll cover in 30 minutes</div>
                 <RevealGroup style={{ display: 'flex', flexDirection: 'column' }}>
                   {[
-                    { bg: 'var(--blight)', ico: '🗺', t: 'Live digital takeoff', s: 'AI auto-count and manual symbol placement on real drawings.' },
-                    { bg: '#E6F7EE', ico: '📍', t: 'Canadian city pricing', s: 'See how L1/L2/L3 regional pricing works for your city — live on screen.' },
-                    { bg: 'var(--rlight)', ico: '📋', t: 'Bid page to quote letter', s: 'Full workflow from estimate complete to branded PDF quote in under 2 minutes.' },
-                    { bg: 'var(--blight)', ico: '👥', t: 'Team roles & management', s: 'Owner and sub-estimator accounts, task assignment, and subscription management.' },
+                    { t: 'Live digital takeoff', s: 'Automatic auto-count and manual symbol placement on real drawings.' },
+                    { t: 'Canadian city pricing', s: 'See how L1/L2/L3 regional pricing works for your city — live on screen.' },
+                    { t: 'Bid page to quote letter', s: 'Full workflow from estimate complete to branded PDF quote in under 2 minutes.' },
+                    { t: 'Team roles & management', s: 'Owner and sub-estimator accounts, task assignment, and subscription management.' },
                   ].map((it, i, arr) => (
-                    <div key={i} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start', padding: '14px 0', borderBottom: i < arr.length - 1 ? '1px solid #F0F3FA' : 'none' }}>
-                      <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: it.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '17px', flexShrink: '0' }}>{it.ico}</div>
-                      <div><div style={{ fontSize: '13px', fontWeight: '500', color: 'var(--txt)', marginBottom: '3px' }}>{it.t}</div><div style={{ fontSize: '12px', color: '#6B7489', lineHeight: '1.65', fontWeight: '300' }}>{it.s}</div></div>
+                    <div key={i} style={{ padding: '14px 0', borderBottom: i < arr.length - 1 ? '1px solid #F0F3FA' : 'none' }}>
+                      <div style={{ fontSize: '13px', fontWeight: '500', color: 'var(--txt)', marginBottom: '3px' }}>{it.t}</div>
+                      <div style={{ fontSize: '12px', color: '#6B7489', lineHeight: '1.65', fontWeight: '300' }}>{it.s}</div>
                     </div>
                   ))}
                 </RevealGroup>
@@ -263,7 +262,7 @@ const Demo = () => {
               </RevealGroup>
               <div style={{ background: 'var(--blight)', border: '1px solid rgba(45,107,228,.18)', borderRadius: '12px', padding: '18px' }}>
                 <div style={{ fontSize: '13px', fontWeight: '500', color: 'var(--txt)', marginBottom: '5px' }}>Prefer to talk first?</div>
-                <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: '15px', fontWeight: '700', color: 'var(--txt)', marginBottom: '3px' }}>📞 (647) 677-8399</div>
+                <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: '15px', fontWeight: '700', color: 'var(--txt)', marginBottom: '3px' }}>(647) 677-8399</div>
                 <div style={{ fontSize: '12px', color: '#8A92A6', fontWeight: '300' }}>Mon–Fri 9:00 AM – 6:00 PM ET · Ontario, Canada</div>
               </div>
             </Reveal>

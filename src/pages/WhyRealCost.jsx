@@ -52,7 +52,7 @@ const WhyRealCost = ({ onNavigate }) => {
           {/* badge */}
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }} style={{ display:'inline-flex', alignItems:'center', gap:'8px', background:'rgba(201,168,76,.13)', border:'1px solid rgba(201,168,76,.30)', color:'#E4C778', fontSize:'10px', fontWeight:'700', padding:'5px 15px', borderRadius:'24px', letterSpacing:'.10em', textTransform:'uppercase', marginBottom:'16px' }}>
             <span style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#E4C778', boxShadow:'0 0 8px rgba(228,199,120,.7)', display:'inline-block', animation:'blink 2.4s ease-in-out infinite' }} />
-            ⚡ Why Real Cost?
+            Why Real Cost?
           </motion.div>
 
           {/* heading */}
@@ -70,8 +70,8 @@ const WhyRealCost = ({ onNavigate }) => {
 
           {/* CTAs */}
           <motion.div className="wrc-hero-ctas" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }}>
-            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial</motion.a>
-            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('demo')}>📅 Request Demo</motion.button>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start Free Trial</motion.a>
+            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('demo')}>Request Demo</motion.button>
           </motion.div>
           </motion.div>
           </div>
@@ -107,7 +107,7 @@ const WhyRealCost = ({ onNavigate }) => {
                 Tailored for electrical contractors with quality and care — bringing you nothing but the best through <strong style={{ color: 'var(--txt)', fontWeight: '600' }}>technology & innovation</strong>.
               </p>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Get Started</motion.a>
+                <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Get Started</motion.a>
                 <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" style={{ background: 'rgba(17,38,70,.07)', color: 'var(--sap)', border: '1px solid rgba(17,38,70,.18)', backdropFilter: 'none' }} onClick={() => onNavigate('pricing')}>See Pricing</motion.button>
               </div>
             </Reveal>
@@ -167,7 +167,6 @@ const WhyRealCost = ({ onNavigate }) => {
                 <img src={process.env.PUBLIC_URL + '/images/about/2nd_colash.png'} alt="Contractors" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
               <div style={{ position: 'absolute', left: '2%', bottom: '12px', zIndex: 4, background: '#fff', borderRadius: '14px', padding: '12px 18px', boxShadow: '0 8px 28px rgba(17,38,70,.18)', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(17,38,70,.07)' }}>
-                <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'var(--grd-prim)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', flexShrink: 0 }}>⚡</div>
                 <div>
                   <div style={{ fontSize: '17px', fontWeight: '800', color: 'var(--sap)', letterSpacing: '-.5px', lineHeight: 1 }}>500+</div>
                   <div style={{ fontSize: '10px', fontWeight: '600', color: '#8A92A6', textTransform: 'uppercase', letterSpacing: '.07em', marginTop: '2px' }}>Contractors Served</div>
@@ -396,7 +395,7 @@ const WhyRealCost = ({ onNavigate }) => {
             Making a difference through technology & innovation — 14-day free trial, no credit card required.
           </p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial</motion.a>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start Free Trial</motion.a>
             <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ol-inv" onClick={() => onNavigate('contact')}>Talk to Us</motion.button>
           </div>
         </Reveal>

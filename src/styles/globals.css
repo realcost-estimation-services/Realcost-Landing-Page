@@ -8,6 +8,9 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
 .sec-light { padding:96px 0; background:#FAFBFE; }
 .sec-grey { padding:96px 0; background:#EEF2F9; }
 .sec-dark { padding:96px 0; background:var(--surf); }
+/* Alternates with .sec-light. Same navy hue, one shade down — enough separation to
+   read as a new section, close enough that the seam never reads as a hard band. */
+.sec-tint { padding:96px 0; background:#F1F5FC; }
 .sec-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -234,21 +237,6 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
   gap: 14px;
   margin-bottom: 20px;
   position: relative;
-}
-.cf-card-ico {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 21px;
-  flex-shrink: 0;
-  box-shadow: 0 6px 16px rgba(15,37,87,.12);
-  transition: transform .32s cubic-bezier(.22,1,.36,1);
-}
-.cf-row:hover .cf-card-ico {
-  transform: scale(1.1) rotate(-4deg);
 }
 .cf-card-eyebrow {
   font-size: 11px;

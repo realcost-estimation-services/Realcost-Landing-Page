@@ -3,6 +3,22 @@ import { motion } from 'framer-motion';
 import { Reveal, RevealGroup } from '../ui/Reveal';
 import '../../styles/components/footer.css';
 
+const IconPhone = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 11a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 .18h3a2 2 0 0 1 2 1.72c.13 1 .37 1.98.72 2.91a2 2 0 0 1-.45 2.11L7.09 8a16 16 0 0 0 9 9l1.08-1.18a2 2 0 0 1 2.11-.45c.93.35 1.91.59 2.91.72A2 2 0 0 1 22 18v-1.08z"/>
+  </svg>
+);
+const IconMail = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/>
+  </svg>
+);
+const IconPin = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+  </svg>
+);
+
 const Footer = ({ onNavigate }) => {
   return (
     <footer className="rc-footer">
@@ -15,8 +31,8 @@ const Footer = ({ onNavigate }) => {
           </div>
           <p style={{ fontSize: '13px', color: 'rgba(200,210,240,.38)', lineHeight: '1.82', maxWidth: '240px', fontWeight: '300' }}>Digital estimation platform for trade contractors across Canada. Upload drawings, count symbols, build your bid, send your quote.</p>
           <div style={{ display: 'flex', gap: '10px', marginTop: '18px', flexWrap: 'wrap' }}>
-            <motion.button whileHover={{ scale: 1.04, y: -1 }} whileTap={{ scale: 0.97 }} onClick={() => onNavigate('demo')} style={{ background: 'linear-gradient(135deg,#0F2557 0%,#1E3A7B 100%)', color: '#fff', fontSize: '12px', fontWeight: '500', borderRadius: '7px', padding: '8px 16px', border: 'none', cursor: 'pointer' }}>📅 Request Demo</motion.button>
-<motion.a whileHover={{ scale: 1.04, y: -1 }} whileTap={{ scale: 0.97 }} href="tel:6476778399" style={{ background: 'rgba(255,255,255,.08)', color: 'rgba(255,255,255,.7)', fontSize: '12px', fontWeight: '400', borderRadius: '7px', padding: '8px 16px', border: '1px solid rgba(255,255,255,.12)', textDecoration: 'none', display: 'inline-block' }}>📞 Call us</motion.a>
+            <motion.button whileHover={{ scale: 1.04, y: -1 }} whileTap={{ scale: 0.97 }} onClick={() => onNavigate('demo')} style={{ background: 'linear-gradient(135deg,#0F2557 0%,#1E3A7B 100%)', color: '#fff', fontSize: '12px', fontWeight: '500', borderRadius: '7px', padding: '8px 16px', border: 'none', cursor: 'pointer' }}>Request Demo</motion.button>
+<motion.a whileHover={{ scale: 1.04, y: -1 }} whileTap={{ scale: 0.97 }} href="tel:6476778399" style={{ background: 'rgba(255,255,255,.08)', color: 'rgba(255,255,255,.7)', fontSize: '12px', fontWeight: '400', borderRadius: '7px', padding: '8px 16px', border: '1px solid rgba(255,255,255,.12)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '7px' }}><IconPhone />Call us</motion.a>
           </div>
           <div style={{ display: 'flex', gap: '10px', marginTop: '16px', flexWrap: 'wrap' }}>
             <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram" style={{ width: '34px', height: '34px', borderRadius: '8px', background: 'rgba(255,255,255,.07)', border: '1px solid rgba(255,255,255,.11)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all .18s', textDecoration: 'none' }} onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(225,48,108,.28)'; e.currentTarget.style.borderColor = 'rgba(225,48,108,.45)'; }} onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,.07)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,.11)'; }}>
@@ -35,7 +51,12 @@ const Footer = ({ onNavigate }) => {
         </div>
         <div><div className="f-lbl">Platform</div><button className="f-lnk" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0', textAlign: 'left' }} onClick={() => onNavigate('features')}>Features</button><button className="f-lnk" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0', textAlign: 'left' }} onClick={() => onNavigate('pricing')}>Pricing</button><button className="f-lnk" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0', textAlign: 'left' }} onClick={() => onNavigate('demo')}>Request Demo</button></div>
         <div><div className="f-lbl">Company</div><button className="f-lnk" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0', textAlign: 'left' }} onClick={() => onNavigate('our-story')}>Our Story</button><button className="f-lnk" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0', textAlign: 'left' }} onClick={() => onNavigate('faq')}>FAQ</button><button className="f-lnk" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0', textAlign: 'left' }} onClick={() => onNavigate('our-story')}>Careers</button><button className="f-lnk" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0', textAlign: 'left' }} onClick={() => onNavigate('contact')}>Contact</button><a className="f-lnk" href="mailto:info@realcostestimating.ca">Email us</a></div>
-        <div><div className="f-lbl">Contact</div><a className="f-lnk" href="tel:6476778399">(647) 677-8399</a><a className="f-lnk" href="mailto:info@realcostestimating.ca">info@realcostestimating.ca</a><div className="f-lnk" style={{ cursor: 'default' }}>1200 Bloor Street West, Toronto 🇨🇦</div></div>
+        <div>
+          <div className="f-lbl">Contact</div>
+          <a className="f-lnk f-contact" href="tel:6476778399"><IconPhone />(647) 677-8399</a>
+          <a className="f-lnk f-contact" href="mailto:info@realcostestimating.ca"><IconMail />info@realcostestimating.ca</a>
+          <div className="f-lnk f-contact" style={{ cursor: 'default' }}><IconPin />1200 Bloor Street West, Toronto</div>
+        </div>
       </RevealGroup>
       <Reveal as="div" className="footer-bottom" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 80px', borderTop: '1px solid rgba(201,168,76,.12)', maxWidth: '1440px', margin: '0 auto', flexWrap: 'wrap', gap: '16px' }}>
         <div style={{ fontSize: '12px', color: 'rgba(200,210,240,.28)', fontWeight: '300' }}>© 2026 Real Cost Estimating Inc. All rights reserved. 1200 Bloor Street West, Toronto, Canada.</div>

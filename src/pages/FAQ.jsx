@@ -6,7 +6,6 @@ import { Reveal, RevealGroup } from '../components/ui/Reveal';
 const faqGroups = [
   {
     cat: 'Getting Started',
-    icon: '🚀',
     items: [
       { q: 'Is Real Cost 100% cloud-based?', a: 'Yes. Real Cost is fully cloud-based — there is nothing to install or maintain. Unlike on-premises software, you can access your estimates from any location with an internet connection, allowing your team to collaborate in real time from the office, the field, or anywhere else.' },
       { q: 'Who is Real Cost designed for?', a: 'Real Cost is built exclusively for electrical contractors. Every feature — from the digital takeoff canvas to Canadian city-based pricing to the quote letter generator — is purpose-built for the way electrical estimators actually work.' },
@@ -16,7 +15,6 @@ const faqGroups = [
   },
   {
     cat: 'Why Real Cost',
-    icon: '⭐',
     items: [
       { q: 'Why should I choose Real Cost?', a: 'Real Cost brings over 15 years of electrical estimation expertise directly into the platform. Our job-winning formulas and pre-built assemblies are the same ones used by the number one electrical estimation company in Canada. You get proven, field-tested tools — not generic software adapted from other industries.' },
       { q: 'How does Real Cost differ from other estimating software?', a: 'Real Cost was built by electrical estimators who experienced the frustrations of other software first-hand — the unnecessary complexity, hidden fees, and pricing models that punish growing teams. We designed Real Cost specifically to fix those problems: a clean workflow, transparent per-user pricing, and features that match how Canadian electrical contractors actually bid jobs.' },
@@ -26,7 +24,6 @@ const faqGroups = [
   },
   {
     cat: 'Security & Data',
-    icon: '🔒',
     items: [
       { q: 'Is my data safe?', a: 'Yes. Real Cost uses industry-standard encryption for all data in transit and at rest. Your estimates, drawings, and pricing data are stored securely in the cloud, backed up automatically, and never shared with third parties. You own your data at all times.' },
       { q: 'Who can see my pricing and estimate details?', a: 'Only you and the team members you explicitly invite. Your job details, material pricing, labour rates, and profit margins are completely private. We never share, sell, or access your data. Everything is encrypted and backed up daily.' },
@@ -34,7 +31,6 @@ const faqGroups = [
   },
   {
     cat: 'Billing & Trial',
-    icon: '💳',
     items: [
       { q: 'How does the free trial work?', a: "Sign up and you're in. You get full access to every feature for 14 days — completely free. No payment details required, no catches. If Real Cost is not the right fit, just don't continue. Your data remains accessible for 30 days after the trial ends." },
       { q: 'How long is the free trial?', a: '14 days with full access to all platform features. After the trial, subscribe monthly at $10/user/month or annually at $80/user/year (save 33%). Your project data is always kept safe regardless of plan status.' },
@@ -83,7 +79,7 @@ const FAQ = ({ onNavigate }) => {
               Everything you need to know about Real Cost — from getting started to billing, security, and why we're different.
             </p>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial →</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start Free Trial →</motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('contact')}>Contact us</motion.button>
             </div>
           </motion.div>
@@ -137,7 +133,6 @@ const FAQ = ({ onNavigate }) => {
                   boxShadow: activeCat === g.cat ? '0 4px 14px rgba(17,38,70,.22)' : 'none',
                 }}
               >
-                <span>{g.icon}</span>
                 <span>{g.cat}</span>
                 <span style={{
                   fontSize: '11px', fontWeight: '700', padding: '1px 7px', borderRadius: '20px',
@@ -152,7 +147,6 @@ const FAQ = ({ onNavigate }) => {
 
           {/* Active category label */}
           <Reveal delay={0.05} style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #E4E9F2' }}>
-            <span style={{ fontSize: '18px' }}>{activeGroup.icon}</span>
             <span style={{ fontSize: '13px', fontWeight: '700', color: '#112646', textTransform: 'uppercase', letterSpacing: '.1em' }}>{activeGroup.cat}</span>
             <span style={{ fontSize: '12px', color: '#aaa', marginLeft: 'auto' }}>{activeGroup.items.length} questions</span>
           </Reveal>
@@ -181,7 +175,7 @@ const FAQ = ({ onNavigate }) => {
                 Contact us →
               </motion.button>
               <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="tel:6476778399" style={{ padding: '11px 20px', borderRadius: '10px', border: '1.5px solid #E0E6F0', background: '#fff', color: '#112646', fontSize: '13px', fontWeight: '600', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                📞 (647) 677-8399
+                (647) 677-8399
               </motion.a>
             </div>
           </Reveal>
@@ -203,7 +197,7 @@ const FAQ = ({ onNavigate }) => {
               14-day free trial. Every feature included. No credit card required.
             </p>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial →</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start Free Trial →</motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('contact')}>Talk to us</motion.button>
             </div>
           </Reveal>

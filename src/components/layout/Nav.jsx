@@ -70,7 +70,6 @@ const Nav = ({ currentPage, onNavigate, lightHero }) => {
             ))}
           </div>
           <button className="nav-cta" onClick={() => handleNav('demo')}>
-            <span className="nav-cta-ico" aria-hidden="true">📅</span>
             Request Demo
           </button>
         </div>
@@ -133,7 +132,7 @@ const Nav = ({ currentPage, onNavigate, lightHero }) => {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
-                📅 Request Demo
+                Request Demo
               </motion.button>
             </motion.div>
           </motion.div>

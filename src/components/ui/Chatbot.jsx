@@ -41,24 +41,24 @@ const Chatbot = () => {
   const qrRef = useRef(null);
 
   const botResponses = {
-    trial: ["✅ Start your 14-day free trial — no credit card required. Click 'Request Demo' at the top of the page to request a demo."],
-    pricing: ["💰 Real Cost is $10/user/month or $80/user/year (save 33%). 14-day free trial included, no card needed."],
-    features: ["🔍 Key features: Digital Takeoff Canvas (upload PDF drawings), Auto-Count (find symbols across all pages instantly), Bid Page (material, labour, overhead, duration), Canadian city pricing (L1/L2/L3), Supplier RFQs, one-click Quote Letter, Estimate Graph, and Team Management."],
+    trial: ["Start your 14-day free trial — no credit card required. Click 'Request Demo' at the top of the page to request a demo."],
+    pricing: ["Real Cost is $10/user/month or $80/user/year (save 33%). 14-day free trial included, no card needed."],
+    features: ["Key features: Digital Takeoff Canvas (upload PDF drawings), Auto-Count (find symbols across all pages instantly), Bid Page (material, labour, overhead, duration), Canadian city pricing (L1/L2/L3), Supplier RFQs, one-click Quote Letter, Estimate Graph, and Team Management."],
     autocount: ["Auto-Count: draw a rectangle around any symbol on your drawing — Real Cost finds and counts all matching assemblies across every page of your drawing set, instantly. No manual clicking."],
-    bidpage: ["💰 The Bid Page auto-calculates material costs, labour hours, overhead, markup, and project duration from your takeoff counts. Everything updates live as you make changes."],
-    quote: ["📋 Once your bid is done, one click generates a professional branded PDF or Word quote letter — ready to send to your client immediately."],
-    trades: ["🏗 Real Cost supports: Electrical, Mechanical/HVAC, Plumbing, Fire Alarm, Voice & Data, Security, Audio/Visual, Heat Tracing, and Mechanical Control."],
-    pricing_can: ["📍 Material rates auto-adjust to your city's regional pricing tier (L1/L2/L3) — covering Toronto, Ottawa, Montreal, Calgary, Vancouver, Quebec and more."],
-    contact: ["📞 (647) 677-8399 · info@realcostestimating.ca · 1200 Bloor Street West, Toronto · Mon–Fri 9AM–6PM ET"],
-    default: ["👋 Hi! I can help with anything about Real Cost — features, pricing, workflows, or how to get started. What would you like to know?"]
+    bidpage: ["The Bid Page auto-calculates material costs, labour hours, overhead, markup, and project duration from your takeoff counts. Everything updates live as you make changes."],
+    quote: ["Once your bid is done, one click generates a professional branded PDF or Word quote letter — ready to send to your client immediately."],
+    trades: ["Real Cost supports: Electrical, Mechanical/HVAC, Plumbing, Fire Alarm, Voice & Data, Security, Audio/Visual, Heat Tracing, and Mechanical Control."],
+    pricing_can: ["Material rates auto-adjust to your city's regional pricing tier (L1/L2/L3) — covering Toronto, Ottawa, Montreal, Calgary, Vancouver, Quebec and more."],
+    contact: ["(647) 677-8399 · info@realcostestimating.ca · 1200 Bloor Street West, Toronto · Mon–Fri 9AM–6PM ET"],
+    default: ["Hi! I can help with anything about Real Cost — features, pricing, workflows, or how to get started. What would you like to know?"]
   };
 
   const quickReplies = [
-    ['🚀 Free trial', 'trial'],
-    ['💰 Pricing', 'pricing'],
-    ['🔍 Auto-count', 'autocount'],
-    ['🏗 Trades', 'trades'],
-    ['📞 Contact', 'contact']
+    ['Free trial', 'trial'],
+    ['Pricing', 'pricing'],
+    ['Auto-count', 'autocount'],
+    ['Trades', 'trades'],
+    ['Contact', 'contact']
   ];
 
   const addMessage = (text, type) => {
@@ -114,7 +114,7 @@ const Chatbot = () => {
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      addMessage("👋 Hi! I'm the Real Cost assistant. Ask me anything about our digital estimation platform!", 'bot');
+      addMessage("Hi! I'm the Real Cost assistant. Ask me anything about our digital estimation platform!", 'bot');
       setTimeout(() => setQuickReplies(quickReplies), 100);
     }
   }, [isOpen]);

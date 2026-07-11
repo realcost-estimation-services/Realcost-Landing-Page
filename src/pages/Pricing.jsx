@@ -6,10 +6,10 @@ import '../styles/pages/pricing.css';
 const APP_URL = 'https://d3jt1vpskh0hbe.cloudfront.net/';
 
 const FEATURE_CARDS = [
-  { icon: '📐', title: 'Unlimited Projects', desc: 'Create and manage as many estimation projects as you need.' },
-  { icon: '🎓', title: 'Free Training', desc: 'One-on-one demo with a qualified Trade Expert at any time.' },
-  { icon: '🔄', title: 'No Lock-in', desc: 'Pay-as-you-go with no contracts. Cancel anytime, no questions.' },
-  { icon: '👥', title: 'Concurrent Licensing', desc: 'Your whole team works from a single shared licence.' },
+  { title: 'Unlimited Projects', desc: 'Create and manage as many estimation projects as you need.' },
+  { title: 'Free Training', desc: 'One-on-one demo with a qualified Trade Expert at any time.' },
+  { title: 'No Lock-in', desc: 'Pay-as-you-go with no contracts. Cancel anytime, no questions.' },
+  { title: 'Concurrent Licensing', desc: 'Your whole team works from a single shared licence.' },
 ];
 
 const ClockIcon = () => (
@@ -191,7 +191,7 @@ const Pricing = ({ onNavigate }) => {
               <span className="ph-chip">✓ Free trade expert demo</span>
             </div>
             <motion.div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }}>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Start Free Trial →</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start Free Trial →</motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('contact')}>Talk to sales</motion.button>
             </motion.div>
           </motion.div>
@@ -341,7 +341,6 @@ const Pricing = ({ onNavigate }) => {
           <RevealGroup className="pr-features-grid">
             {FEATURE_CARDS.map((fc, i) => (
               <div key={i} className="pr-feature-card">
-                <div className="pr-feature-icon">{fc.icon}</div>
                 <div className="pr-feature-title">{fc.title}</div>
                 <div className="pr-feature-desc">{fc.desc}</div>
               </div>
@@ -362,12 +361,11 @@ const Pricing = ({ onNavigate }) => {
           </Reveal>
           <RevealGroup className="pr-trust-grid">
             {[
-              { icon: '👥', title: 'Professional Team', desc: 'Real Cost’s expert support team understands trade estimating and helps you stay accurate and on schedule.' },
-              { icon: '🤝', title: 'Trusted by Clients', desc: 'Contractors across Canada rely on Real Cost for consistent estimates and competitive bids.' },
-              { icon: '💬', title: 'Customer Support', desc: 'Get fast, practical help with implementation, training, and troubleshooting whenever your team needs it.' },
+              { title: 'Professional Team', desc: 'Real Cost’s expert support team understands trade estimating and helps you stay accurate and on schedule.' },
+              { title: 'Trusted by Clients', desc: 'Contractors across Canada rely on Real Cost for consistent estimates and competitive bids.' },
+              { title: 'Customer Support', desc: 'Get fast, practical help with implementation, training, and troubleshooting whenever your team needs it.' },
             ].map((item, i) => (
               <div key={i} className="pr-trust-card">
-                <div className="pr-trust-icon">{item.icon}</div>
                 <div className="pr-trust-title">{item.title}</div>
                 <div className="pr-trust-desc">{item.desc}</div>
               </div>
@@ -404,7 +402,7 @@ const Pricing = ({ onNavigate }) => {
             </p>
             <div className="pr-bottom-cta-btns">
               <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={APP_URL} target="_blank" rel="noopener noreferrer">
-                🚀 Start your free trial
+                Start your free trial
               </motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" style={{ color: 'rgba(255,255,255,.7)', borderColor: 'rgba(255,255,255,.2)' }} onClick={() => onNavigate('contact')}>
                 Talk to us first

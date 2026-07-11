@@ -3,18 +3,18 @@ import { motion } from 'framer-motion';
 import { Reveal, RevealGroup } from '../components/ui/Reveal';
 
 const features = [
-  { accent: 'var(--grd-blue)', bg: 'var(--blight)', ico: '🗺', title: 'Digital Takeoff Canvas', body: 'Upload PDF drawing sets and navigate every page on a digital canvas. Place symbols manually or let the platform detect matching symbols. Multi-page projects supported with full page navigation.', img: '/images/features/take_off.png' },
-  { accent: 'linear-gradient(90deg,#1A6B45,#2E8A5A)', bg: '#E6F7EE', ico: '🔍', title: 'Symbol Auto-Count', body: 'Draw a rectangle around any reference symbol — a light fixture, outlet, or device. The platform instantly finds and counts all matching assemblies across every drawing page.', img: '/images/features/blueprint.png' },
-  { accent: 'linear-gradient(90deg,var(--red),var(--red2))', bg: 'var(--rlight)', ico: '💰', title: 'Bid Page', body: 'Your bid auto-calculates from takeoff counts. Material cost, labour hours, overhead percentage, markup, and a project duration calculator — all in one view.', img: '/images/features/bid_page.png' },
-  { accent: 'var(--grd-gold)', bg: '#FDF6E3', ico: '📍', title: 'Canadian City-Based Pricing', body: 'Material rates auto-adjust to L1/L2/L3 regional tiers for your city — Quebec, Ottawa, Toronto, Montreal, Calgary, Vancouver, and more.', img: '/images/misc/project.png' },
-  { accent: 'linear-gradient(90deg,#0891B2,#06B6D4)', bg: '#E0F7FA', ico: '🚚', title: 'Supplier RFQs', body: 'Send requests for quotation to your material distributors directly from the Bid Page. Compare supplier quotes side-by-side and apply the best price instantly.', img: '/images/home/benefits_3.png' },
-  { accent: 'linear-gradient(90deg,#5B21B6,#7C3AED)', bg: '#F5F3FF', ico: '📋', title: 'Quote Letter Generator', body: 'One click generates a professional branded PDF or Word quote letter from your bid — ready to submit to your client immediately.', img: '/images/features/quote_letter.png' },
-  { accent: 'linear-gradient(90deg,#1A6B45,#2E8A5A)', bg: '#E6F7EE', ico: '📊', title: 'Estimate Graph & Analytics', body: 'Visual breakdown chart of your estimate showing material, labour, overhead, and markup proportions. Understand your bid at a glance.', img: '/images/home/benefits_2.png' },
-  { accent: 'linear-gradient(90deg,var(--sap),var(--sap2))', bg: 'var(--blight)', ico: '👥', title: 'Team & Role Management', body: 'Owner and estimator roles. Assign projects to team members, track progress, and manage subscriptions — all from one account dashboard.', img: '/images/home/benefits_1.png' },
-  { accent: 'var(--grd-gold)', bg: '#FDF6E3', ico: '🏗', title: 'Multi-Trade Support', body: 'One platform for all your trades — electrical, mechanical, plumbing, fire alarm, voice & data, security, AV, and heat tracing all supported.', img: '/images/trades/mechanical.jpg' },
+  { accent: 'var(--grd-blue)', title: 'Digital Takeoff Canvas', body: 'Upload PDF drawing sets and navigate every page on a digital canvas. Place symbols manually or let the platform detect matching symbols. Multi-page projects supported with full page navigation.', img: '/images/features/take_off.png' },
+  { accent: 'linear-gradient(90deg,#1A6B45,#2E8A5A)', title: 'Symbol Auto-Count', body: 'Draw a rectangle around any reference symbol — a light fixture, outlet, or device. The platform instantly finds and counts all matching assemblies across every drawing page.', img: '/images/features/blueprint.png' },
+  { accent: 'linear-gradient(90deg,var(--red),var(--red2))', title: 'Bid Page', body: 'Your bid auto-calculates from takeoff counts. Material cost, labour hours, overhead percentage, markup, and a project duration calculator — all in one view.', img: '/images/features/bid_page.png' },
+  { accent: 'var(--grd-gold)', title: 'Canadian City-Based Pricing', body: 'Material rates auto-adjust to L1/L2/L3 regional tiers for your city — Quebec, Ottawa, Toronto, Montreal, Calgary, Vancouver, and more.', img: '/images/misc/project.png' },
+  { accent: 'linear-gradient(90deg,#0891B2,#06B6D4)', title: 'Supplier RFQs', body: 'Send requests for quotation to your material distributors directly from the Bid Page. Compare supplier quotes side-by-side and apply the best price instantly.', img: '/images/home/benefits_3.png' },
+  { accent: 'linear-gradient(90deg,#5B21B6,#7C3AED)', title: 'Quote Letter Generator', body: 'One click generates a professional branded PDF or Word quote letter from your bid — ready to submit to your client immediately.', img: '/images/features/quote_letter.png' },
+  { accent: 'linear-gradient(90deg,#1A6B45,#2E8A5A)', title: 'Estimate Graph & Analytics', body: 'Visual breakdown chart of your estimate showing material, labour, overhead, and markup proportions. Understand your bid at a glance.', img: '/images/home/benefits_2.png' },
+  { accent: 'linear-gradient(90deg,var(--sap),var(--sap2))', title: 'Team & Role Management', body: 'Owner and estimator roles. Assign projects to team members, track progress, and manage subscriptions — all from one account dashboard.', img: '/images/home/benefits_1.png' },
+  { accent: 'var(--grd-gold)', title: 'Multi-Trade Support', body: 'One platform for all your trades — electrical, mechanical, plumbing, fire alarm, voice & data, security, AV, and heat tracing all supported.', img: '/images/trades/mechanical.jpg' },
 ];
 
-const chips = ['🗺 Digital Takeoff Canvas', '🔍 Auto-Count', '💰 Bid Page', '📍 Canadian City Pricing', '🚚 Supplier RFQs', '📋 Quote Letter Generator', '📊 Estimate Graph', '👥 Team Management'];
+const chips = ['Digital Takeoff Canvas', 'Auto-Count', 'Bid Page', 'Canadian City Pricing', 'Supplier RFQs', 'Quote Letter Generator', 'Estimate Graph', 'Team Management'];
 
 const Features = ({ onNavigate }) => {
   return (
@@ -39,7 +39,7 @@ const Features = ({ onNavigate }) => {
               ))}
             </motion.div>
             <motion.div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }}>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Open the App →</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Open the App →</motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('pricing')}>See pricing</motion.button>
             </motion.div>
           </motion.div>
@@ -63,7 +63,6 @@ const Features = ({ onNavigate }) => {
                 <div className="cf-card" style={{ '--card-accent': f.accent }}>
                   <div className="cf-card-num">{String(i + 1).padStart(2, '0')}</div>
                   <div className="cf-card-top">
-                    <div className="cf-card-ico" style={{ background: f.bg }}>{f.ico}</div>
                     <div className="cf-card-eyebrow">Core feature</div>
                   </div>
                   <div className="cf-card-ttl">{f.title}</div>
@@ -144,7 +143,7 @@ const Features = ({ onNavigate }) => {
           <h2 style={{ fontSize: '40px', fontWeight: '800', color: '#fff', letterSpacing: '-1.2px', marginBottom: '14px' }}>See it all live in the app.</h2>
           <p style={{ fontSize: '16px', color: 'rgba(220,228,248,.65)', maxWidth: '440px', margin: '0 auto 36px', lineHeight: '1.78', fontWeight: '300' }}>14-day free trial. Every feature, no card required.</p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">🚀 Open the App →</motion.a>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Open the App →</motion.a>
             <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ol-inv" onClick={() => onNavigate('pricing')}>View pricing</motion.button>
           </div>
         </Reveal>

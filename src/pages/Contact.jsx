@@ -93,14 +93,14 @@ const Contact = ({ onNavigate }) => {
             transition={{ duration: 1.05, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <motion.div className="contact-float-card" whileHover={{ y: -4, boxShadow: '0 16px 32px rgba(15,37,87,.16)' }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
-              <div className="contact-float-icon">✉️</div>
+              <div className="contact-float-icon"><IconMail /></div>
               <div>
                 <div className="contact-float-label">Email us</div>
                 <div className="contact-float-val">care@realcost.ca</div>
               </div>
             </motion.div>
             <motion.div className="contact-float-card" whileHover={{ y: -4, boxShadow: '0 16px 32px rgba(15,37,87,.16)' }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
-              <div className="contact-float-icon">📍</div>
+              <div className="contact-float-icon"><IconPin /></div>
               <div>
                 <div className="contact-float-label">Based in</div>
                 <div className="contact-float-val">1200 Bloor Street West, Toronto</div>
@@ -155,7 +155,6 @@ const Contact = ({ onNavigate }) => {
                 </form>
               ) : (
                 <div style={{ background: '#112646', borderRadius: '20px 20px 80px 20px', padding: '64px 40px', boxShadow: '0 16px 56px rgba(10,20,60,.28)', textAlign: 'center' }}>
-                  <div style={{ fontSize: '48px', marginBottom: '18px' }}>✅</div>
                   <div style={{ fontSize: '22px', fontWeight: '700', color: '#fff', marginBottom: '10px' }}>Message Sent!</div>
                   <div style={{ fontSize: '14px', color: 'rgba(255,255,255,.70)', marginBottom: '28px', fontWeight: '300' }}>Thank you! Our team will get back to you within 24 hours.</div>
                   <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} onClick={() => setSubmitted(false)} style={{ background: '#C5A047', color: '#0A1428', border: 'none', borderRadius: '50px', padding: '12px 36px', fontSize: '14px', fontWeight: '700', cursor: 'pointer' }}>

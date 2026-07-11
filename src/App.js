@@ -4,6 +4,7 @@ import Nav from './components/layout/Nav';
 import Footer from './components/layout/Footer';
 import Chatbot from './components/ui/Chatbot';
 import ScrollTop from './components/ui/ScrollTop';
+import useScrollRestoration from './hooks/useScrollRestoration';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const Demo = React.lazy(() => import('./pages/Demo'));
@@ -45,9 +46,10 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useScrollRestoration();
+
   const handleNavigate = (page) => {
     navigate('/' + page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

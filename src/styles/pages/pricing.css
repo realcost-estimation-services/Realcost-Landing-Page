@@ -366,17 +366,6 @@
   padding: 28px 24px;
   text-align: center;
 }
-.pr-feature-icon {
-  width: 44px;
-  height: 44px;
-  background: #EEEFFE;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 14px;
-  font-size: 20px;
-}
 .pr-feature-title {
   font-size: 14px;
   font-weight: 700;
@@ -408,17 +397,6 @@
 .pr-trust-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(15,37,87,.08);
-}
-.pr-trust-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  background: rgba(79,70,229,.08);
-  color: #4F46E5;
-  font-size: 22px;
-  margin-bottom: 18px;
 }
 .pr-trust-title {
   font-size: 16px;

@@ -276,7 +276,6 @@
   background: rgba(255, 255, 255, 0.13);
 }
 .contact-float-icon {
-  font-size: 22px;
   width: 44px;
   height: 44px;
   background: rgba(255, 255, 255, 0.1);
@@ -285,6 +284,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  color: #fff;
 }
 .contact-float-label {
   font-size: 11px;

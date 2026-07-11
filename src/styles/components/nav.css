@@ -160,7 +160,6 @@
   transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
   text-decoration: none;
 }
-.nav-cta-ico { font-size: 14px; line-height: 1; }
 .nav-cta:hover {
   box-shadow: 0 10px 26px rgba(86,103,232,.6);
   transform: translateY(-1px);

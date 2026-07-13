@@ -41,8 +41,9 @@ const faqGroups = [
   {
     cat: 'Billing & Trial',
     items: [
-      { q: 'How does the free trial work?', a: "You can try the platform free of charge and explore its core features. No long-term commitment is required, and you can decide if it fits your workflow before subscribing." },
+      { q: 'How does the 14-day free trial work?', a: "After signing up, you'll start a 14-day free trial with unrestricted access to all of RealCost's features. A free demonstration with a RealCost Trade Expert is available at any stage during the trial. Enter your billing details to continue using RealCost beyond the trial period." },
       { q: 'How long is the free trial?', a: '14 days with full access to all platform features. Your project data is always kept safe regardless of plan status.' },
+      { q: 'Is there any commitment?', a: "RealCost allows you to pay-as-you-go and you're free to end your subscription whenever you like. We don't subject you to any lock-in contracts or hidden fees." },
       { q: 'What payment methods are accepted?', a: 'Visa, Mastercard, and major debit cards via Stripe. All transactions are encrypted and processed securely.' },
       { q: 'Can I cancel anytime?', a: 'Yes. You can cancel your subscription at any time, and we will make sure you understand what happens to your account and project data before your plan changes.' },
       { q: 'How do I get support?', a: 'Call us at (647) 677-8399, email care@realcost.ca, or use the live chat on this site. Subscribers receive priority support with same-day response for urgent issues, plus access to video tutorials and onboarding guides.' },
@@ -50,23 +51,65 @@ const faqGroups = [
   },
 ];
 
+const IconCalendar = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="5" width="18" height="16" rx="2.5" /><path d="M3 10h18M8 3v4M16 3v4" />
+  </svg>
+);
+const IconCardOff = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2.5" y="5.5" width="19" height="13" rx="2.5" /><path d="M2.5 10h19M4 20.5 20 3.5" />
+  </svg>
+);
+const IconHardHat = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 17a9 9 0 0 1 18 0" /><path d="M9.5 8.2V4.5A1.5 1.5 0 0 1 11 3h2a1.5 1.5 0 0 1 1.5 1.5v3.7" /><path d="M2 17h20v2.5H2z" />
+  </svg>
+);
+const IconBolt = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
+  </svg>
+);
+
 const stats = [
-  { val: '14 Days', label: 'Free trial, full access' },
-  { val: 'No Card', label: 'Required to start' },
-  { val: '15+ Yrs', label: 'Estimation expertise' },
-  { val: 'Same Day', label: 'Support response' },
+  { val: '14 Days',  label: 'Free trial, full access', ico: <IconCalendar />, tone: 'gold' },
+  { val: 'No Card',  label: 'Required to start',       ico: <IconCardOff />,  tone: 'navy' },
+  { val: '15+ Yrs',  label: 'Estimation expertise',    ico: <IconHardHat />,  tone: 'gold' },
+  { val: 'Same Day', label: 'Support response',        ico: <IconBolt />,     tone: 'navy' },
 ];
 
+const IconSearch = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <circle cx="11" cy="11" r="7" /><path d="m20 20-3.6-3.6" />
+  </svg>
+);
+
+const tabs = ['All', ...faqGroups.map(g => g.cat)];
+const totalFaqs = faqGroups.reduce((n, g) => n + g.items.length, 0);
+
 const FAQ = ({ onNavigate }) => {
-  const [openIndex, setOpenIndex] = useState(null);
-  const [activeCat, setActiveCat] = useState(faqGroups[0].cat);
+  const [openKey, setOpenKey] = useState(null);
+  const [activeCat, setActiveCat] = useState('All');
+  const [query, setQuery] = useState('');
 
-  const activeGroup = faqGroups.find(g => g.cat === activeCat);
+  const term = query.trim().toLowerCase();
+  const matches = item =>
+    !term || item.q.toLowerCase().includes(term) || item.a.toLowerCase().includes(term);
 
-  const handleCat = (cat) => {
-    setActiveCat(cat);
-    setOpenIndex(null);
-  };
+  const visibleGroups = faqGroups
+    .filter(g => activeCat === 'All' || g.cat === activeCat)
+    .map(g => ({ ...g, items: g.items.filter(matches) }))
+    .filter(g => g.items.length > 0);
+
+  const resultCount = visibleGroups.reduce((n, g) => n + g.items.length, 0);
+
+  const tabCount = cat =>
+    cat === 'All'
+      ? faqGroups.reduce((n, g) => n + g.items.filter(matches).length, 0)
+      : faqGroups.find(g => g.cat === cat).items.filter(matches).length;
+
+  const reset = () => { setOpenKey(null); };
 
   return (
     <div className="page-enter">
@@ -97,14 +140,24 @@ const FAQ = ({ onNavigate }) => {
       </section>
 
       {/* ── Stats strip ── */}
-      <div style={{ background: '#fff', borderBottom: '1px solid #E8EEF8' }}>
+      <div className="faq-stats-band">
         <div className="cxl">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
-            {stats.map(({ val, label }, i) => (
-              <div key={i} style={{ padding: '26px 0', textAlign: 'center', borderRight: i < 3 ? '1px solid #E8EEF8' : 'none' }}>
-                <div style={{ fontSize: '20px', fontWeight: '800', color: '#112646', letterSpacing: '-.4px', marginBottom: '3px' }}>{val}</div>
-                <div style={{ fontSize: '12px', color: '#999', fontWeight: '400' }}>{label}</div>
-              </div>
+          <div className="faq-stats-grid">
+            {stats.map(({ val, label, ico, tone }, i) => (
+              <motion.div
+                key={val}
+                className={`faq-stat ${tone}`}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="faq-stat-ico">{ico}</div>
+                <div className="faq-stat-txt">
+                  <div className="faq-stat-val">{val}</div>
+                  <div className="faq-stat-label">{label}</div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -112,10 +165,10 @@ const FAQ = ({ onNavigate }) => {
 
       {/* ── FAQ Body ── */}
       <section style={{ background: '#F8F9FC', padding: '80px 0 100px' }}>
-        <div className="cxl" style={{ maxWidth: '860px' }}>
+        <div className="cxl" style={{ maxWidth: '880px' }}>
 
           {/* Section heading */}
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '36px' }}>
             <div style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '.18em', color: '#C5A047', marginBottom: '12px' }}>
               Common Questions
             </div>
@@ -123,56 +176,75 @@ const FAQ = ({ onNavigate }) => {
               Got questions? We've got answers.
             </h2>
             <p style={{ fontSize: '15px', color: '#888', lineHeight: '1.7', margin: 0, fontWeight: '300' }}>
-              Browse by category or scroll through all questions below.
+              Search all {totalFaqs} questions, or filter by topic.
             </p>
           </div>
 
-          {/* Category tabs */}
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '40px' }}>
-            {faqGroups.map(g => (
-              <button
-                key={g.cat}
-                onClick={() => handleCat(g.cat)}
-                style={{
-                  padding: '10px 20px', borderRadius: '50px', border: '1.5px solid',
-                  borderColor: activeCat === g.cat ? '#112646' : '#E0E6F0',
-                  background: activeCat === g.cat ? '#112646' : '#fff',
-                  color: activeCat === g.cat ? '#fff' : '#555',
-                  fontSize: '13px', fontWeight: '600', cursor: 'pointer',
-                  transition: 'all .18s', display: 'flex', alignItems: 'center', gap: '6px',
-                  boxShadow: activeCat === g.cat ? '0 4px 14px rgba(17,38,70,.22)' : 'none',
-                }}
-              >
-                <span>{g.cat}</span>
-                <span style={{
-                  fontSize: '11px', fontWeight: '700', padding: '1px 7px', borderRadius: '20px',
-                  background: activeCat === g.cat ? 'rgba(255,255,255,.2)' : '#F0F3FA',
-                  color: activeCat === g.cat ? '#fff' : '#888',
-                }}>
-                  {g.items.length}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          {/* Active category label */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #E4E9F2' }}>
-            <span style={{ fontSize: '13px', fontWeight: '700', color: '#112646', textTransform: 'uppercase', letterSpacing: '.1em' }}>{activeGroup.cat}</span>
-            <span style={{ fontSize: '12px', color: '#aaa', marginLeft: 'auto' }}>{activeGroup.items.length} questions</span>
-          </div>
-
-          {/* Accordion */}
-          <div>
-            {activeGroup.items.map((item, i) => (
-              <FAQItem
-                key={item.q}
-                question={item.q}
-                answer={item.a}
-                isOpen={openIndex === i}
-                onToggle={() => setOpenIndex(prev => prev === i ? null : i)}
+          {/* Search + category filter */}
+          <div className="faq-toolbar">
+            <div className="faq-search">
+              <IconSearch />
+              <input
+                type="text"
+                value={query}
+                onChange={e => { setQuery(e.target.value); reset(); }}
+                placeholder="Search questions…"
+                aria-label="Search frequently asked questions"
               />
-            ))}
+              {query && (
+                <button type="button" className="faq-search-clear" onClick={() => { setQuery(''); reset(); }} aria-label="Clear search">
+                  ×
+                </button>
+              )}
+            </div>
+            <div className="faq-tabs" role="tablist">
+              {tabs.map(cat => (
+                <button
+                  key={cat}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeCat === cat}
+                  className={`faq-tab ${activeCat === cat ? 'active' : ''}`}
+                  onClick={() => { setActiveCat(cat); reset(); }}
+                >
+                  {cat}
+                  <span className="faq-tab-n">{tabCount(cat)}</span>
+                </button>
+              ))}
+            </div>
           </div>
+
+          {/* Accordion — grouped by category */}
+          {resultCount === 0 ? (
+            <div className="faq-empty">
+              <div className="faq-empty-t">No questions match “{query}”.</div>
+              <div className="faq-empty-s">
+                Try a different keyword, or{' '}
+                <button type="button" onClick={() => onNavigate('contact')}>ask us directly</button>.
+              </div>
+            </div>
+          ) : (
+            visibleGroups.map(group => (
+              <div className="faq-group" key={group.cat}>
+                <div className="faq-cat">
+                  <span>{group.cat}</span>
+                  <span className="faq-cat-n">{group.items.length}</span>
+                </div>
+                <div className="faq-list">
+                  {group.items.map((item, i) => (
+                    <FAQItem
+                      key={item.q}
+                      index={i + 1}
+                      question={item.q}
+                      answer={item.a}
+                      isOpen={openKey === item.q}
+                      onToggle={() => setOpenKey(prev => (prev === item.q ? null : item.q))}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))
+          )}
 
           {/* Still have questions inline card */}
           <div style={{ marginTop: '48px', background: '#fff', border: '1px solid #E4E9F2', borderRadius: '16px', padding: '32px 36px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px', boxShadow: '0 2px 12px rgba(15,37,87,.06)' }}>

@@ -80,8 +80,8 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #E3D7A6 0%, #F5E9C0 100%);
-  color: #0F2547;
+  background: var(--grd-prim);
+  color: #fff;
   font-weight: 800;
   font-size: 12px;
   margin-top: 4px;
@@ -187,16 +187,6 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
   z-index: 2;
   margin-left: -48px;
   transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s ease;
-}
-.cf-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--card-accent, var(--gold));
-  z-index: 1;
 }
 .cf-card::after {
   content: '';

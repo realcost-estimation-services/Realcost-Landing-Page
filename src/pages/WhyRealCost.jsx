@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Reveal, RevealGroup } from '../components/ui/Reveal';
+import CountUp from '../components/ui/CountUp';
 import '../styles/pages/why-real-cost.css';
 
 
@@ -168,7 +169,7 @@ const WhyRealCost = ({ onNavigate }) => {
               </div>
               <div style={{ position: 'absolute', left: '2%', bottom: '12px', zIndex: 4, background: '#fff', borderRadius: '14px', padding: '12px 18px', boxShadow: '0 8px 28px rgba(17,38,70,.18)', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(17,38,70,.07)' }}>
                 <div>
-                  <div style={{ fontSize: '17px', fontWeight: '800', color: 'var(--sap)', letterSpacing: '-.5px', lineHeight: 1 }}>500+</div>
+                  <div style={{ fontSize: '17px', fontWeight: '800', color: 'var(--sap)', letterSpacing: '-.5px', lineHeight: 1 }}><CountUp end={500} suffix="+" /></div>
                   <div style={{ fontSize: '10px', fontWeight: '600', color: '#8A92A6', textTransform: 'uppercase', letterSpacing: '.07em', marginTop: '2px' }}>Contractors Served</div>
                 </div>
               </div>
@@ -186,12 +187,12 @@ const WhyRealCost = ({ onNavigate }) => {
               </p>
               <div style={{ display: 'flex', gap: '0', borderTop: '1px solid rgba(17,38,70,.08)', marginTop: '4px' }}>
                 {[
-                  { n: '15+',    l: 'Years Experience' },
-                  { n: '1,000+', l: 'Projects Won' },
-                  { n: '10x',    l: 'Client ROI' },
-                ].map(({ n, l }, i) => (
+                  { v: 15,   s: '+', l: 'Years Experience' },
+                  { v: 1000, s: '+', l: 'Projects Won' },
+                  { v: 10,   s: 'x', l: 'Client ROI' },
+                ].map(({ v, s, l }, i) => (
                   <div key={l} style={{ paddingTop: '20px', paddingRight: '28px', paddingLeft: i > 0 ? '28px' : 0, borderLeft: i > 0 ? '1px solid rgba(17,38,70,.08)' : 'none' }}>
-                    <div style={{ fontSize: '26px', fontWeight: '800', color: 'var(--sap)', letterSpacing: '-1px', lineHeight: 1 }}>{n}</div>
+                    <div style={{ fontSize: '26px', fontWeight: '800', color: 'var(--sap)', letterSpacing: '-1px', lineHeight: 1 }}><CountUp end={v} suffix={s} /></div>
                     <div style={{ fontSize: '10.5px', fontWeight: '600', color: '#8A92A6', textTransform: 'uppercase', letterSpacing: '.08em', marginTop: '5px' }}>{l}</div>
                   </div>
                 ))}
@@ -257,7 +258,7 @@ const WhyRealCost = ({ onNavigate }) => {
                   'Strong, lasting client relationships',
                 ].map((pt) => (
                   <div key={pt} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-                    <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'var(--grd-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#0A1428', flexShrink: 0, marginTop: '2px', fontWeight: '800' }}>✓</div>
+                    <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: 'var(--grd-prim)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#fff', flexShrink: 0, marginTop: '2px', fontWeight: '800' }}>✓</div>
                     <div style={{ fontSize: '13.5px', color: 'var(--txt)', lineHeight: '1.65', fontWeight: '400' }}>{pt}</div>
                   </div>
                 ))}
@@ -338,7 +339,7 @@ const WhyRealCost = ({ onNavigate }) => {
               { label: 'Long-Lasting Solutions',  desc: 'Built to withstand the demands of the trade — reliable, consistent, and continuously refined.' },
               { label: 'Canadian Standard',       desc: 'Designed specifically for the Canadian electrical market with city-wise pricing and local compliance in mind.' },
             ].map(({ label, desc }) => (
-              <div key={label} style={{ background: '#fff', border: '1px solid rgba(220,226,240,.85)', borderRadius: '18px', padding: '32px 28px', boxShadow: '0 4px 24px rgba(15,37,87,.06)' }}>
+              <div key={label} style={{ background: '#fff', border: '1px solid rgba(220,226,240,.85)', borderRadius: '18px', padding: '32px 28px', boxShadow: '0 4px 24px rgba(15,37,87,.06)', height: '100%' }}>
                 <div style={{ width: '36px', height: '4px', background: 'var(--grd-gold)', borderRadius: '2px', marginBottom: '20px' }} />
                 <div style={{ fontSize: '16px', fontWeight: '700', color: 'var(--txt)', marginBottom: '10px', letterSpacing: '-.3px' }}>{label}</div>
                 <div style={{ fontSize: '13.5px', color: '#6B7489', lineHeight: '1.78', fontWeight: '300' }}>{desc}</div>

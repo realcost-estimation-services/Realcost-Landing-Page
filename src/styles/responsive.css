@@ -19,6 +19,41 @@ html, body { overflow-x: clip; }
 /* Media should never force the page wider than the screen */
 img, svg, video, canvas, iframe { max-width: 100%; }
 
+/* ── Large screens ≥1600px: scale the page up ──
+   The design is px-based end to end — the CSS, and ~470 inline style={{}} blocks
+   in the JSX. That gives it one intrinsic size: a 1280px column of 15px text that
+   is right on a laptop and shrinks into a narrow strip in the middle of a 24"/32"
+   monitor. `zoom` scales every length, so the inline styles come along too; the
+   page keeps the proportions it was designed with at any width, which is what
+   per-class min-width breakpoints could not do without re-declaring hundreds of
+   inline values.
+
+   Each step keeps the *effective* viewport (real width ÷ zoom) between roughly
+   1500px and 1900px — the range the layout was built for. Nothing fires below
+   1600px, so laptops render exactly as before.
+
+   Two things to know before editing:
+
+   1. Media queries and window.innerWidth are NOT zoomed — they always see the
+      real viewport — so the max-width breakpoints below keep working untouched,
+      and there is no feedback loop between a tier and the query that selects it.
+
+   2. vh/vw are the one unit zoom does not divide: 100vh inside zoom:1.2 renders
+      1.2× the viewport and overflows the fold. Every viewport-unit rule that
+      survives to desktop must be written as calc(<n>vh / var(--z)) — see .hero /
+      .hero-left in home.css. --z carries this tier's factor for exactly that.
+      Grep for `vh` / `vw` before adding new ones.
+
+   Browsers without `zoom` (pre-2024) simply ignore these tiers and get today's
+   unscaled layout, which is the current behaviour — so the fallback is safe. */
+:root { --z: 1; }
+@media (min-width:1600px) { :root { zoom:1.06; --z:1.06; } }
+@media (min-width:1920px) { :root { zoom:1.2;  --z:1.2;  } }
+@media (min-width:2200px) { :root { zoom:1.35; --z:1.35; } }
+@media (min-width:2560px) { :root { zoom:1.55; --z:1.55; } }
+@media (min-width:3000px) { :root { zoom:1.8;  --z:1.8;  } }
+@media (min-width:3600px) { :root { zoom:2.2;  --z:2.2;  } }
+
 /* ── Laptop ≤1024px ── */
 @media (max-width:1024px) {
   /* Nav responsive rules live in nav.css (bundled after this file so they win the source-order tie) */

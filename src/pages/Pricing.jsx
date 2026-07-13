@@ -57,17 +57,6 @@ const STREAMLINE_ITEMS = [
   },
 ];
 
-const FAQ_ITEMS = [
-  {
-    q: 'Is there any commitment?',
-    a: "RealCost allows you to pay-as-you-go and you're free to end your subscription whenever you like. We don't subject you to any lock-in contracts or hidden fees.",
-  },
-  {
-    q: 'How does the 14-day free trial work?',
-    a: "After signing up, you'll start a 14-day free trial with unrestricted access to all of RealCost's features. A free demonstration with a RealCost Trade Expert is available at any stage during the trial. Enter your billing details to continue using RealCost beyond the trial period.",
-  },
-];
-
 const PLAN_FEATURES_FREE = [
   '10 documents included',
   'All core features unlocked',
@@ -219,7 +208,9 @@ const Pricing = ({ onNavigate }) => {
       <section style={{ padding: '34px 0 28px' }}>
         <div className="cxl" style={{ textAlign: 'center' }}>
           <div className="sec-h2" style={{ marginBottom: '10px' }}>Best Value for Price</div>
-          <p className="sec-sub" style={{ color: 'var(--sap)', fontWeight: '600' }}>REAL COST — a name you can rely on.</p>
+          <p className="pr-tagline">
+            <span className="pr-tagline-brand">Real Cost</span> — a name you can rely on.
+          </p>
         </div>
       </section>
 
@@ -368,24 +359,6 @@ const Pricing = ({ onNavigate }) => {
               <div key={i} className="pr-trust-card">
                 <div className="pr-trust-title">{item.title}</div>
                 <div className="pr-trust-desc">{item.desc}</div>
-              </div>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* ── FAQ ── */}
-      <section className="pr-faq-section">
-        <div className="cxl">
-          <Reveal style={{ textAlign: 'center' }}>
-            <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>FAQ</div>
-            <div className="sec-h2">Common questions</div>
-          </Reveal>
-          <RevealGroup className="pr-faq-grid">
-            {FAQ_ITEMS.map((item, i) => (
-              <div key={i} className="pr-faq-item">
-                <div className="pr-faq-q">{item.q}</div>
-                <div className="pr-faq-a">{item.a}</div>
               </div>
             ))}
           </RevealGroup>

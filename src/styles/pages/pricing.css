@@ -107,6 +107,24 @@
   margin: 0 auto;
 }
 
+/* ─── "Best Value for Price" tagline ───────────────────── */
+.pr-tagline {
+  font-size: 17px;
+  font-weight: 500;
+  color: #6B7489;
+  line-height: 1.6;
+  letter-spacing: -.2px;
+  margin: 0;
+}
+.pr-tagline-brand {
+  font-weight: 800;
+  letter-spacing: -.4px;
+  background: var(--grd-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* ─── Plans section ────────────────────────────────────── */
 .pr-plans-section {
   background: #F2F5FB;
@@ -410,36 +428,6 @@
   line-height: 1.8;
 }
 
-/* ─── FAQ ───────────────────────────────────────────────── */
-.pr-faq-section {
-  background: #F2F5FB;
-  padding: 80px 0;
-}
-.pr-faq-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 48px;
-}
-.pr-faq-item {
-  background: #fff;
-  border: 1px solid #E8EDF5;
-  border-radius: 16px;
-  padding: 28px 32px;
-}
-.pr-faq-q {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--txt);
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-.pr-faq-a {
-  font-size: 13.5px;
-  color: #6B7489;
-  line-height: 1.8;
-}
-
 /* ─── Bottom CTA ────────────────────────────────────────── */
 .pr-bottom-cta {
   background: linear-gradient(135deg, #0D1A33 0%, #1B3266 100%);
@@ -487,13 +475,12 @@
   .pr-cards { grid-template-columns: 1fr; gap: 20px; max-width: 460px; }
   .pr-streamline-grid { grid-template-columns: 1fr; gap: 32px; max-width: 420px; }
   .pr-trust-grid { grid-template-columns: 1fr; gap: 18px; }
-  .pr-faq-grid { grid-template-columns: 1fr; gap: 16px; }
   .pr-card-top { padding: 26px 24px 20px; }
   .pr-card-bottom { padding: 20px 24px 26px; }
-  .pr-faq-item { padding: 22px 24px; }
 }
 @media (max-width:600px) {
   .pr-price { font-size: 42px; letter-spacing: -1.5px; }
+  .pr-tagline { font-size: 15px; }
 }
 @media (max-width:480px) {
   .pr-features-grid { grid-template-columns: 1fr; }

@@ -2,11 +2,61 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Testimonials from '../components/ui/Testimonials';
 import { Reveal, RevealGroup } from '../components/ui/Reveal';
+import CountUp from '../components/ui/CountUp';
 import '../styles/pages/home.css';
+
+const APP_URL = 'https://d3jt1vpskh0hbe.cloudfront.net/';
+
+/* Slide + copy travel on the same easing so they read as one moving surface. */
+const SLIDE_EASE = { duration: 0.95, ease: [0.65, 0, 0.35, 1] };
+const pad = (n) => String(n).padStart(2, '0');
+
+/* Hero carousel slides. The copy (badge / headline / sub) swaps per slide; the
+   15-year badge and the CTA buttons stay put across all three. */
+const HERO_SLIDES = [
+  {
+    image: '/images/features/Home.png',
+    badge: 'Professional Electrical Estimating Software',
+    title: <>Tired of overpriced,<br />over-complicated software?<br /><em>Your wait is over.</em></>,
+    sub: <>Switch to <strong>Real Cost</strong> for a premium estimating experience — upload your drawings, count symbols, build your bid, and generate a quote letter, all in one place.</>,
+  },
+  {
+    image: '/images/features/takeoff.png',
+    badge: 'Digital takeoff & symbol auto-count',
+    title: <>Stop counting symbols<br />by hand.<br /><em>Let the app do it.</em></>,
+    sub: <>Box-select a single symbol and <strong>Real Cost</strong> finds every match across every page of your drawing set — in seconds, not evenings.</>,
+  },
+  {
+    image: '/images/features/our_features.png',
+    badge: 'Bid page & one-click quote letter',
+    title: <>From drawings to a<br />branded quote.<br /><em>In four steps.</em></>,
+    sub: <>Material, labour, overhead and markup — calculated on your bid page, then sent out as a <strong>professional PDF quote letter</strong>.</>,
+  },
+];
 
 const Home = ({ onNavigate }) => {
   const [tab2, setTab2] = useState(0);
   const monitorRef2 = useRef(null);
+
+  /* ── Hero carousel ──
+     Auto-advance is driven by the progress bar's CSS animation ending (see
+     .hero-dot-fill), not a timer, so hovering the hero pauses the animation and
+     the slide advance together — they can never drift apart. */
+  const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const touchX = useRef(null);
+
+  const goTo = (i) => setSlide((i + HERO_SLIDES.length) % HERO_SLIDES.length);
+  const nextSlide = () => goTo(slide + 1);
+  const prevSlide = () => goTo(slide - 1);
+
+  const onTouchStart = (e) => { touchX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    if (Math.abs(dx) > 50) (dx < 0 ? nextSlide : prevSlide)();
+    touchX.current = null;
+  };
 
   useEffect(() => {
     const el = monitorRef2.current;
@@ -22,8 +72,34 @@ const Home = ({ onNavigate }) => {
   return (
     <div className="page-enter">
       {/* ════════ HERO ════════ */}
-      <section className="hero">
-        <img className="hero-video" src={process.env.PUBLIC_URL + '/images/features/Home.png'} alt="" aria-hidden="true" style={{ objectFit: 'cover' }} />
+      <section
+        className={`hero${paused ? ' is-paused' : ''}`}
+        aria-roledescription="carousel"
+        aria-label="Real Cost highlights"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        {/* Background track: the three images sit side by side and the whole
+            strip slides, so a slide change reads as a horizontal swipe. */}
+        <motion.div
+          className="hero-bg-track"
+          animate={{ x: `-${slide * 100}%` }}
+          transition={SLIDE_EASE}
+        >
+          {HERO_SLIDES.map((s, i) => (
+            <div className="hero-bg-slide" key={s.image}>
+              <img
+                className={`hero-slide-img${i === slide ? ' is-active' : ''}`}
+                src={process.env.PUBLIC_URL + s.image}
+                alt=""
+                aria-hidden="true"
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            </div>
+          ))}
+        </motion.div>
         <div className="hero-overlay"></div>
         <div className="hero-tint"></div>
         <div className="hero-inner">
@@ -33,9 +109,24 @@ const Home = ({ onNavigate }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
           >
-            <motion.div className="hero-badge" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.15 }}><div className="badge-dot"></div>Professional Electrical Estimating Software</motion.div>
-            <h1 className="hero-h1">Tired of overpriced,<br />over-complicated software?<br /><em>Your wait is over.</em></h1>
-            <p className="hero-sub">Switch to <strong>Real Cost</strong> for a premium estimating experience — upload your drawings, count symbols, build your bid, and generate a quote letter, all in one place.</p>
+            {/* Copy track: slides in lockstep with the background, so the words
+                travel with their image. The window is as tall as the tallest of
+                the three, so the badge and buttons below never move. */}
+            <div className="hero-copy-window">
+              <motion.div
+                className="hero-copy-track"
+                animate={{ x: `-${slide * 100}%` }}
+                transition={SLIDE_EASE}
+              >
+                {HERO_SLIDES.map((s, i) => (
+                  <div className={`hero-copy${i === slide ? ' is-active' : ''}`} key={s.image} aria-hidden={i !== slide}>
+                    <div className="hero-badge"><div className="badge-dot"></div>{s.badge}</div>
+                    <h1 className="hero-h1">{s.title}</h1>
+                    <p className="hero-sub">{s.sub}</p>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
             {/* 15-year badge — sits in the flow between the copy and the buttons
                 on mobile; absolutely positioned bottom-right on desktop (see
                 .years-badge in home.css) */}
@@ -116,9 +207,29 @@ const Home = ({ onNavigate }) => {
             </motion.div>
 
             <motion.div className="hero-btns" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }}>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Switch to Real Cost now</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={APP_URL} target="_blank" rel="noopener noreferrer">Switch to Real Cost now</motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('demo')}>Request Demo</motion.button>
             </motion.div>
+
+            {/* Carousel controls: ‹ 01 ──progress── 03 › */}
+            <div className="hero-ctrl">
+              <button className="hero-arrow" onClick={prevSlide} aria-label="Previous slide">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+              </button>
+              <div className="hero-counter">
+                <span className="hero-count is-current">{pad(slide + 1)}</span>
+                <div className="hero-line">
+                  {/* The bar's CSS animation IS the autoplay clock — when it ends,
+                      we advance. Remounting it per slide restarts the countdown,
+                      and pausing the animation pauses the carousel with it. */}
+                  <span key={slide} className="hero-progress" onAnimationEnd={nextSlide} />
+                </div>
+                <span className="hero-count">{pad(HERO_SLIDES.length)}</span>
+              </div>
+              <button className="hero-arrow" onClick={nextSlide} aria-label="Next slide">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -134,9 +245,9 @@ const Home = ({ onNavigate }) => {
                 We build user-focused estimating software that aligns with your business goals — upload drawings, auto-count symbols, build your bid, and send a branded quote letter, all in one place.
               </p>
               <div className="ph-stat-row hb-stat-row">
-                <div className="ph-stat"><div className="ph-stat-n">15+</div><div className="ph-stat-l">Years Experience</div></div>
-                <div className="ph-stat"><div className="ph-stat-n">500+</div><div className="ph-stat-l">Contractors Served</div></div>
-                <div className="ph-stat"><div className="ph-stat-n">9</div><div className="ph-stat-l">Trades Supported</div></div>
+                <div className="ph-stat"><div className="ph-stat-n"><CountUp end={15} suffix="+" /></div><div className="ph-stat-l">Years Experience</div></div>
+                <div className="ph-stat"><div className="ph-stat-n"><CountUp end={500} suffix="+" /></div><div className="ph-stat-l">Contractors Served</div></div>
+                <div className="ph-stat"><div className="ph-stat-n"><CountUp end={9} /></div><div className="ph-stat-l">Trades Supported</div></div>
               </div>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '32px' }}>
                 <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={process.env.PUBLIC_URL + '/downloads/RealCost_brochure.pdf'} download>
@@ -240,12 +351,6 @@ const Home = ({ onNavigate }) => {
             {/* Left: monitor canvas */}
             <Reveal className="monitor-3d-wrap" y={0} style={{ opacity: 0 }} initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }}>
               <div ref={monitorRef2} className="monitor monitor-3d">
-                <div className="mon-bar">
-                  <div className="wdot" style={{ background: '#FF5F57' }}></div>
-                  <div className="wdot" style={{ background: '#FFBD2E' }}></div>
-                  <div className="wdot" style={{ background: '#28C840' }}></div>
-                  <div className="mon-url">realcost.ca / project / estimate</div>
-                </div>
                 <div className="mon-tabs">
                   <button className={`mt ${tab2 === 0 ? 'on' : ''}`} onClick={() => setTab2(0)}>Takeoff Canvas</button>
                   <button className={`mt ${tab2 === 1 ? 'on' : ''}`} onClick={() => setTab2(1)}>Bid Page</button>
@@ -311,10 +416,10 @@ const Home = ({ onNavigate }) => {
               },
               {
                 bg: 'rgba(14,165,233,.14)',  title: 'Symbol Auto-Count',       desc: 'Box-select a reference symbol and the platform matches it across every drawing page in seconds.',
-                img: '/images/features/blueprint.png',
+                img: '/images/features/autocount.png',
               },
               {
-                bg: 'rgba(197,160,71,.15)',  title: 'Canadian City Pricing',   desc: 'L1/L2/L3 tiers for Toronto, Ottawa, Montreal, Calgary, Vancouver and more.',
+                bg: 'rgba(197,160,71,.15)',  title: 'Canadian City Pricing',   desc: 'Regional pricing for Toronto, Ottawa, Montreal, Calgary, Vancouver and more.',
                 img: '/images/misc/project.png',
               },
 
@@ -357,7 +462,7 @@ const Home = ({ onNavigate }) => {
                   'Low Voltage Estimating',
                 ].map((item) => (
                   <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--grd-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: '#0A1428', fontWeight: '800', flexShrink: 0 }}>✓</div>
+                    <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--grd-prim)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: '#fff', fontWeight: '800', flexShrink: 0 }}>✓</div>
                     <span style={{ fontSize: '14.5px', fontWeight: '500', color: 'var(--txt)' }}>{item}</span>
                   </div>
                 ))}
@@ -369,37 +474,6 @@ const Home = ({ onNavigate }) => {
               <img src={process.env.PUBLIC_URL + '/images/misc/project.png'} alt="Electrical project estimating" style={{ width: '100%', maxWidth: '340px', height: 'auto', display: 'block' }} />
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      {/* Trades — premium horizontal cards */}
-      <section className="sec-light">
-        <div className="cxl">
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div className="sec-eyebrow" style={{ justifyContent: 'center' }}>Supported trades</div>
-            <div className="sec-h2">Built for every trade on the job.</div>
-            <p className="sec-sub" style={{ maxWidth: '440px', margin: '0 auto' }}>Real Cost works for all major construction trades — not just electrical.</p>
-          </div>
-          <RevealGroup className="home-trades-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px', maxWidth: '1100px', margin: '0 auto' }}>
-            {[
-              { border: 'rgba(245,158,11,.22)', title: 'Electrical',         desc: 'Lighting, branch wiring, distribution, panels, feeders.',  img: process.env.PUBLIC_URL + '/images/trades/electrical.jpg' },
-              { border: 'rgba(14,165,233,.22)',  title: 'Mechanical / HVAC', desc: 'Ductwork, equipment, piping, ventilation systems.',          img: process.env.PUBLIC_URL + '/images/trades/mechanical.jpg' },
-              { border: 'rgba(16,185,129,.22)', title: 'Plumbing',          desc: 'Fixtures, piping, drainage, water supply systems.',          img: process.env.PUBLIC_URL + '/images/trades/plumbing.jpg' },
-            ].map(({ border, title, desc, img }) => (
-              <motion.div key={title} style={{ background: '#fff', border: '1px solid #E8EEF8', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(15,37,87,.06)' }}
-                whileHover={{ y: -8, boxShadow: '0 24px 48px rgba(15,37,87,.12)', borderColor: border }}
-                transition={{ type: 'spring', stiffness: 280, damping: 20 }}>
-                <div style={{ overflow: 'hidden' }}>
-                  <motion.img whileHover={{ scale: 1.08 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} src={img} alt={title} style={{ width: '100%', height: '220px', objectFit: 'cover', display: 'block' }} />
-                </div>
-                <div style={{ padding: '28px' }}>
-                  <div style={{ fontSize: '16px', fontWeight: '700', color: 'var(--txt)', letterSpacing: '-.3px', marginBottom: '12px' }}>{title}</div>
-                  <div style={{ fontSize: '13px', color: '#6B7489', lineHeight: '1.78', fontWeight: '300' }}>{desc}</div>
-                </div>
-              </motion.div>
-            ))}
-          </RevealGroup>
-
         </div>
       </section>
 

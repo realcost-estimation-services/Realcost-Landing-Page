@@ -222,7 +222,7 @@
   /* The copy is nudged below centre so it sits in the darker part of the art —
      but only as far as there is room for it. The carousel controls are the last
      thing in this column, and they have to stay above the fold. */
-  margin-top: calc(10vh / var(--z, 1));
+  margin-top: calc(14vh / var(--z, 1));
 }
 .hero-badge {
   display: inline-flex;
@@ -639,7 +639,7 @@
        (min-width: 2560px) and (max-height: 1395px),
        (min-width: 3000px) and (max-height: 1620px),
        (min-width: 3600px) and (max-height: 1980px) {
-  .hero-left { margin-top: calc(4vh / var(--z, 1)); }
+  .hero-left { margin-top: calc(7vh / var(--z, 1)); }
   .hero-h1 { font-size: 52px; letter-spacing: -2px; }
   .hero-badge { margin-bottom: 22px; }
   .hero-sub { margin-bottom: 30px; }

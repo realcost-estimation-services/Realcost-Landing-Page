@@ -15,7 +15,7 @@ const pad = (n) => String(n).padStart(2, '0');
    15-year badge and the CTA buttons stay put across all three. */
 const HERO_SLIDES = [
   {
-    image: '/images/features/Home.png',
+    image: '/images/home/Home.png',
     badge: 'Professional Electrical Estimating Software',
     title: <>Tired of overpriced,<br />over-complicated software?<br /><em>Your wait is over.</em></>,
     sub: <>Switch to <strong>Real Cost</strong> for a premium estimating experience — upload your drawings, count symbols, build your bid, and generate a quote letter, all in one place.</>,
@@ -353,16 +353,20 @@ const Home = ({ onNavigate }) => {
               <div ref={monitorRef2} className="monitor monitor-3d">
                 <div className="mon-tabs">
                   <button className={`mt ${tab2 === 0 ? 'on' : ''}`} onClick={() => setTab2(0)}>Takeoff Canvas</button>
-                  <button className={`mt ${tab2 === 1 ? 'on' : ''}`} onClick={() => setTab2(1)}>Bid Page</button>
-                  <button className={`mt ${tab2 === 2 ? 'on' : ''}`} onClick={() => setTab2(2)}>Quote Letter</button>
+                  <button className={`mt ${tab2 === 1 ? 'on' : ''}`} onClick={() => setTab2(1)}>Estimating</button>
+                  <button className={`mt ${tab2 === 2 ? 'on' : ''}`} onClick={() => setTab2(2)}>Bid Page</button>
+                  <button className={`mt ${tab2 === 3 ? 'on' : ''}`} onClick={() => setTab2(3)}>Quote Letter</button>
                 </div>
                 <div style={{ display: tab2 === 0 ? 'block' : 'none', background: '#F2F4FC' }}>
                   <img src={process.env.PUBLIC_URL + '/images/features/take_off.png'} alt="Digital takeoff canvas" style={{ width: '100%', display: 'block' }} />
                 </div>
                 <div style={{ display: tab2 === 1 ? 'block' : 'none', background: '#F2F4FC' }}>
-                  <img src={process.env.PUBLIC_URL + '/images/features/bid_page.png'} alt="Bid page" style={{ width: '100%', display: 'block' }} />
+                  <img src={process.env.PUBLIC_URL + '/images/features/estimating.png'} alt="Estimating" style={{ width: '100%', display: 'block' }} />
                 </div>
                 <div style={{ display: tab2 === 2 ? 'block' : 'none', background: '#F2F4FC' }}>
+                  <img src={process.env.PUBLIC_URL + '/images/features/bid_page.png'} alt="Bid page" style={{ width: '100%', display: 'block' }} />
+                </div>
+                <div style={{ display: tab2 === 3 ? 'block' : 'none', background: '#F2F4FC' }}>
                   <img src={process.env.PUBLIC_URL + '/images/features/quote_letter.png'} alt="Quote letter" style={{ width: '100%', display: 'block' }} />
                 </div>
               </div>
@@ -448,7 +452,7 @@ const Home = ({ onNavigate }) => {
               <div className="sec-eyebrow">Project coverage</div>
               <div className="sec-h2">
                 Estimate Any Electrical<br />
-                <span style={{ background: 'var(--grd-gold)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Project</span>
+                Project
               </div>
               <p className="sec-sub" style={{ fontSize: '16px', fontWeight: '500', color: 'var(--sap)', marginBottom: '32px' }}>
                 Any project size, any voltage type, Real Cost can help.

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Reveal, RevealGroup } from '../components/ui/Reveal';
+import { LOGIN_URL } from '../config';
 
 const IconPin = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -158,7 +159,7 @@ const Contact = ({ onNavigate }) => {
             Start your free trial today — no credit card, no commitment.
           </p>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="contact-hero-btn" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="contact-hero-btn" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
               Start Free Trial
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Reveal, RevealGroup } from '../components/ui/Reveal';
 import '../styles/pages/pricing.css';
-
-const APP_URL = 'https://d3jt1vpskh0hbe.cloudfront.net/';
+import { LOGIN_URL, API_BASE_URL } from '../config';
 
 const FEATURE_CARDS = [
   { title: 'Unlimited Projects', desc: 'Create and manage as many estimation projects as you need.' },
@@ -109,7 +108,7 @@ const Pricing = ({ onNavigate }) => {
   useEffect(() => {
     const cached = readCache();
     if (cached) { setPlans(cached); setLoading(false); return; }
-    fetch('https://api.mybids.us/api/user/content/subscription-plans/')
+    fetch(`${API_BASE_URL}/api/user/content/subscription-plans/`)
       .then((r) => r.json())
       .then((data) => {
         if (data.success) {
@@ -175,7 +174,7 @@ const Pricing = ({ onNavigate }) => {
               <span className="ph-chip">✓ Free trade expert demo</span>
             </div>
             <motion.div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }}>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start Free Trial →</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">Start Free Trial →</motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('contact')}>Talk to sales</motion.button>
             </motion.div>
           </motion.div>
@@ -263,7 +262,7 @@ const Pricing = ({ onNavigate }) => {
                         <li key={i} className="pr-feature-item"><Check />{f}</li>
                       ))}
                     </ul>
-                    <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="pr-cta-outline" href={APP_URL} target="_blank" rel="noopener noreferrer">
+                    <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="pr-cta-outline" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
                       {trialPlan.button_text}
                     </motion.a>
                   </div>
@@ -312,6 +311,19 @@ const Pricing = ({ onNavigate }) => {
                       )}
                     </div>
                   </div>
+                  <div className="pr-card-bottom">
+                    <ul className="pr-features">
+                      {PLAN_FEATURES_PRO.map((f, i) => (
+                        <li key={i} className="pr-feature-item"><Check />{f}</li>
+                      ))}
+                    </ul>
+                    <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="pr-cta-primary" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
+                      {activePlan.button_text}
+                    </motion.a>
+                    <p className="pr-cta-note">{trialDays}-day free trial included · no card needed</p>
+                  </div>
+                </div>
+              )}
                 );
               })}
 
@@ -376,7 +388,7 @@ const Pricing = ({ onNavigate }) => {
               Join estimators across Canada already using RealCost to win more bids.
             </p>
             <div className="pr-bottom-cta-btns">
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={APP_URL} target="_blank" rel="noopener noreferrer">
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
                 Start your free trial
               </motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" style={{ color: 'rgba(255,255,255,.7)', borderColor: 'rgba(255,255,255,.2)' }} onClick={() => onNavigate('contact')}>

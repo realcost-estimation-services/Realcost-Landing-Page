@@ -1,6 +1,7 @@
 import React from 'react';
 import { Reveal, RevealGroup } from '../ui/Reveal';
 import '../../styles/components/footer.css';
+import { APP_URL } from '../../config';
 
 const IconPhone = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -56,7 +57,7 @@ const Footer = ({ onNavigate }) => {
       <Reveal as="div" className="footer-bottom" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 80px', borderTop: '1px solid rgba(96,165,250,.12)', maxWidth: '1440px', margin: '0 auto', flexWrap: 'wrap', gap: '16px' }}>
         <div style={{ fontSize: '12px', color: 'rgba(200,210,240,.28)', fontWeight: '300' }}>© 2026 Real Cost Estimating Inc. All rights reserved. 1200 Bloor Street West, Toronto, Canada.</div>
         <div style={{ display: 'flex', gap: '28px' }}>
-          <a href="https://d3jt1vpskh0hbe.cloudfront.net/termsandconditions" target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'rgba(200,210,240,.28)', textDecoration: 'none' }}>Privacy policy & Terms of use</a>
+          <a href={`${APP_URL}termsandconditions`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '12px', color: 'rgba(200,210,240,.28)', textDecoration: 'none' }}>Privacy policy & Terms of use</a>
         </div>
       </Reveal>
     </footer>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Reveal, RevealGroup } from '../components/ui/Reveal';
 import CountUp from '../components/ui/CountUp';
 import '../styles/pages/why-real-cost.css';
+import { LOGIN_URL } from '../config';
 
 
 const perks = [
@@ -72,7 +73,7 @@ const WhyRealCost = ({ onNavigate }) => {
 
           {/* CTAs */}
           <motion.div className="wrc-hero-ctas" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }}>
-            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start Free Trial</motion.a>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">Start Free Trial</motion.a>
             <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('demo')}>Request Demo</motion.button>
           </motion.div>
           </motion.div>
@@ -109,7 +110,7 @@ const WhyRealCost = ({ onNavigate }) => {
                 Tailored for electrical contractors with quality and care — bringing you nothing but the best through <strong style={{ color: 'var(--txt)', fontWeight: '600' }}>technology & innovation</strong>.
               </p>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Get Started</motion.a>
+                <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">Get Started</motion.a>
                 <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" style={{ background: 'rgba(17,38,70,.07)', color: 'var(--sap)', border: '1px solid rgba(17,38,70,.18)', backdropFilter: 'none' }} onClick={() => onNavigate('pricing')}>See Pricing</motion.button>
               </div>
             </Reveal>
@@ -397,7 +398,7 @@ const WhyRealCost = ({ onNavigate }) => {
             Making a difference through technology & innovation — 14-day free trial, no credit card required.
           </p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start Free Trial</motion.a>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">Start Free Trial</motion.a>
             <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ol-inv" onClick={() => onNavigate('contact')}>Talk to Us</motion.button>
           </div>
         </Reveal>

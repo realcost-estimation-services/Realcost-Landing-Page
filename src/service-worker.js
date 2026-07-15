@@ -56,7 +56,7 @@ registerRoute(
 
 // Pricing API — network-first so prices are always fresh; falls back to cache
 registerRoute(
-  ({ url }) => url.origin === 'https://api.mybids.us',
+  ({ url }) => url.origin === process.env.REACT_APP_API_BASE_URL,
   new NetworkFirst({
     cacheName: 'rc-api',
     networkTimeoutSeconds: 5,

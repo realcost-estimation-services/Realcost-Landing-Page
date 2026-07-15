@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, animate, useInView } from 'framer-motion';
 import { Reveal, RevealGroup } from '../components/ui/Reveal';
 import '../styles/pages/our-story.css';
+import { LOGIN_URL } from '../config';
 
 function CountUp({ value, suffix = '', duration = 1.6 }) {
   const ref = useRef(null);
@@ -182,7 +183,7 @@ const OurStory = ({ onNavigate }) => {
               Today, that expertise is built into a platform trusted by 500+ contractors across Canada.
             </p>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Try Free for 14 Days</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">Try Free for 14 Days</motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('demo')}>Request Demo</motion.button>
             </div>
           </motion.div>
@@ -231,7 +232,7 @@ const OurStory = ({ onNavigate }) => {
                 We prepare accurate and affordable electrical estimates for <strong style={{ color: 'var(--txt)', fontWeight: '600' }}>commercial, residential, institutional and industrial</strong> projects — including homes, refurbished buildings, schools, banking institutions, hospitals, and industrial establishments.
               </p>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Get Started</motion.a>
+                <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">Get Started</motion.a>
                 <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" style={{ background: 'rgba(17,38,70,.07)', color: 'var(--sap)', border: '1px solid rgba(17,38,70,.18)', backdropFilter: 'none' }} onClick={() => onNavigate('contact')}>Contact Us</motion.button>
               </div>
             </Reveal>
@@ -508,7 +509,7 @@ const OurStory = ({ onNavigate }) => {
             14-day free trial. No credit card required. Start estimating smarter today.
           </p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start Free Trial</motion.a>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">Start Free Trial</motion.a>
             <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ol-inv" onClick={() => onNavigate('contact')}>Talk to Us</motion.button>
           </div>
         </Reveal>

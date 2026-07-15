@@ -4,8 +4,7 @@ import Testimonials from '../components/ui/Testimonials';
 import { Reveal, RevealGroup } from '../components/ui/Reveal';
 import CountUp from '../components/ui/CountUp';
 import '../styles/pages/home.css';
-
-const APP_URL = 'https://d3jt1vpskh0hbe.cloudfront.net/';
+import { LOGIN_URL } from '../config';
 
 /* Slide + copy travel on the same easing so they read as one moving surface. */
 const SLIDE_EASE = { duration: 0.95, ease: [0.65, 0, 0.35, 1] };
@@ -238,7 +237,7 @@ const Home = ({ onNavigate }) => {
             </motion.div>
 
             <motion.div className="hero-btns" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.4 }}>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={APP_URL} target="_blank" rel="noopener noreferrer">Switch to Real Cost now</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">Switch to Real Cost now</motion.a>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ghost" onClick={() => onNavigate('demo')}>Request Demo</motion.button>
             </motion.div>
           </motion.div>
@@ -572,7 +571,7 @@ const Home = ({ onNavigate }) => {
           <h2 style={{ fontSize: '42px', fontWeight: '800', color: '#fff', letterSpacing: '-1.3px', marginBottom: '14px' }}>Ready to do faster estimates?</h2>
           <p style={{ fontSize: '16px', color: 'rgba(220,228,248,.65)', maxWidth: '500px', margin: '0 auto 40px', lineHeight: '1.78', fontWeight: '300' }}>14-day free trial. No credit card required. Your whole team can be estimating digitally today.</p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href="https://d3jt1vpskh0hbe.cloudfront.net/" target="_blank" rel="noopener noreferrer">Start free trial</motion.a>
+            <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" href={LOGIN_URL} target="_blank" rel="noopener noreferrer">Start free trial</motion.a>
             <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-ol-inv" onClick={() => onNavigate('contact')}>Talk to us</motion.button>
           </div>
         </Reveal>

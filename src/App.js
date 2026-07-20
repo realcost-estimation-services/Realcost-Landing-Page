@@ -5,6 +5,7 @@ import Footer from './components/layout/Footer';
 import Chatbot from './components/ui/Chatbot';
 import ScrollTop from './components/ui/ScrollTop';
 import useScrollRestoration from './hooks/useScrollRestoration';
+import usePreloadImages from './hooks/usePreloadImages';
 import { APP_VERSION } from './config/version';
 
 const Home = React.lazy(() => import('./pages/Home'));
@@ -48,6 +49,7 @@ function App() {
   const location = useLocation();
 
   useScrollRestoration();
+  usePreloadImages();
 
   /* ── App Version Check: Clear cache on new deployment ── */
   useEffect(() => {

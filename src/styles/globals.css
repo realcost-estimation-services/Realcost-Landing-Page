@@ -120,7 +120,6 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
 .cf-frame {
   flex: 0 1 44%;
   max-width: 440px;
-  height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,22 +142,21 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 100%;
   border-radius: 26px;
   background: rgba(255,255,255,.85);
   border: 1px solid rgba(220,226,240,.6);
   box-shadow: 0 20px 50px rgba(15,37,87,.10);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s ease;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+}
+/* The screenshot itself drives the frame's height, so the whole image is
+   always shown (never cropped) and it scales fluidly with the column width. */
+.cf-frame-inner img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 .cf-row:hover .cf-frame-inner {
   transform: translateY(-8px) scale(1.045);
@@ -235,11 +233,8 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
   }
   /* Keep the image narrower than the text card below it (card spans the full
      row minus its 20px side margins), so the card reads as the wider element.
-     flex must be reset to `0 0 auto`: the row is now a column, so the 40%
-     flex-basis from .cf-frame would resolve against the *height* axis and
-     override the fixed height, letting the frame grow to the image's natural
-     aspect (a 587px-tall square on tablets). */
-  .cf-frame { flex: 0 0 auto; height: 280px; max-width: 82%; margin: 0 auto; }
+     flex is reset to `0 0 auto` so the stacked column doesn't stretch it. */
+  .cf-frame { flex: 0 0 auto; max-width: 82%; margin: 0 auto; }
   .cf-card {
     margin: -40px 20px 0;
     flex: 1 1 auto;
@@ -258,10 +253,11 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 24px 60px rgba(15,37,87,.16), 0 0 0 1px rgba(17,38,70,.06);
-  aspect-ratio: 16/10;
   background: #fff;
 }
-.wcr-media img   { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Let the image set the height so its full aspect ratio shows and it scales
+   with the grid column — no cropping at any breakpoint. */
+.wcr-media img   { width: 100%; height: auto; display: block; }
 .wcr-num         { font-size: 13px; font-weight: 800; letter-spacing: .06em; margin-bottom: 12px; }
 .wcr-ttl         { font-size: 26px; font-weight: 800; letter-spacing: -.5px; line-height: 1.18; }
 .wcr-divider     { width: 44px; height: 3px; border-radius: 2px; margin: 16px 0; }

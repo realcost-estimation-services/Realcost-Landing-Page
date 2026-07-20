@@ -65,12 +65,8 @@ const Features = ({ onNavigate }) => {
               <Reveal key={i} className={`cf-row ${i % 2 === 1 ? 'cf-row-rev' : ''}`}>
                 <div className="cf-frame">
                   <div className="cf-frame-glow" style={{ background: f.accent }} />
-                  <div className="cf-frame-inner" style={{
-                    backgroundImage: `url(${process.env.PUBLIC_URL}${f.img})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
-                  }}>
+                  <div className="cf-frame-inner">
+                    <img src={`${process.env.PUBLIC_URL}${f.img}`} alt={f.title} loading="lazy" />
                   </div>
                 </div>
                 <div className="cf-card" style={{ '--card-accent': f.accent }}>

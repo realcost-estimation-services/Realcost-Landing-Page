@@ -303,7 +303,7 @@ const Pricing = ({ onNavigate }) => {
                           <li key={i} className="pr-feature-item"><Check />{f}</li>
                         ))}
                       </ul>
-                      <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className={featured ? 'pr-cta-primary' : 'pr-cta-outline'} href={APP_URL} target="_blank" rel="noopener noreferrer">
+                      <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className={featured ? 'pr-cta-primary' : 'pr-cta-outline'} href={LOGIN_URL} target="_blank" rel="noopener noreferrer">
                         {plan.button_text}
                       </motion.a>
                       {featured && (

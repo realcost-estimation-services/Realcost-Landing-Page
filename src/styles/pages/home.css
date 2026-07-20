@@ -426,9 +426,10 @@
     margin: 2px 0 24px;
     right: auto;
     bottom: auto;
-    /* sits at the right edge of the copy column, opposite the left-aligned text */
+    /* Align left under the copy so the badge stays clear of the busy right side
+       of the hero photo (the app UI / icons) instead of overlapping it. */
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
   .years-badge svg { width: 96px; height: 96px; }
 }

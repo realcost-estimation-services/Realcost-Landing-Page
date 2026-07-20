@@ -10,7 +10,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "prebuild": "node scripts/set-version.js",
+    "build": "react-scripts build",
+    "version:stamp": "node scripts/set-version.js"
   },
   "devDependencies": {
     "react-scripts": "5.0.1"

@@ -1,2 +1,2 @@
-/* App Version - Update this number on each deployment to clear user cache */
-export const APP_VERSION = "1.0.6";
+
+export const APP_VERSION = "2026.07.21.0004-6f3d28b";

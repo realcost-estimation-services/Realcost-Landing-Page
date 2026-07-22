@@ -42,7 +42,7 @@ const HERO_SLIDES = [
 const MONITOR_TABS = [
   { label: 'Take Off',       image: '/images/home/take_off_how_it_works.png',            alt: 'Digital takeoff canvas' },
   { label: 'Estimating',     image: '/images/home/estimating_take_off_how_it_works.png', alt: 'Estimating' },
-  { label: 'Get Materials',  image: '/images/home/mat_list_take_off_how_it_works.png',   alt: 'Generated materials list' },
+  { label: 'Gen Materials',  image: '/images/home/mat_list_take_off_how_it_works.png',   alt: 'Generated materials list' },
   { label: 'Bid Page',       image: '/images/home/bid_take_off_how_it_works.png',        alt: 'Bid page' },
   { label: 'Quote Letter',   image: '/images/home/quote_how_it_works.png',               alt: 'Branded PDF quote letter' },
   { label: 'Estimate Graph', image: '/images/home/graph_take_off_how_it_works.png',      alt: 'Estimate graph' },
@@ -50,9 +50,11 @@ const MONITOR_TABS = [
 
 const Home = ({ onNavigate }) => {
   const [tab2, setTab2] = useState(0);
+  const [lightbox, setLightbox] = useState(null); // index of the tab being previewed, or null
   const [currentStep, setCurrentStep] = useState(0);
   const monitorRef2 = useRef(null);
   const monitorPausedRef = useRef(false); // hover pause — a ref so it can never wedge a re-render
+  const lightboxOpenRef = useRef(false); // preview pause — kept out of the autoplay deps
 
   const N = HERO_SLIDES.length;
   const [pos, setPos] = useState(0);
@@ -124,7 +126,7 @@ const Home = ({ onNavigate }) => {
   useEffect(() => {
     let timer;
     const step = () => {
-      if (monitorPausedRef.current || document.hidden) {
+      if (monitorPausedRef.current || lightboxOpenRef.current || document.hidden) {
         timer = setTimeout(step, 2000);
         return;
       }
@@ -133,6 +135,36 @@ const Home = ({ onNavigate }) => {
     timer = setTimeout(step, 2000);
     return () => clearTimeout(timer);
   }, [tab2]);
+
+  /* Image preview: opening the lightbox parks autoplay on the tab you clicked, so
+     you come back to the same panel instead of one that moved on behind the overlay. */
+  const openPreview = (i) => {
+    lightboxOpenRef.current = true;
+    setTab2(i);
+    setLightbox(i);
+  };
+  const closePreview = () => {
+    lightboxOpenRef.current = false;
+    setLightbox(null);
+  };
+
+  /* Esc closes the preview; arrows step between screenshots without leaving it.
+     Body scroll is locked while it's open so the page doesn't drift underneath. */
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') closePreview();
+      else if (e.key === 'ArrowRight') setLightbox((i) => (i + 1) % MONITOR_TABS.length);
+      else if (e.key === 'ArrowLeft') setLightbox((i) => (i - 1 + MONITOR_TABS.length) % MONITOR_TABS.length);
+    };
+    window.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [lightbox]);
 
   /* Steps autoplay: cycle through the 4 steps every 3s */
   useEffect(() => {
@@ -438,11 +470,22 @@ const Home = ({ onNavigate }) => {
                 <div className="mon-stage">
                   {MONITOR_TABS.map(({ label, image, alt }, i) => (
                     <div key={label} className={`mon-panel${tab2 === i ? ' on' : ''}`} aria-hidden={tab2 !== i}>
-                      <img src={process.env.PUBLIC_URL + image} alt={alt} />
+                      <button
+                        type="button"
+                        className="mon-shot"
+                        onClick={() => openPreview(i)}
+                        tabIndex={tab2 === i ? 0 : -1}
+                        aria-label={`View ${label} full size`}
+                      >
+                        <img src={process.env.PUBLIC_URL + image} alt={alt} />
+                        <span className="mon-zoom">Click to enlarge</span>
+                      </button>
                     </div>
                   ))}
                 </div>
               </div>
+              {/* Name of the screenshot currently on the monitor */}
+              <div className="mon-caption">{MONITOR_TABS[tab2].label}</div>
             </Reveal>
 
             {/* Right: heading + timeline steps */}
@@ -475,6 +518,36 @@ const Home = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      {/* How-it-works image preview */}
+      {lightbox !== null && (
+        <div className="mon-lb" role="dialog" aria-modal="true" aria-label={MONITOR_TABS[lightbox].label} onClick={closePreview}>
+          <div className="mon-lb-box" onClick={(e) => e.stopPropagation()}>
+            <div className="mon-lb-bar">
+              <span className="mon-lb-name">{MONITOR_TABS[lightbox].label}</span>
+              <span className="mon-lb-count">{lightbox + 1} / {MONITOR_TABS.length}</span>
+              <button type="button" className="mon-lb-x" onClick={closePreview} aria-label="Close preview">×</button>
+            </div>
+            <img
+              className="mon-lb-img"
+              src={process.env.PUBLIC_URL + MONITOR_TABS[lightbox].image}
+              alt={MONITOR_TABS[lightbox].alt}
+            />
+            <button
+              type="button"
+              className="mon-lb-nav prev"
+              aria-label="Previous image"
+              onClick={() => setLightbox((i) => (i - 1 + MONITOR_TABS.length) % MONITOR_TABS.length)}
+            >‹</button>
+            <button
+              type="button"
+              className="mon-lb-nav next"
+              aria-label="Next image"
+              onClick={() => setLightbox((i) => (i + 1) % MONITOR_TABS.length)}
+            >›</button>
+          </div>
+        </div>
+      )}
 
       {/* Features preview */}
       <section className="sec-light" style={{ position: 'relative', overflow: 'hidden' }}>

@@ -327,6 +327,12 @@
     height: 1px;
     background: #E8EEF8;
   }
+  /* With 3 stats in a 2-column grid the last one is alone on its row — span it
+     across both columns and centre it instead of leaving it hugging the left. */
+  .faq-stat:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
 }
 @media (max-width: 480px) {
   .faq-stat { gap: 10px; padding: 16px 10px; }

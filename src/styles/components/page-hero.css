@@ -9,6 +9,14 @@
   opacity: 1;
 }
 
+/* Demo hero: nudged up from the shared `center top` so a bit more of the lower
+   part of the photo shows. On mobile the crop is pulled to the right edge so the
+   subject stays in frame instead of being cropped out on the sides. */
+.demo-hero-bg { background-position: center 20%; }
+@media (max-width:768px) {
+  .demo-hero-bg { background-position: right 20%; }
+}
+
 /* Soft white light behind the copy column — same treatment as the home hero's
    .hero-tint. Sits above the image and the scrim, below the text. */
 .hero-glow {
@@ -427,6 +435,19 @@
 }
 @media (max-width:900px) {
   .contact-hero-inner { grid-template-columns: 1fr; }
+  /* Stacked to one column, the copy now runs the full width and would sit on the
+     bright right half the left-to-right gradient leaves untouched. Swap it for a
+     flat dark scrim so every line keeps its contrast. */
+  .contact-hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(5, 10, 22, 0.74) 0%,
+      rgba(5, 10, 22, 0.62) 50%,
+      rgba(5, 10, 22, 0.72) 100%
+    );
+  }
+  /* The white glow lightens the same area the text sits on once it's full-width. */
+  .contact-hero .hero-glow { display: none; }
   .contact-hero-right { justify-self: stretch; max-width: 100%; }
   .contact-hero-left { max-width: 100%; }
 }

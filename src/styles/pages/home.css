@@ -360,10 +360,12 @@
   inset: 0;
   opacity: 0;
   transition: opacity .55s ease;
+  pointer-events: none; /* only the visible panel is clickable for the preview */
 }
 .mon-panel.on {
   opacity: 1;
   z-index: 1; /* incoming sits on top, so it dissolves over the outgoing one */
+  pointer-events: auto;
 }
 .mon-panel img {
   width: 100%;
@@ -372,6 +374,139 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .mon-panel { transition: none; }
+}
+
+/* The screenshot itself is the click target for the full-size preview. */
+.mon-shot {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+  position: relative;
+}
+.mon-zoom {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  color: #fff;
+  background: rgba(8, 12, 24, .72);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+}
+.mon-shot:hover .mon-zoom,
+.mon-shot:focus-visible .mon-zoom { opacity: 1; transform: translateY(0); }
+.mon-shot:focus-visible { outline: 2px solid rgba(96,165,250,.8); outline-offset: 3px; }
+
+/* Name of the screenshot currently showing on the monitor. */
+.mon-caption {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  color: var(--txt, #112646);
+}
+
+/* ===== How-it-works image preview (lightbox) ===== */
+.mon-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: rgba(6, 10, 20, .82);
+  backdrop-filter: blur(6px);
+  animation: monLbIn .22s ease;
+  cursor: zoom-out;
+}
+@keyframes monLbIn { from { opacity: 0; } to { opacity: 1; } }
+.mon-lb-box {
+  position: relative;
+  width: min(1180px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0B1020;
+  box-shadow: 0 30px 90px rgba(0,0,0,.55);
+  cursor: default;
+}
+.mon-lb-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #080C18;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.mon-lb-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.1px;
+}
+.mon-lb-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,.45);
+  margin-right: auto;
+}
+.mon-lb-x {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.mon-lb-x:hover { background: rgba(255,255,255,.18); }
+.mon-lb-img {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 140px);
+  object-fit: contain;
+  background: #fff;
+}
+.mon-lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(8,12,24,.6);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.mon-lb-nav:hover { background: rgba(8,12,24,.9); }
+.mon-lb-nav.prev { left: 12px; }
+.mon-lb-nav.next { right: 12px; }
+@media (max-width: 768px) {
+  .mon-lb { padding: 14px; }
+  .mon-lb-img { max-height: calc(100vh - 120px); }
+  .mon-lb-nav { width: 34px; height: 34px; font-size: 22px; }
+  .mon-zoom { display: none; }
 }
 
 /* ===== Monitor 3D scroll reveal ===== */

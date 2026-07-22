@@ -257,9 +257,6 @@ const FAQ = ({ onNavigate }) => {
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} onClick={() => onNavigate('contact')} style={{ padding: '11px 24px', borderRadius: '10px', border: 'none', background: '#112646', color: '#fff', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>
                 Contact us →
               </motion.button>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="tel:6476778399" style={{ padding: '11px 20px', borderRadius: '10px', border: '1.5px solid #E0E6F0', background: '#fff', color: '#112646', fontSize: '13px', fontWeight: '600', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                (647) 677-8399
-              </motion.a>
             </div>
           </div>
 

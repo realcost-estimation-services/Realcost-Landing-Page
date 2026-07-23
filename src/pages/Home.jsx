@@ -16,12 +16,15 @@ const HERO_SLIDES = [
     slug: 'intro',
     image: '/images/home/Home.png',
     mobileImage: '/images/home/home_1_mobile.png',
+    mobileImage: '/images/home/home_1_mobile.png',
     badge: 'Professional Electrical Estimating Software',
     title: <>Tired of overpriced,<br />over-complicated software?<br /><em>Your wait is over.</em></>,
     sub: <>Switch to <strong>Real Cost</strong> for a premium estimating experience — upload your drawings, count symbols, build your bid, and generate a quote letter, all in one place.</>,
   },
   {
     slug: 'takeoff',
+    image: '/images/home/home_2.png',
+    mobileImage: '/images/home/home_2_mobile.png',
     image: '/images/home/home_2.png',
     mobileImage: '/images/home/home_2_mobile.png',
     badge: 'Digital takeoff & symbol auto-count',
@@ -31,6 +34,7 @@ const HERO_SLIDES = [
   {
     slug: 'bid',
     image: '/images/home/home_3.png',
+    mobileImage: '/images/home/home_3_mobile.png',
     mobileImage: '/images/home/home_3_mobile.png',
     badge: 'Bid page & one-click quote letter',
     title: <>From drawings to a<br />branded quote.<br /><em>In four steps.</em></>,
@@ -60,12 +64,21 @@ const Home = ({ onNavigate }) => {
   const [pos, setPos] = useState(0);
   const [snapping, setSnapping] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const pausedRef = useRef(false); // hover pause — a ref so it can never wedge a re-render
   const touchX = useRef(null);
 
   const nextSlide = () => setPos((p) => (p >= N ? 1 : p + 1));
   const prevSlide = () => setPos((p) => (p - 1 + N) % N);
 
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -195,6 +208,20 @@ const Home = ({ onNavigate }) => {
           animate={{ x: `-${pos * 100}%` }}
           transition={snapping ? { duration: 0 } : SLIDE_EASE}
         >
+          {[...HERO_SLIDES, HERO_SLIDES[0]].map((s, i) => {
+            const imageUrl = isMobile && s.mobileImage ? s.mobileImage : s.image;
+            return (
+              <div className="hero-bg-slide" key={i}>
+                <img
+                  className={`hero-slide-img hero-slide-${s.slug}${i === pos ? ' is-active' : ''}`}
+                  src={process.env.PUBLIC_URL + imageUrl}
+                  alt=""
+                  aria-hidden="true"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
+            );
+          })}
           {[...HERO_SLIDES, HERO_SLIDES[0]].map((s, i) => {
             const imageUrl = isMobile && s.mobileImage ? s.mobileImage : s.image;
             return (
@@ -462,6 +489,12 @@ const Home = ({ onNavigate }) => {
                 onMouseEnter={() => { monitorPausedRef.current = true; }}
                 onMouseLeave={() => { monitorPausedRef.current = false; }}
               >
+              <div
+                ref={monitorRef2}
+                className="monitor monitor-3d"
+                onMouseEnter={() => { monitorPausedRef.current = true; }}
+                onMouseLeave={() => { monitorPausedRef.current = false; }}
+              >
                 <div className="mon-tabs">
                   {MONITOR_TABS.map(({ label }, i) => (
                     <button key={label} className={`mt ${tab2 === i ? 'on' : ''}`} onClick={() => setTab2(i)}>{label}</button>
@@ -570,6 +603,7 @@ const Home = ({ onNavigate }) => {
               },
               {
                 bg: 'rgba(155, 194, 241, 0.15)',  title: 'Canadian City Pricing',   desc: 'Regional pricing for Ontario ,Toronto, Ottawa, Montreal, Calgary, Vancouver and more.',
+                bg: 'rgba(155, 194, 241, 0.15)',  title: 'Canadian City Pricing',   desc: 'Regional pricing for Ontario ,Toronto, Ottawa, Montreal, Calgary, Vancouver and more.',
                 img: '/images/features/canada-map.webp', fit: true,
               },
 
@@ -577,6 +611,13 @@ const Home = ({ onNavigate }) => {
               <motion.div key={title} className="home-featp-card" style={{ background: '#fff', border: '1px solid #E8EEF8', borderRadius: '18px', position: 'relative', overflow: 'hidden', boxShadow: '0 1px 6px rgba(15,37,87,.05)', height: '100%' }}
                 whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(15,37,87,.10)', borderColor: 'rgba(96,165,250,.35)' }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+                <div className={`home-featp-card-img${fit ? ' is-fit' : ''}`} style={{
+                  background: bg,
+                  backgroundImage: `url(${process.env.PUBLIC_URL}${img})`,
+                  backgroundSize: fit ? 'contain' : 'cover',
+                  backgroundPosition: fit ? 'center' : 'center top',
+                  backgroundRepeat: 'no-repeat'
+                }}>
                 <div className={`home-featp-card-img${fit ? ' is-fit' : ''}`} style={{
                   background: bg,
                   backgroundImage: `url(${process.env.PUBLIC_URL}${img})`,

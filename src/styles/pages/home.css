@@ -106,6 +106,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  object-position: center top;
   display: block;
   /* Ken Burns. The zoom-out on the way back to rest takes just as long, so an
      off-screen slide has quietly reset by the time it comes round again. */
@@ -163,6 +164,15 @@
   display: flex;
   align-items: center;
   gap: 72px;
+}
+.hero-inner-right {
+  flex-direction: row;
+  justify-content: space-between;
+}
+.hero-inner-right .hero-left {
+  text-align: left;
+  flex: 0 0 60%;
+  padding-left: 0;
 }
 .hero-inner-right {
   flex-direction: row;
@@ -318,6 +328,7 @@
 }
 .mon-tabs {
   display: none;
+  display: none;
   background: #080C18;
   border-bottom: 1px solid rgba(255,255,255,.05);
 }
@@ -338,6 +349,15 @@
   border-bottom-color: var(--acc);
   background: rgba(96,165,250,.08);
 }
+/* The stage holds the box, so the monitor keeps its height as you switch tabs
+   instead of jolting. The ratio is gen_materials' — the tallest of the five — so
+   every screenshot still renders at its natural size and none is scaled to fit.
+   The shorter ones just leave white below: ~15px for quote_letter (the odd one at
+   ~2.11:1 against the others' ~2.04), a couple of px for the rest. height:auto
+   and top-alignment are what put that gap at the bottom rather than splitting it
+   above and below. */
+.mon-stage {
+  position: relative;
 /* The stage holds the box, so the monitor keeps its height as you switch tabs
    instead of jolting. The ratio is gen_materials' — the tallest of the five — so
    every screenshot still renders at its natural size and none is scaled to fit.
@@ -600,6 +620,13 @@
   background-position: center top;
   background-repeat: no-repeat;
   transition: transform .5s cubic-bezier(.22,1,.36,1), background-size .5s cubic-bezier(.22,1,.36,1);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  transition: transform .5s cubic-bezier(.22,1,.36,1), background-size .5s cubic-bezier(.22,1,.36,1);
+}
+.home-featp-card:hover .home-featp-card-img {
+  transform: scale(1.05);
 }
 .home-featp-card:hover .home-featp-card-img {
   transform: scale(1.05);
@@ -609,6 +636,8 @@
 .home-featp-card-img.is-fit {
   box-sizing: border-box;
   padding: 12px;
+  background-size: contain;
+  background-position: center;
   background-size: contain;
   background-position: center;
 }

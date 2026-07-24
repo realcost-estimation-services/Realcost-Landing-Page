@@ -31,8 +31,26 @@ async function purgeCachesAndReload() {
   } catch {
     /* purge is best-effort — reload regardless so the user is not stuck */
   }
-  sessionStorage.removeItem('rc_plans_v1');
-  localStorage.removeItem('rc_plans_v1');
+
+  // Wipe every cookie for this origin (expire on the current + parent domain/path).
+  try {
+    const domains = ['', `; domain=${window.location.hostname}`, `; domain=.${window.location.hostname}`];
+    document.cookie.split(';').forEach((c) => {
+      const name = c.split('=')[0].trim();
+      if (!name) return;
+      domains.forEach((d) => {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d}`;
+      });
+    });
+  } catch { /* cookies may be blocked — nothing more to do */ }
+
+  // Preserve only the reload-attempt counter so we don't loop forever on a
+  // stuck-cached index.html; wipe everything else so no stale data survives.
+  const attempts = sessionStorage.getItem(ATTEMPT_KEY);
+  try { localStorage.clear(); } catch {}
+  try { sessionStorage.clear(); } catch {}
+  if (attempts != null) sessionStorage.setItem(ATTEMPT_KEY, attempts);
+
   localStorage.setItem('app_version', APP_VERSION);
   window.location.reload();
 }

@@ -169,7 +169,7 @@ const Chatbot = () => {
         <button className={`cistack-btn${isOpen ? ' active' : ''}`} onClick={toggle} aria-label="Chat with us">
           {isOpen ? <CloseIcon /> : <ChatIcon />}
         </button>
-        <a className="cistack-btn" href="tel:6476778399" aria-label="Call us">
+        <a className="cistack-btn" href="tel:+16476778399" aria-label="Call us">
           <PhoneIcon />
         </a>
         <a className="cistack-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=info@realcostestimating.ca" target="_blank" rel="noopener noreferrer" aria-label="Email us">

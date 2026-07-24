@@ -96,7 +96,7 @@ const Demo = () => {
             </div>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
               <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="btn-prim" onClick={scrollToBooking}>Book your demo now →</motion.button>
-              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="tel:6476778399" className="btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>Prefer to call?</motion.a>
+              <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="tel:+16476778399" className="btn-ghost" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>Prefer to call?</motion.a>
             </div>
           </motion.div>
         </div>

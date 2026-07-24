@@ -273,6 +273,9 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
 @media (max-width: 768px) {
   .wcr-rows      { gap: 30px; }
   .wcr-row, .wcr-row-rev { grid-template-columns: 1fr; gap: 20px; direction: ltr; }
+  /* Text first, image below it on mobile */
+  .wcr-card      { order: 1; }
+  .wcr-media     { order: 2; }
   .wcr-ttl       { font-size: 22px; }
 }
 
